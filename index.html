@@ -46,7 +46,7 @@
     position: relative;
   }
 
-  /* Emulated CRT Screen */
+  /* Emulated Screen (Scanlines removed) */
   .screen {
     background-color: var(--bg);
     display: flex;
@@ -56,18 +56,6 @@
     position: relative;
     overflow: hidden;
     border-right: 6px solid #1e2029;
-  }
-
-  /* Scanline overlay for that ZXNet feel */
-  .screen::after {
-    content: " ";
-    display: block;
-    position: absolute;
-    top: 0; left: 0; bottom: 0; right: 0;
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
-    background-size: 100% 4px;
-    z-index: 10;
-    pointer-events: none;
   }
 
   /* Pure Teletext Header (Row 0) */
