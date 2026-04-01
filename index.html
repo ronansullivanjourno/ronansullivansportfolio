@@ -275,6 +275,9 @@
             <div class="row" onclick="changePage('102')">
               <span class="cyan">102</span><span>ABOUT ME / CV</span><span class="green">OK</span>
             </div>
+            <div class="row" onclick="changePage('103')">
+              <span class="cyan">103</span><span>CONTACT DETAILS</span><span class="green">OK</span>
+            </div>
           </div>
           <div class="content-block" style="margin-top: auto;">
             <p class="blink red">TYPE A 3-DIGIT NUMBER OR USE THE REMOTE TO NAVIGATE</p>
@@ -316,13 +319,28 @@
                * Content Strategy & Digital Publishing</p>
           </div>
           <div class="content-block">
-            <h2 class="green">CONTACT</h2>
+            <p>Need to reach me? Navigate to <span class="cyan">Page 103</span> or use the toolbar below to access direct messaging links.</p>
+          </div>
+        </div>
+
+        <div class="page hidden" id="page-103">
+          <h1 class="yellow">P103: CONTACT</h1>
+          <div class="content-block">
+            <p>I am always looking to connect with editors, fellow writers, or anyone interested in my work. Feel free to drop a message through any of the active paths below:</p>
+          </div>
+          <div class="grid-header">
+            <span>KEY</span><span>NETWORK</span><span>LINK</span>
+          </div>
+          <div class="file-list">
             <a class="row" href="mailto:ronansullivan@hotmail.co.uk">
               <span class="yellow">@</span><span>Email Me</span><span class="cyan">MAIL</span>
             </a>
             <a class="row" href="https://www.linkedin.com/in/ronanmsullivan/" target="_blank">
               <span class="yellow">LN</span><span>LinkedIn</span><span class="cyan">LINK</span>
             </a>
+          </div>
+          <div class="content-block" style="margin-top: auto;">
+            <p class="green">Gating: These links will open up standard external protocols on your device.</p>
           </div>
         </div>
 
@@ -378,7 +396,7 @@
         <div class="fast-btn red" onclick="changePage('100')"><span>100</span> INDEX</div>
         <div class="fast-btn green" onclick="changePage('101')"><span>101</span> DIR</div>
         <div class="fast-btn yellow" onclick="changePage('102')"><span>102</span> ABOUT</div>
-        <div class="fast-btn cyan" onclick="changePage('130')"><span>130</span> COLUMNS</div>
+        <div class="fast-btn cyan" onclick="changePage('103')"><span>103</span> CONTACT</div>
       </div>
 
     </div> <div class="remote-panel">
@@ -452,7 +470,8 @@
     });
 
     function changePage(pageNum) {
-      const validPages = ['100', '101', '102', '110', '120', '130'];
+      // ADDED 103 TO VALID PAGES ARRAY HERE
+      const validPages = ['100', '101', '102', '103', '110', '120', '130'];
       
       if (!validPages.includes(pageNum)) {
         alert("Page " + pageNum + " not found!");
