@@ -21,13 +21,14 @@
   }
 
   body {
-    /* Clasic Windows 98 tiled clouds wallpaper */
+    /* Classic Windows 95/98 clouds wallpaper */
     background-color: var(--bg-teal);
-    background-image: url('https://winwallpapers.fandom.com/wiki/Windows_98?file=Clouds.bmp');
-    background-repeat: repeat;
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/e3/Clouds.jpg');
+    background-size: cover;
+    background-position: center;
     color: var(--ink);
     font-family: var(--sans);
-    font-size: 13px;
+    font-size: 16px; /* Increased general font size */
     height: 100vh;
     overflow: hidden;
     position: relative;
@@ -37,7 +38,7 @@
   /* ── DESKTOP BRANDING WATERMARK ── */
   .desktop-branding {
     position: absolute;
-    bottom: 60px;
+    bottom: 80px;
     right: 40px;
     text-align: right;
     pointer-events: none;
@@ -45,7 +46,7 @@
     z-index: 1;
   }
   .desktop-branding h1 {
-    font-size: 48px;
+    font-size: 56px;
     font-weight: 900;
     margin-bottom: -2px;
     text-transform: uppercase;
@@ -54,7 +55,7 @@
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
   }
   .desktop-branding p {
-    font-size: 18px;
+    font-size: 22px;
     font-weight: bold;
     letter-spacing: 1px;
     color: #ffffff;
@@ -63,20 +64,20 @@
 
   /* ── DESKTOP & ICONS ── */
   .desktop {
-    height: calc(100vh - 30px);
+    height: calc(100vh - 40px);
     padding: 20px;
     position: relative;
   }
 
   .icon {
-    width: 85px;
+    width: 100px; /* Made bigger */
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     cursor: pointer;
     color: var(--win-light);
-    font-size: 11px;
+    font-size: 13px; /* Slightly bigger font */
     text-shadow: 1px 1px 1px var(--win-black);
     position: absolute;
     user-select: none;
@@ -84,14 +85,14 @@
     z-index: 2;
   }
 
-  #icon-work { top: 20px; left: 20px; }
-  #icon-about { top: 120px; left: 20px; }
-  #icon-contact { top: 220px; left: 20px; }
+  #icon-work { top: 30px; left: 30px; }
+  #icon-about { top: 150px; left: 30px; }
+  #icon-contact { top: 270px; left: 30px; }
 
   .icon .win-icon-fallback {
-    width: 32px;
-    height: 32px;
-    margin-bottom: 5px;
+    width: 48px; /* Scaled up from 32px */
+    height: 48px;
+    margin-bottom: 8px;
     pointer-events: none;
   }
 
@@ -103,8 +104,8 @@
   .icon-folder::before {
     content: '';
     position: absolute;
-    top: -4px; left: 2px;
-    width: 10px; height: 4px;
+    top: -5px; left: 3px;
+    width: 14px; height: 5px;
     background: #ffd700;
   }
 
@@ -116,12 +117,12 @@
   .icon-txt::after {
     content: '≡';
     color: #808080;
-    font-size: 20px;
-    line-height: 25px;
+    font-size: 30px;
+    line-height: 40px;
   }
 
   .icon span {
-    padding: 2px 4px;
+    padding: 3px 6px;
     pointer-events: none;
     display: block;
     width: 100%;
@@ -135,11 +136,11 @@
   /* ── WINDOWS 2000 FRAME ── */
   .window {
     background-color: var(--win-gray);
-    border: 2px solid;
+    border: 3px solid; /* Made borders chunkier */
     border-color: var(--win-light) var(--win-dark) var(--win-dark) var(--win-light);
     box-shadow: 1px 1px 0px var(--win-black);
     position: absolute;
-    min-width: 300px;
+    min-width: 350px;
     display: flex;
     flex-direction: column;
     z-index: 10;
@@ -151,33 +152,33 @@
   .title-bar {
     background: linear-gradient(90deg, var(--title-blue) 0%, #a6caf0 100%);
     color: var(--win-light);
-    padding: 3px 5px 3px 3px;
+    padding: 5px 8px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-weight: bold;
-    font-size: 12px;
+    font-size: 14px;
     cursor: move;
   }
 
   .title-bar-text {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 8px;
     pointer-events: none;
   }
 
   .title-bar-controls button {
-    width: 16px;
-    height: 14px;
+    width: 20px;
+    height: 18px;
     background-color: var(--win-gray);
     border: 1px solid;
     border-color: var(--win-light) var(--win-dark) var(--win-dark) var(--win-light);
     font-family: var(--sans);
-    font-size: 9px;
+    font-size: 11px;
     font-weight: bold;
     text-align: center;
-    line-height: 10px;
+    line-height: 14px;
     cursor: pointer;
   }
 
@@ -187,7 +188,7 @@
   }
 
   .window-content {
-    padding: 10px;
+    padding: 15px;
     flex: 1;
     overflow: auto;
     display: flex;
@@ -196,11 +197,11 @@
 
   .menu-bar {
     display: flex;
-    gap: 10px;
-    font-size: 11px;
-    padding: 2px 5px;
+    gap: 15px;
+    font-size: 13px;
+    padding: 4px 8px;
     border-bottom: 1px solid var(--win-dark);
-    margin-bottom: 5px;
+    margin-bottom: 8px;
   }
 
   .menu-bar span::first-letter { text-decoration: underline; }
@@ -209,42 +210,42 @@
     background-color: var(--win-light);
     border: 2px solid;
     border-color: var(--win-dark) var(--win-light) var(--win-light) var(--win-dark);
-    padding: 5px;
+    padding: 8px;
     overflow-y: auto;
     flex: 1;
   }
 
-  /* Starting positions for Windows */
-  #win-work { top: 60px; left: 150px; width: 550px; height: 380px; }
-  #win-about { top: 120px; left: 240px; width: 450px; }
-  #win-contact { top: 180px; left: 300px; width: 400px; }
+  /* Starting positions for Windows (Wider and Taller) */
+  #win-work { top: 80px; left: 160px; width: 650px; height: 500px; }
+  #win-about { top: 140px; left: 260px; width: 550px; }
+  #win-contact { top: 200px; left: 320px; width: 480px; }
 
-  /* SPLASH LOGIN SCREEN (Intro) ── */
+  /* SPLASH LOGIN SCREEN ── */
   #win-login {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 440px;
+    width: 480px;
     z-index: 200;
   }
 
   .login-header {
     display: flex;
     align-items: center;
-    gap: 15px;
-    margin-bottom: 15px;
+    gap: 20px;
+    margin-bottom: 20px;
   }
 
   .login-header .pfp-fallback {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     background: #a0a0a0;
     border: 2px solid;
     border-color: var(--win-dark) var(--win-light) var(--win-light) var(--win-dark);
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 24px;
+    font-size: 32px;
     color: #fff;
   }
 
@@ -252,48 +253,49 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
   }
 
   .login-form-row label {
     font-weight: bold;
+    font-size: 14px;
   }
 
   .login-form-row input {
-    width: 240px;
+    width: 260px;
     border: 2px solid;
     border-color: var(--win-dark) var(--win-light) var(--win-light) var(--win-dark);
-    padding: 2px 4px;
+    padding: 4px 6px;
     background: #fff;
     font-family: var(--sans);
-    font-size: 12px;
+    font-size: 14px;
+    user-select: text; /* Allow typing */
   }
 
   .login-buttons {
     display: flex;
     justify-content: flex-end;
-    gap: 8px;
     margin-top: 15px;
   }
 
   /* ── WORK LIST ── */
   .file-list-header {
     display: grid;
-    grid-template-columns: 20px 250px 100px 1fr;
-    gap: 5px;
-    font-size: 11px;
+    grid-template-columns: 24px 280px 100px 1fr;
+    gap: 8px;
+    font-size: 13px;
     background: var(--win-gray);
     border-bottom: 1px solid var(--win-dark);
-    padding: 2px 5px;
+    padding: 4px 8px;
     font-weight: bold;
   }
 
   .file-row {
     display: grid;
-    grid-template-columns: 20px 250px 100px 1fr;
-    gap: 5px;
-    font-size: 11px;
-    padding: 3px 5px;
+    grid-template-columns: 24px 280px 100px 1fr;
+    gap: 8px;
+    font-size: 13px;
+    padding: 5px 8px;
     cursor: pointer;
     border-bottom: 1px solid #f0f0f0;
     align-items: center;
@@ -313,9 +315,9 @@
     background-color: var(--win-gray);
     border: 1px solid;
     border-color: var(--win-light) var(--win-dark) var(--win-dark) var(--win-light);
-    padding: 3px 15px;
+    padding: 5px 20px;
     font-family: var(--sans);
-    font-size: 11px;
+    font-size: 13px;
     cursor: pointer;
     box-shadow: 1px 1px 0px var(--win-black);
   }
@@ -323,27 +325,27 @@
   button.win-btn:active {
     border-color: var(--win-dark) var(--win-light) var(--win-light) var(--win-dark);
     box-shadow: none;
-    padding: 4px 14px 2px 16px;
+    padding: 6px 19px 4px 21px;
   }
 
   .filter-bar {
     display: flex;
-    gap: 5px;
-    margin-bottom: 10px;
+    gap: 8px;
+    margin-bottom: 15px;
     align-items: center;
-    font-size: 11px;
+    font-size: 13px;
   }
 
   .about-body p, .contact-body p {
-    margin-bottom: 10px;
-    line-height: 1.5;
+    margin-bottom: 15px;
+    line-height: 1.6;
   }
 
   .cred-row, .contact-row {
     display: flex;
     justify-content: space-between;
     border-bottom: 1px dotted var(--win-dark);
-    padding: 3px 0;
+    padding: 5px 0;
   }
 
   .cred-label, .contact-label {
@@ -353,7 +355,7 @@
 
   /* ── TASKBAR ── */
   .taskbar {
-    height: 30px;
+    height: 40px; /* Thicker taskbar */
     background-color: var(--win-gray);
     border-top: 2px solid var(--win-light);
     position: fixed;
@@ -361,17 +363,17 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 2px 5px;
+    padding: 4px 8px;
     z-index: 100;
   }
 
   .start-btn {
     font-weight: bold;
-    font-size: 12px;
+    font-size: 14px;
     display: flex;
     align-items: center;
-    gap: 5px;
-    padding: 2px 6px;
+    gap: 8px;
+    padding: 3px 10px;
     border: 2px solid;
     border-color: var(--win-light) var(--win-dark) var(--win-dark) var(--win-light);
     background-color: var(--win-gray);
@@ -384,24 +386,24 @@
 
   .start-btn::before {
     content: '⊞';
-    font-size: 16px;
-    line-height: 12px;
+    font-size: 18px;
+    line-height: 14px;
   }
 
   .tasks {
     flex: 1;
     display: flex;
-    gap: 5px;
-    padding-left: 10px;
+    gap: 8px;
+    padding-left: 15px;
   }
 
   .task-item {
     background-color: var(--win-gray);
     border: 1px solid;
     border-color: var(--win-light) var(--win-dark) var(--win-dark) var(--win-light);
-    font-size: 11px;
-    padding: 2px 8px;
-    max-width: 150px;
+    font-size: 13px;
+    padding: 3px 12px;
+    max-width: 160px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -417,8 +419,8 @@
   .systray {
     border: 2px solid;
     border-color: var(--win-dark) var(--win-light) var(--win-light) var(--win-dark);
-    font-size: 11px;
-    padding: 2px 8px;
+    font-size: 13px;
+    padding: 3px 12px;
     background-color: var(--win-gray);
   }
 
@@ -462,31 +464,30 @@
   <div class="title-bar">
     <div class="title-bar-text">🔐 PORTFOLIO SYSTEM ACCESS</div>
   </div>
-  <div class="window-content" style="padding: 15px;">
+  <div class="window-content">
     <div class="login-header">
       <div class="pfp-fallback">R</div>
       <div>
-        <h2 style="font-size: 16px; margin-bottom: 3px; color: #0a246a;">Ronan Sullivan</h2>
-        <p style="font-size: 12px; color: #333; font-weight: bold;">Journalist & Critic based in London.</p>
+        <h2 style="font-size: 18px; margin-bottom: 4px; color: #0a246a;">Ronan Sullivan</h2>
+        <p style="font-size: 14px; color: #333; font-weight: bold;">Journalist & Critic based in London.</p>
       </div>
     </div>
     
-    <div class="recessed" style="padding: 10px; margin-bottom: 12px; background-color: #f5f5f5;">
-      <p style="font-size: 11px; line-height: 1.4;"><strong>About This Website:</strong> This digital desktop holds my published columns, sports reporting, book analysis, and theater reviews. Click 'OK' to run the desktop and view my work.</p>
+    <div class="recessed" style="padding: 12px; margin-bottom: 15px; background-color: #f5f5f5;">
+      <p style="font-size: 13px; line-height: 1.5;"><strong>About This Website:</strong> This digital desktop holds my published columns, sports reporting, book analysis, and theater reviews. Type anything and click 'OK' to run the desktop and view my work.</p>
     </div>
 
     <div class="login-form-row">
       <label>Access Role:</label>
-      <input type="text" value="Guest Reader" readonly>
+      <input type="text" value="Guest Reader" id="login-role" onkeydown="if(event.key==='Enter') closeLogin()">
     </div>
     <div class="login-form-row">
       <label>Access Key:</label>
-      <input type="password" value="••••••••" readonly>
+      <input type="password" value="password" id="login-pass" onkeydown="if(event.key==='Enter') closeLogin()">
     </div>
 
     <div class="login-buttons">
       <button class="win-btn" onclick="closeLogin()">OK</button>
-      <button class="win-btn" onclick="closeLogin()">Cancel</button>
     </div>
   </div>
 </div>
@@ -675,6 +676,9 @@
   }
 
   function startDrag(e, element, type) {
+    // Prevent default dragging on standard UI targets to allow text input
+    if (e.target.tagName === 'INPUT') return;
+
     isDragging = true;
     currentDraggedElement = element;
     iconDragThreshold = 0;
@@ -689,7 +693,10 @@
 
     if (type === 'window') bringToFront(element.id);
 
-    e.preventDefault();
+    // Only prevent defaults if moving windows or icons (don't break forms)
+    if (type === 'icon' || (type === 'window' && e.target.classList.contains('title-bar'))) {
+      e.preventDefault();
+    }
   }
 
   function doDrag(e) {
