@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -73,6 +73,11 @@
   .header-left { display: flex; gap: 20px; }
   .page-num { color: var(--yellow); }
   .brand { color: var(--green); }
+  
+  /* Clickable header message */
+  .header-center {
+    cursor: pointer;
+  }
 
   /* ── PAGES (INTERACTIVE) ── */
   .page {
@@ -249,7 +254,7 @@
         <span class="page-num" id="current-page-header">P100</span>
         <span class="brand">CEEFAX</span>
       </div>
-      <div class="header-center yellow blink">NEW MESSAGES</div>
+      <div class="header-center yellow blink" onclick="goToPage(104)">NEW MESSAGES</div>
       <div class="header-right" id="clock">12:00:00</div>
     </div>
 
@@ -266,6 +271,7 @@
         <div class="data-row"><span class="white">101</span><span class="cyan">PUBLISHED WORK & PRESS ARTICLES</span></div>
         <div class="data-row"><span class="white">102</span><span class="cyan">BIOGRAPHY & ACCREDITATIONS</span></div>
         <div class="data-row"><span class="white">103</span><span class="cyan">CONTACT INFO & EXTERNAL LINKS</span></div>
+        <div class="data-row"><span class="white">104</span><span class="cyan">LIVE NOTICES & INBOX</span></div>
       </div>
     </div>
 
@@ -281,13 +287,13 @@
           <span class="yellow">10</span><span>Win over Welsh side - <span class="cyan">Enfield Dispatch</span></span><span class="green">SPORT</span>
         </a>
         <a class="row" href="https://ronanswriting.blogspot.com/2023/05/national-theatre-review-motive-and-cue.html" target="_blank">
-          <span class="yellow">11</span><span>The Motive and the Cue - <span class="cyan">The Line Is Good</span></span><span class="green">ARTS</span>
+          <span class="yellow">11</span><span>The Motive and the Cue - <span class="cyan">The Line Is Good</span></span><span class="green">THEATRE</span>
         </a>
         <a class="row" href="https://ronanswriting.blogspot.com/2023/05/national-theatre-dancing-at-lughnasa.html" target="_blank">
-          <span class="yellow">12</span><span>Dancing at Lughnasa - <span class="cyan">The Line Is Good</span></span><span class="green">ARTS</span>
+          <span class="yellow">12</span><span>Dancing at Lughnasa - <span class="cyan">The Line Is Good</span></span><span class="green">THEATRE</span>
         </a>
         <a class="row" href="https://ronanswriting.blogspot.com/2022/12/book-review-wednesday-second-place-by.html" target="_blank">
-          <span class="yellow">13</span><span>My Brilliant Friend - <span class="cyan">Anvil Heavy</span></span><span class="green">BOOKS</span>
+          <span class="yellow">13</span><span>My Brilliant Friend - <span class="cyan">My Pen Will Absolve Me</span></span><span class="green">BOOKS</span>
         </a>
         <a class="row" href="https://ronanswriting.blogspot.com/2022/12/book-review-wednesday-second-place-by.html" target="_blank">
           <span class="yellow">14</span><span>Second Place - <span class="cyan">The Line Is Good</span></span><span class="green">BOOKS</span>
@@ -305,8 +311,8 @@
       <h1 class="green">P102: BIOGRAPHY & LEDGER</h1>
       
       <div class="content-block">
-        <p><span class="yellow">I'm Ronan Sullivan</span>, a journalist based in London, currently studying for an NCTJ Diploma at PA Media Academy.</p>
-        <p>I focus on capturing the intersection between ground-level culture and everyday experience — whether that is reporting on football or analyzing heavy literature.</p>
+        <p><span class="yellow">I am Ronan Sullivan</span>, a journalist based in London, currently studying for an NCTJ Diploma at PA Media Academy.</p>
+        <p>I focus on capturing the intersection between ground-level culture and everyday experience — whether that is reporting on football or analysing heavy literature.</p>
       </div>
 
       <div class="content-block" style="border-color: var(--cyan);">
@@ -321,7 +327,7 @@
       <h1 class="cyan">P103: CONTACT PORTAL</h1>
       
       <div class="content-block" style="border-color: var(--yellow);">
-        <p>I am open to external commissions, localized reporting, and general editorial conversations. Links are active below:</p>
+        <p>I am open to external commissions, localised reporting, and general editorial conversations. Links are active below:</p>
       </div>
 
       <div class="content-block">
@@ -334,6 +340,21 @@
         <div class="data-row">
           <span class="yellow">LOCATION:</span><span class="white">London, UK</span>
         </div>
+      </div>
+    </div>
+
+    <div id="p104" class="page hidden">
+      <h1 class="yellow">P104: LIVE INBOX</h1>
+      
+      <div class="content-block" style="border-color: var(--red);">
+        <p><span class="red blink">></span> Incoming broadcast...</p>
+        <p>Currently on the ground in London covering culture and sport. Always on the lookout for the next compelling lead.</p>
+        <p>Drop me a line on LinkedIn if you've got a tip, a brief, or just want to talk shop.</p>
+      </div>
+      
+      <div class="content-block" style="border-color: var(--cyan);">
+        <div class="data-row"><span class="cyan">STATUS:</span><span class="green">OPEN TO COMMISSIONS</span></div>
+        <div class="data-row"><span class="cyan">LAST UPDATE:</span><span class="white">RECENT</span></div>
       </div>
     </div>
 
