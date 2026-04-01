@@ -6,30 +6,30 @@
 <title>Ronan Sullivan — Journalist</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    /* Exciting "Cyber-Retro Night" Palette */
-    --bg-dark-sky: #0d1b2a;
-    --win-gray: #1b263b;      /* Sleek dark slate instead of standard office gray */
-    --win-dark: #0f172a;      /* Deepest shadow */
-    --win-light: #415a77;     /* Soft highlight */
-    --win-black: #000000;
-    --title-blue: #e0a96d;    /* Glowing amber/gold instead of flat blue */
-    --title-blue-end: #965d34;/* Deep copper accent */
-    --ink: #ffffff;           /* Crisp white text for the dark UI */
-    --sans: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    --bg-paper: #f4f4f0;
+    --card-bg: #ffffff;
+    --oxford-blue: #1a2a3a;
+    --accent-yellow: #f4c430;
+    --ink: #111111;
+    --rule: #e0e0dc;
+    --serif: 'Playfair Display', Georgia, serif;
+    --mono: 'IBM Plex Mono', monospace;
   }
 
   body {
-    background-color: var(--bg-dark-sky);
-    /* Vibrant space/night sky background */
-    background-image: url('https://upload.wikimedia.org/wikipedia/commons/b/b2/Spirit_of_the_night_sky.jpg');
-    background-size: cover;
-    background-position: center;
+    background-color: var(--bg-paper);
+    /* Clean, satisfying drafting grid background */
+    background-image: 
+      linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+    background-size: 30px 30px;
     color: var(--ink);
-    font-family: var(--sans);
+    font-family: var(--mono);
     font-size: 16px;
     height: 100vh;
     overflow: hidden;
@@ -37,113 +37,97 @@
     user-select: none;
   }
 
-  /* ── DESKTOP BRANDING WATERMARK ── */
+  /* ── MASSIVE DESKTOP BRANDING ── */
   .desktop-branding {
     position: absolute;
     bottom: 80px;
-    right: 40px;
+    right: 50px;
     text-align: right;
     pointer-events: none;
     user-select: none;
     z-index: 1;
   }
   .desktop-branding h1 {
-    font-size: 56px;
+    font-family: var(--serif);
+    font-size: 72px;
     font-weight: 900;
-    margin-bottom: -2px;
-    text-transform: uppercase;
-    font-family: Arial, sans-serif;
-    color: #ffffff;
-    text-shadow: 0 0 10px rgba(224, 169, 109, 0.6), 2px 2px 4px #000;
+    line-height: 1;
+    margin-bottom: 5px;
+    color: var(--oxford-blue);
   }
   .desktop-branding p {
-    font-size: 22px;
+    font-family: var(--mono);
+    font-size: 20px;
     font-weight: bold;
-    letter-spacing: 1px;
-    color: #e0a96d;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+    color: var(--ink);
+    letter-spacing: -1px;
+    background: var(--accent-yellow);
+    display: inline-block;
+    padding: 2px 8px;
   }
 
   /* ── DESKTOP & ICONS ── */
   .desktop {
-    height: calc(100vh - 40px);
-    padding: 20px;
+    height: calc(100vh - 50px);
+    padding: 30px;
     position: relative;
   }
 
   .icon {
-    width: 100px;
+    width: 120px;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     cursor: pointer;
-    color: #ffffff;
-    font-size: 13px;
-    text-shadow: 1px 1px 3px var(--win-black);
+    font-family: var(--mono);
+    color: var(--ink);
+    font-size: 14px;
+    font-weight: bold;
     position: absolute;
     user-select: none;
     touch-action: none;
     z-index: 2;
   }
 
-  #icon-work { top: 30px; left: 30px; }
-  #icon-about { top: 150px; left: 30px; }
-  #icon-contact { top: 270px; left: 30px; }
+  #icon-work { top: 40px; left: 40px; }
+  #icon-about { top: 180px; left: 40px; }
+  #icon-contact { top: 320px; left: 40px; }
 
-  .icon .win-icon-fallback {
-    width: 48px;
-    height: 48px;
-    margin-bottom: 8px;
-    pointer-events: none;
-  }
-
-  .icon-folder {
-    background: #e0a96d;
-    border: 1px solid #965d34;
-    position: relative;
-  }
-  .icon-folder::before {
-    content: '';
-    position: absolute;
-    top: -5px; left: 3px;
-    width: 14px; height: 5px;
-    background: #e0a96d;
+  .icon-symbol {
+    width: 60px;
+    height: 60px;
+    background: var(--oxford-blue);
+    color: var(--accent-yellow);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    border: 3px solid var(--ink);
+    box-shadow: 4px 4px 0px var(--ink);
+    margin-bottom: 10px;
+    transition: transform 0.1s;
   }
 
-  .icon-txt {
-    background: #ffffff;
-    border: 1px solid #415a77;
-    position: relative;
-  }
-  .icon-txt::after {
-    content: '≡';
-    color: #1b263b;
-    font-size: 30px;
-    line-height: 40px;
+  .icon:hover .icon-symbol {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px var(--ink);
   }
 
   .icon span {
-    padding: 3px 6px;
-    pointer-events: none;
-    display: block;
+    background: var(--card-bg);
+    border: 2px solid var(--ink);
+    padding: 2px 5px;
     width: 100%;
   }
 
-  .icon:hover span {
-    background-color: var(--title-blue);
-    color: #000;
-    outline: 1px dotted #000;
-  }
-
-  /* ── WINDOWS FRAME ── */
+  /* ── ACCESSIBLE WINDOW CARDS ── */
   .window {
-    background-color: var(--win-gray);
-    border: 3px solid;
-    border-color: var(--win-light) var(--win-dark) var(--win-dark) var(--win-light);
-    box-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+    background-color: var(--card-bg);
+    border: 3px solid var(--ink);
+    box-shadow: 8px 8px 0px var(--ink);
     position: absolute;
-    min-width: 350px;
+    min-width: 380px;
     display: flex;
     flex-direction: column;
     z-index: 10;
@@ -153,85 +137,64 @@
   .window.hidden { display: none !important; }
 
   .title-bar {
-    background: linear-gradient(90deg, var(--title-blue) 0%, var(--title-blue-end) 100%);
-    color: #000000;
-    padding: 5px 8px;
+    background-color: var(--oxford-blue);
+    color: #ffffff;
+    padding: 8px 12px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-family: var(--mono);
     font-weight: bold;
-    font-size: 14px;
+    font-size: 15px;
     cursor: move;
-  }
-
-  .title-bar-text {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    pointer-events: none;
+    border-bottom: 3px solid var(--ink);
   }
 
   .title-bar-controls button {
-    width: 20px;
-    height: 18px;
-    background-color: var(--win-gray);
-    border: 1px solid;
-    border-color: var(--win-light) var(--win-dark) var(--win-dark) var(--win-light);
-    font-family: var(--sans);
-    font-size: 11px;
+    width: 24px;
+    height: 24px;
+    background-color: var(--accent-yellow);
+    border: 2px solid var(--ink);
+    font-family: var(--mono);
+    font-size: 13px;
     font-weight: bold;
-    color: #ffffff;
-    text-align: center;
-    line-height: 14px;
     cursor: pointer;
+    box-shadow: 2px 2px 0px var(--ink);
   }
 
   .title-bar-controls button:active {
-    border-color: var(--win-dark) var(--win-light) var(--win-light) var(--win-dark);
-    padding: 1px 0 0 1px;
+    box-shadow: none;
+    transform: translate(1px, 1px);
   }
 
   .window-content {
-    padding: 15px;
+    padding: 20px;
     flex: 1;
     overflow: auto;
     display: flex;
     flex-direction: column;
   }
 
-  .menu-bar {
-    display: flex;
-    gap: 15px;
-    font-size: 13px;
-    padding: 4px 8px;
-    border-bottom: 1px solid var(--win-dark);
-    margin-bottom: 8px;
-    color: #a6caf0;
-  }
-
-  .menu-bar span::first-letter { text-decoration: underline; }
-
   .recessed {
-    background-color: #0d1b2a;
-    border: 2px solid;
-    border-color: var(--win-dark) var(--win-light) var(--win-light) var(--win-dark);
-    padding: 8px;
+    background-color: var(--bg-paper);
+    border: 2px solid var(--ink);
+    padding: 12px;
     overflow-y: auto;
     flex: 1;
-    color: #e0e6ed;
+    color: var(--ink);
   }
 
   /* Starting positions for Windows */
-  #win-work { top: 80px; left: 160px; width: 650px; height: 500px; }
-  #win-about { top: 140px; left: 260px; width: 550px; }
-  #win-contact { top: 200px; left: 320px; width: 480px; }
+  #win-work { top: 80px; left: 200px; width: 680px; height: 500px; }
+  #win-about { top: 140px; left: 300px; width: 550px; }
+  #win-contact { top: 220px; left: 360px; width: 480px; }
 
   /* SPLASH LOGIN SCREEN ── */
   #win-login {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 480px;
+    width: 500px;
     z-index: 200;
   }
 
@@ -245,14 +208,15 @@
   .login-header .pfp-fallback {
     width: 60px;
     height: 60px;
-    background: #415a77;
-    border: 2px solid;
-    border-color: var(--win-dark) var(--win-light) var(--win-light) var(--win-dark);
+    background: var(--accent-yellow);
+    border: 3px solid var(--ink);
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 32px;
-    color: #fff;
+    font-family: var(--serif);
+    font-weight: bold;
+    color: var(--ink);
   }
 
   .login-form-row {
@@ -265,85 +229,76 @@
   .login-form-row label {
     font-weight: bold;
     font-size: 14px;
-    color: #a6caf0;
   }
 
   .login-form-row input {
     width: 260px;
-    border: 2px solid;
-    border-color: var(--win-dark) var(--win-light) var(--win-light) var(--win-dark);
-    padding: 4px 6px;
-    background: #1b263b;
-    color: #ffffff;
-    font-family: var(--sans);
+    border: 2px solid var(--ink);
+    padding: 6px;
+    background: var(--card-bg);
+    color: var(--ink);
+    font-family: var(--mono);
     font-size: 14px;
     user-select: text;
-  }
-
-  .login-buttons {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 15px;
   }
 
   /* ── WORK LIST ── */
   .file-list-header {
     display: grid;
-    grid-template-columns: 24px 280px 100px 1fr;
-    gap: 8px;
+    grid-template-columns: 30px 280px 100px 1fr;
+    gap: 10px;
     font-size: 13px;
-    background: var(--win-gray);
-    border-bottom: 1px solid var(--win-dark);
-    padding: 4px 8px;
+    background: var(--oxford-blue);
+    border-bottom: 2px solid var(--ink);
+    padding: 6px 10px;
     font-weight: bold;
-    color: #e0a96d;
+    color: #ffffff;
   }
 
   .file-row {
     display: grid;
-    grid-template-columns: 24px 280px 100px 1fr;
-    gap: 8px;
-    font-size: 13px;
-    padding: 5px 8px;
+    grid-template-columns: 30px 280px 100px 1fr;
+    gap: 10px;
+    font-size: 14px;
+    padding: 8px 10px;
     cursor: pointer;
-    border-bottom: 1px solid #1b263b;
+    border-bottom: 1px solid var(--rule);
     align-items: center;
     text-decoration: none;
-    color: #ffffff;
+    color: var(--ink);
   }
 
   .file-row:hover {
-    background-color: var(--title-blue);
-    color: #000000;
+    background-color: var(--accent-yellow);
+    font-weight: bold;
   }
 
   .file-row.cat-hidden { display: none !important; }
 
   /* ── BUTTONS ── */
   button.win-btn {
-    background-color: var(--win-gray);
-    color: #ffffff;
-    border: 1px solid;
-    border-color: var(--win-light) var(--win-dark) var(--win-dark) var(--win-light);
-    padding: 5px 20px;
-    font-family: var(--sans);
-    font-size: 13px;
+    background-color: var(--card-bg);
+    color: var(--ink);
+    border: 2px solid var(--ink);
+    padding: 6px 16px;
+    font-family: var(--mono);
+    font-size: 14px;
+    font-weight: bold;
     cursor: pointer;
-    box-shadow: 1px 1px 0px var(--win-black);
+    box-shadow: 4px 4px 0px var(--ink);
   }
 
   button.win-btn:active {
-    border-color: var(--win-dark) var(--win-light) var(--win-light) var(--win-dark);
     box-shadow: none;
-    padding: 6px 19px 4px 21px;
+    transform: translate(2px, 2px);
   }
 
   .filter-bar {
     display: flex;
-    gap: 8px;
+    gap: 10px;
     margin-bottom: 15px;
     align-items: center;
-    font-size: 13px;
+    font-size: 14px;
   }
 
   .about-body p, .contact-body p {
@@ -354,89 +309,85 @@
   .cred-row, .contact-row {
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px dotted var(--win-dark);
-    padding: 5px 0;
+    border-bottom: 1px dotted var(--ink);
+    padding: 6px 0;
   }
 
   .cred-label, .contact-label {
     font-weight: bold;
-    color: var(--title-blue);
+    color: var(--oxford-blue);
   }
 
   /* ── TASKBAR ── */
   .taskbar {
-    height: 40px;
-    background-color: var(--win-gray);
-    border-top: 2px solid var(--win-light);
+    height: 50px;
+    background-color: var(--oxford-blue);
+    border-top: 3px solid var(--ink);
     position: fixed;
     bottom: 0; left: 0; right: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 4px 8px;
+    padding: 0 15px;
     z-index: 100;
   }
 
   .start-btn {
     font-weight: bold;
-    font-size: 14px;
+    font-family: var(--mono);
+    font-size: 16px;
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 3px 10px;
-    border: 2px solid;
-    border-color: var(--win-light) var(--win-dark) var(--win-dark) var(--win-light);
-    background-color: var(--win-gray);
-    color: #ffffff;
+    gap: 10px;
+    padding: 5px 12px;
+    border: 2px solid var(--ink);
+    background-color: var(--accent-yellow);
+    color: var(--ink);
     cursor: pointer;
+    box-shadow: 3px 3px 0px var(--ink);
   }
 
   .start-btn:active {
-    border-color: var(--win-dark) var(--win-light) var(--win-light) var(--win-dark);
-  }
-
-  .start-btn::before {
-    content: '⊞';
-    font-size: 18px;
-    line-height: 14px;
-    color: #e0a96d;
+    box-shadow: none;
+    transform: translate(2px, 2px);
   }
 
   .tasks {
     flex: 1;
     display: flex;
-    gap: 8px;
-    padding-left: 15px;
+    gap: 10px;
+    padding-left: 20px;
   }
 
   .task-item {
-    background-color: var(--win-gray);
-    border: 1px solid;
-    border-color: var(--win-light) var(--win-dark) var(--win-dark) var(--win-light);
+    background-color: var(--card-bg);
+    border: 2px solid var(--ink);
     font-size: 13px;
-    color: #ffffff;
-    padding: 3px 12px;
+    font-weight: bold;
+    color: var(--ink);
+    padding: 4px 12px;
     max-width: 160px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     cursor: pointer;
+    box-shadow: 3px 3px 0px var(--ink);
   }
 
   .task-item.active {
-    border-color: var(--win-dark) var(--win-light) var(--win-light) var(--win-dark);
-    background-color: #0d1b2a;
-    font-weight: bold;
-    color: #e0a96d;
+    background-color: var(--accent-yellow);
+    box-shadow: none;
+    transform: translate(1px, 1px);
   }
 
   .systray {
-    border: 2px solid;
-    border-color: var(--win-dark) var(--win-light) var(--win-light) var(--win-dark);
-    font-size: 13px;
-    padding: 3px 12px;
-    color: #ffffff;
-    background-color: #0d1b2a;
+    border: 2px solid var(--ink);
+    font-size: 14px;
+    font-weight: bold;
+    padding: 4px 12px;
+    color: var(--ink);
+    background-color: var(--accent-yellow);
+    box-shadow: 3px 3px 0px var(--ink);
   }
 
   @media (max-width: 600px) {
@@ -460,17 +411,17 @@
 
 <div class="desktop">
   <div id="icon-work" class="icon" onclick="iconClick('win-work')">
-    <div class="win-icon-fallback icon-folder"></div>
+    <div class="icon-symbol">🗂</div>
     <span>Ronan's Work</span>
   </div>
   
   <div id="icon-about" class="icon" onclick="iconClick('win-about')">
-    <div class="win-icon-fallback icon-txt"></div>
+    <div class="icon-symbol">🖋</div>
     <span>Bio.txt</span>
   </div>
   
   <div id="icon-contact" class="icon" onclick="iconClick('win-contact')">
-    <div class="win-icon-fallback icon-folder"></div>
+    <div class="icon-symbol">✉️</div>
     <span>Contact Info</span>
   </div>
 </div>
@@ -483,13 +434,13 @@
     <div class="login-header">
       <div class="pfp-fallback">R</div>
       <div>
-        <h2 style="font-size: 18px; margin-bottom: 4px; color: #e0a96d;">Ronan Sullivan</h2>
-        <p style="font-size: 14px; color: #ffffff; font-weight: bold;">Journalist & Critic based in London.</p>
+        <h2 style="font-family: var(--serif); font-size: 24px; color: var(--oxford-blue);">Ronan Sullivan</h2>
+        <p style="font-size: 14px; color: #555; font-weight: bold;">Journalist & Critic based in London.</p>
       </div>
     </div>
     
-    <div class="recessed" style="padding: 12px; margin-bottom: 15px;">
-      <p style="font-size: 13px; line-height: 1.5;"><strong>About This Website:</strong> This digital desktop holds my published columns, sports reporting, book analysis, and theater reviews. Type anything and click 'OK' to run the desktop and view my work.</p>
+    <div class="recessed" style="padding: 15px; margin-bottom: 20px;">
+      <p style="font-size: 14px; line-height: 1.5; font-family: var(--mono);"><strong>About This Website:</strong> This platform is designed as an interactive index holding my published columns, sports reporting, book analysis, and theater reviews. Type anything below and click 'OK' to proceed.</p>
     </div>
 
     <div class="login-form-row">
@@ -501,7 +452,7 @@
       <input type="password" value="password" id="login-pass" onkeydown="if(event.key==='Enter') closeLogin()">
     </div>
 
-    <div class="login-buttons">
+    <div class="login-buttons" style="display: flex; justify-content: flex-end; margin-top: 10px;">
       <button class="win-btn" onclick="closeLogin()">OK</button>
     </div>
   </div>
@@ -514,9 +465,6 @@
       <button onclick="closeWindow('win-work'); event.stopPropagation();">X</button>
     </div>
   </div>
-  <div class="menu-bar">
-    <span>File</span><span>Edit</span><span>View</span><span>Help</span>
-  </div>
   <div class="window-content">
     
     <div class="filter-bar">
@@ -528,7 +476,7 @@
       <button class="win-btn" onclick="filterFiles('column')">Columns</button>
     </div>
 
-    <div class="recessed">
+    <div class="recessed" style="background-color: #fff;">
       <div class="file-list-header">
         <span></span><span>Name</span><span>Type</span><span>Source</span>
       </div>
@@ -575,18 +523,18 @@
 
 <div id="win-about" class="window hidden" onclick="bringToFront('win-about')">
   <div class="title-bar">
-    <div class="title-bar-text">📝 Bio.txt - Notepad</div>
+    <div class="title-bar-text">📝 Bio.txt - Ledger</div>
     <div class="title-bar-controls">
       <button onclick="closeWindow('win-about'); event.stopPropagation();">X</button>
     </div>
   </div>
   <div class="window-content">
-    <div class="recessed about-body" style="background-color: #0d1b2a;">
+    <div class="recessed about-body" style="background-color: #ffffe4;">
       <p><strong>I'm Ronan Sullivan</strong>, a journalist based in London, currently studying for an NCTJ Diploma at PA Media Academy.</p>
       <p>My work spans non-league sport reporting, theatre and book criticism, and long-form student columns.</p>
       <p>I'm drawn to stories at the intersection of culture and everyday experience — whether that's a play-off push at Enfield Town or a Brian Friel revival at the National Theatre.</p>
       
-      <p style="border-top: 1px solid var(--win-light); padding-top: 5px; font-weight: bold; color: var(--title-blue);">System Specs:</p>
+      <p style="border-top: 2px solid var(--ink); padding-top: 10px; font-weight: bold; color: var(--oxford-blue);">System Specs:</p>
       <div class="cred-row"><span class="cred-label">Training:</span><span class="cred-value">NCTJ Diploma</span></div>
       <div class="cred-row"><span class="cred-label">Institution:</span><span class="cred-value">PA Media Academy</span></div>
       <div class="cred-row"><span class="cred-label">Based:</span><span class="cred-value">London, UK</span></div>
@@ -605,14 +553,14 @@
     <div class="contact-body">
       <p>Open to commissions, work experience and editorial conversations. Best reached via LinkedIn.</p>
       
-      <div class="recessed">
+      <div class="recessed" style="background-color: #fff;">
         <div class="contact-row">
           <span class="contact-label">LinkedIn:</span>
-          <a href="https://www.linkedin.com/in/ronanmsullivan/" target="_blank" style="color: #a6caf0;">ronanmsullivan ↗</a>
+          <a href="https://www.linkedin.com/in/ronanmsullivan/" target="_blank" style="color: var(--oxford-blue); font-weight: bold;">ronanmsullivan ↗</a>
         </div>
         <div class="contact-row">
           <span class="contact-label">Blog:</span>
-          <a href="https://ronanswriting.blogspot.com/" target="_blank" style="color: #a6caf0;">The Line Is Good ↗</a>
+          <a href="https://ronanswriting.blogspot.com/" target="_blank" style="color: var(--oxford-blue); font-weight: bold;">The Line Is Good ↗</a>
         </div>
         <div class="contact-row">
           <span class="contact-label">Location:</span>
@@ -624,7 +572,7 @@
 </div>
 
 <div class="taskbar">
-  <div class="start-btn">Start</div>
+  <div class="start-btn">INDEX</div>
   <div class="tasks">
     <div class="task-item" id="task-win-work" onclick="openWindow('win-work')">My Work</div>
     <div class="task-item" id="task-win-about" onclick="openWindow('win-about')">Bio.txt</div>
@@ -691,7 +639,7 @@
   }
 
   function startDrag(e, element, type) {
-    if (e.target.tagName === 'INPUT') return;
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'A') return;
 
     isDragging = true;
     currentDraggedElement = element;
