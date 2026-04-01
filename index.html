@@ -10,25 +10,27 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg-teal: #008080;
-    --win-gray: #d4d0c8;
-    --win-dark: #808080;
-    --win-light: #ffffff;
+    /* Exciting "Cyber-Retro Night" Palette */
+    --bg-dark-sky: #0d1b2a;
+    --win-gray: #1b263b;      /* Sleek dark slate instead of standard office gray */
+    --win-dark: #0f172a;      /* Deepest shadow */
+    --win-light: #415a77;     /* Soft highlight */
     --win-black: #000000;
-    --title-blue: #0a246a;
-    --ink: #000000;
+    --title-blue: #e0a96d;    /* Glowing amber/gold instead of flat blue */
+    --title-blue-end: #965d34;/* Deep copper accent */
+    --ink: #ffffff;           /* Crisp white text for the dark UI */
     --sans: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
   }
 
   body {
-    /* Classic Windows 95/98 clouds wallpaper */
-    background-color: var(--bg-teal);
-    background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/e3/Clouds.jpg');
+    background-color: var(--bg-dark-sky);
+    /* Vibrant space/night sky background */
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/b/b2/Spirit_of_the_night_sky.jpg');
     background-size: cover;
     background-position: center;
     color: var(--ink);
     font-family: var(--sans);
-    font-size: 16px; /* Increased general font size */
+    font-size: 16px;
     height: 100vh;
     overflow: hidden;
     position: relative;
@@ -52,14 +54,14 @@
     text-transform: uppercase;
     font-family: Arial, sans-serif;
     color: #ffffff;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    text-shadow: 0 0 10px rgba(224, 169, 109, 0.6), 2px 2px 4px #000;
   }
   .desktop-branding p {
     font-size: 22px;
     font-weight: bold;
     letter-spacing: 1px;
-    color: #ffffff;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+    color: #e0a96d;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
   }
 
   /* ── DESKTOP & ICONS ── */
@@ -70,15 +72,15 @@
   }
 
   .icon {
-    width: 100px; /* Made bigger */
+    width: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     cursor: pointer;
-    color: var(--win-light);
-    font-size: 13px; /* Slightly bigger font */
-    text-shadow: 1px 1px 1px var(--win-black);
+    color: #ffffff;
+    font-size: 13px;
+    text-shadow: 1px 1px 3px var(--win-black);
     position: absolute;
     user-select: none;
     touch-action: none;
@@ -90,15 +92,15 @@
   #icon-contact { top: 270px; left: 30px; }
 
   .icon .win-icon-fallback {
-    width: 48px; /* Scaled up from 32px */
+    width: 48px;
     height: 48px;
     margin-bottom: 8px;
     pointer-events: none;
   }
 
   .icon-folder {
-    background: #ffd700;
-    border: 1px solid #d4a000;
+    background: #e0a96d;
+    border: 1px solid #965d34;
     position: relative;
   }
   .icon-folder::before {
@@ -106,17 +108,17 @@
     position: absolute;
     top: -5px; left: 3px;
     width: 14px; height: 5px;
-    background: #ffd700;
+    background: #e0a96d;
   }
 
   .icon-txt {
-    background: #fff;
-    border: 1px solid #808080;
+    background: #ffffff;
+    border: 1px solid #415a77;
     position: relative;
   }
   .icon-txt::after {
     content: '≡';
-    color: #808080;
+    color: #1b263b;
     font-size: 30px;
     line-height: 40px;
   }
@@ -130,15 +132,16 @@
 
   .icon:hover span {
     background-color: var(--title-blue);
-    outline: 1px dotted var(--win-light);
+    color: #000;
+    outline: 1px dotted #000;
   }
 
-  /* ── WINDOWS 2000 FRAME ── */
+  /* ── WINDOWS FRAME ── */
   .window {
     background-color: var(--win-gray);
-    border: 3px solid; /* Made borders chunkier */
+    border: 3px solid;
     border-color: var(--win-light) var(--win-dark) var(--win-dark) var(--win-light);
-    box-shadow: 1px 1px 0px var(--win-black);
+    box-shadow: 3px 3px 10px rgba(0,0,0,0.5);
     position: absolute;
     min-width: 350px;
     display: flex;
@@ -150,8 +153,8 @@
   .window.hidden { display: none !important; }
 
   .title-bar {
-    background: linear-gradient(90deg, var(--title-blue) 0%, #a6caf0 100%);
-    color: var(--win-light);
+    background: linear-gradient(90deg, var(--title-blue) 0%, var(--title-blue-end) 100%);
+    color: #000000;
     padding: 5px 8px;
     display: flex;
     justify-content: space-between;
@@ -177,6 +180,7 @@
     font-family: var(--sans);
     font-size: 11px;
     font-weight: bold;
+    color: #ffffff;
     text-align: center;
     line-height: 14px;
     cursor: pointer;
@@ -202,20 +206,22 @@
     padding: 4px 8px;
     border-bottom: 1px solid var(--win-dark);
     margin-bottom: 8px;
+    color: #a6caf0;
   }
 
   .menu-bar span::first-letter { text-decoration: underline; }
 
   .recessed {
-    background-color: var(--win-light);
+    background-color: #0d1b2a;
     border: 2px solid;
     border-color: var(--win-dark) var(--win-light) var(--win-light) var(--win-dark);
     padding: 8px;
     overflow-y: auto;
     flex: 1;
+    color: #e0e6ed;
   }
 
-  /* Starting positions for Windows (Wider and Taller) */
+  /* Starting positions for Windows */
   #win-work { top: 80px; left: 160px; width: 650px; height: 500px; }
   #win-about { top: 140px; left: 260px; width: 550px; }
   #win-contact { top: 200px; left: 320px; width: 480px; }
@@ -239,7 +245,7 @@
   .login-header .pfp-fallback {
     width: 60px;
     height: 60px;
-    background: #a0a0a0;
+    background: #415a77;
     border: 2px solid;
     border-color: var(--win-dark) var(--win-light) var(--win-light) var(--win-dark);
     display: flex;
@@ -259,6 +265,7 @@
   .login-form-row label {
     font-weight: bold;
     font-size: 14px;
+    color: #a6caf0;
   }
 
   .login-form-row input {
@@ -266,10 +273,11 @@
     border: 2px solid;
     border-color: var(--win-dark) var(--win-light) var(--win-light) var(--win-dark);
     padding: 4px 6px;
-    background: #fff;
+    background: #1b263b;
+    color: #ffffff;
     font-family: var(--sans);
     font-size: 14px;
-    user-select: text; /* Allow typing */
+    user-select: text;
   }
 
   .login-buttons {
@@ -288,6 +296,7 @@
     border-bottom: 1px solid var(--win-dark);
     padding: 4px 8px;
     font-weight: bold;
+    color: #e0a96d;
   }
 
   .file-row {
@@ -297,15 +306,15 @@
     font-size: 13px;
     padding: 5px 8px;
     cursor: pointer;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid #1b263b;
     align-items: center;
     text-decoration: none;
-    color: var(--ink);
+    color: #ffffff;
   }
 
   .file-row:hover {
-    background-color: #0a246a;
-    color: #ffffff;
+    background-color: var(--title-blue);
+    color: #000000;
   }
 
   .file-row.cat-hidden { display: none !important; }
@@ -313,6 +322,7 @@
   /* ── BUTTONS ── */
   button.win-btn {
     background-color: var(--win-gray);
+    color: #ffffff;
     border: 1px solid;
     border-color: var(--win-light) var(--win-dark) var(--win-dark) var(--win-light);
     padding: 5px 20px;
@@ -355,7 +365,7 @@
 
   /* ── TASKBAR ── */
   .taskbar {
-    height: 40px; /* Thicker taskbar */
+    height: 40px;
     background-color: var(--win-gray);
     border-top: 2px solid var(--win-light);
     position: fixed;
@@ -377,6 +387,7 @@
     border: 2px solid;
     border-color: var(--win-light) var(--win-dark) var(--win-dark) var(--win-light);
     background-color: var(--win-gray);
+    color: #ffffff;
     cursor: pointer;
   }
 
@@ -388,6 +399,7 @@
     content: '⊞';
     font-size: 18px;
     line-height: 14px;
+    color: #e0a96d;
   }
 
   .tasks {
@@ -402,6 +414,7 @@
     border: 1px solid;
     border-color: var(--win-light) var(--win-dark) var(--win-dark) var(--win-light);
     font-size: 13px;
+    color: #ffffff;
     padding: 3px 12px;
     max-width: 160px;
     white-space: nowrap;
@@ -412,8 +425,9 @@
 
   .task-item.active {
     border-color: var(--win-dark) var(--win-light) var(--win-light) var(--win-dark);
-    background-color: #e4e0d8;
+    background-color: #0d1b2a;
     font-weight: bold;
+    color: #e0a96d;
   }
 
   .systray {
@@ -421,7 +435,8 @@
     border-color: var(--win-dark) var(--win-light) var(--win-light) var(--win-dark);
     font-size: 13px;
     padding: 3px 12px;
-    background-color: var(--win-gray);
+    color: #ffffff;
+    background-color: #0d1b2a;
   }
 
   @media (max-width: 600px) {
@@ -468,12 +483,12 @@
     <div class="login-header">
       <div class="pfp-fallback">R</div>
       <div>
-        <h2 style="font-size: 18px; margin-bottom: 4px; color: #0a246a;">Ronan Sullivan</h2>
-        <p style="font-size: 14px; color: #333; font-weight: bold;">Journalist & Critic based in London.</p>
+        <h2 style="font-size: 18px; margin-bottom: 4px; color: #e0a96d;">Ronan Sullivan</h2>
+        <p style="font-size: 14px; color: #ffffff; font-weight: bold;">Journalist & Critic based in London.</p>
       </div>
     </div>
     
-    <div class="recessed" style="padding: 12px; margin-bottom: 15px; background-color: #f5f5f5;">
+    <div class="recessed" style="padding: 12px; margin-bottom: 15px;">
       <p style="font-size: 13px; line-height: 1.5;"><strong>About This Website:</strong> This digital desktop holds my published columns, sports reporting, book analysis, and theater reviews. Type anything and click 'OK' to run the desktop and view my work.</p>
     </div>
 
@@ -566,12 +581,12 @@
     </div>
   </div>
   <div class="window-content">
-    <div class="recessed about-body" style="background-color: #ffffe1;">
+    <div class="recessed about-body" style="background-color: #0d1b2a;">
       <p><strong>I'm Ronan Sullivan</strong>, a journalist based in London, currently studying for an NCTJ Diploma at PA Media Academy.</p>
       <p>My work spans non-league sport reporting, theatre and book criticism, and long-form student columns.</p>
       <p>I'm drawn to stories at the intersection of culture and everyday experience — whether that's a play-off push at Enfield Town or a Brian Friel revival at the National Theatre.</p>
       
-      <p style="border-top: 1px solid var(--win-dark); padding-top: 5px; font-weight: bold;">System Specs:</p>
+      <p style="border-top: 1px solid var(--win-light); padding-top: 5px; font-weight: bold; color: var(--title-blue);">System Specs:</p>
       <div class="cred-row"><span class="cred-label">Training:</span><span class="cred-value">NCTJ Diploma</span></div>
       <div class="cred-row"><span class="cred-label">Institution:</span><span class="cred-value">PA Media Academy</span></div>
       <div class="cred-row"><span class="cred-label">Based:</span><span class="cred-value">London, UK</span></div>
@@ -593,11 +608,11 @@
       <div class="recessed">
         <div class="contact-row">
           <span class="contact-label">LinkedIn:</span>
-          <a href="https://www.linkedin.com/in/ronanmsullivan/" target="_blank" style="color: blue;">ronanmsullivan ↗</a>
+          <a href="https://www.linkedin.com/in/ronanmsullivan/" target="_blank" style="color: #a6caf0;">ronanmsullivan ↗</a>
         </div>
         <div class="contact-row">
           <span class="contact-label">Blog:</span>
-          <a href="https://ronanswriting.blogspot.com/" target="_blank" style="color: blue;">The Line Is Good ↗</a>
+          <a href="https://ronanswriting.blogspot.com/" target="_blank" style="color: #a6caf0;">The Line Is Good ↗</a>
         </div>
         <div class="contact-row">
           <span class="contact-label">Location:</span>
@@ -676,7 +691,6 @@
   }
 
   function startDrag(e, element, type) {
-    // Prevent default dragging on standard UI targets to allow text input
     if (e.target.tagName === 'INPUT') return;
 
     isDragging = true;
@@ -693,7 +707,6 @@
 
     if (type === 'window') bringToFront(element.id);
 
-    // Only prevent defaults if moving windows or icons (don't break forms)
     if (type === 'icon' || (type === 'window' && e.target.classList.contains('title-bar'))) {
       e.preventDefault();
     }
