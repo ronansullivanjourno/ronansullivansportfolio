@@ -488,29 +488,32 @@
 
       const targetVal = parseInt(targetPage);
       
-      // Start the counter EXACTLY at the current page number
-      let currentTickerVal = parseInt(currentPage);
-
-      // Determine where the counter switches gears to slow count-up (between -80 and -90 of target page)
-      const threshold = targetVal - (80 + Math.floor(Math.random() * 10));
+      // Counter always starts at the NEXT page in the sequence
+      let currentTickerVal = parseInt(currentPage) + 1;
 
       const rollInterval = setInterval(() => {
-        // STATE 1: Chaotic Large Jumps (Only if starting from a lower number)
-        if (currentTickerVal < threshold) {
+        // Calculate the physical broadcast distance to the target 
+        // Handles rolling over to a lower number by simulating the carousel
+        let distance;
+        if (targetVal >= currentTickerVal) {
+          distance = targetVal - currentTickerVal;
+        } else {
+          distance = (200 - currentTickerVal) + targetVal; 
+        }
+
+        // STATE 1: Jumping rapidly if far away
+        if (distance > 10) {
           // Jump by random large or smaller amounts (between 10 and 35)
           const jump = 10 + Math.floor(Math.random() * 25);
           currentTickerVal += jump;
-          
-          // Failsafe to ensure it doesn't accidentally fly past the threshold in one leap
-          if (currentTickerVal > threshold) currentTickerVal = threshold;
-          
         } else {
-          // STATE 2: Linear count-up gear (counts up normally or counts down if going backwards)
-          if (currentTickerVal < targetVal) {
-            currentTickerVal++;
-          } else if (currentTickerVal > targetVal) {
-            currentTickerVal--;
-          }
+          // STATE 2: Counting up normally gear when close
+          currentTickerVal++;
+        }
+
+        // Handle Rollover (Teletext loops from 199 back to 100 on sub-menus typically)
+        if (currentTickerVal > 199) {
+          currentTickerVal = 100;
         }
 
         // Render the search value
