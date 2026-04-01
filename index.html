@@ -55,16 +55,22 @@
   }
 
   .header {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 80px auto 80px auto;
     align-items: center;
     border-bottom: 4px double var(--white);
     padding-bottom: 5px;
     margin-bottom: 15px;
+    
+    letter-spacing: 4px; 
+    transform: scaleY(0.8); 
+    transform-origin: top left; 
   }
 
-  .header-left { display: flex; gap: 20px; }
-  .user-name { color: var(--yellow); font-weight: bold; }
+  .header-pnum { color: var(--white); }
+  .header-name { color: var(--white); text-align: center; }
+  .header-search { color: var(--yellow); text-align: center; }
+  .header-datetime { color: var(--yellow); text-align: right; }
 
   .pages-container {
     position: relative;
@@ -81,7 +87,14 @@
   }
   .hidden { display: none !important; }
 
-  h1 { font-size: 44px; margin-bottom: 15px; }
+  h1 { 
+    font-size: 44px; 
+    margin-bottom: 15px; 
+    transform: scaleY(0.9);
+    transform-origin: bottom left; 
+    line-height: 1.1; 
+  }
+  
   h2 { font-size: 32px; margin-bottom: 15px; }
 
   .cyan { color: var(--cyan); }
@@ -139,7 +152,6 @@
     margin-bottom: 15px;
   }
 
-  /* Universal Footer - Anchored to the bottom of the TV screen */
   .fastext {
     display: flex;
     justify-content: space-between;
@@ -218,21 +230,6 @@
     letter-spacing: 4px;
   }
 
-  .pixel-transition {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: var(--bg);
-    display: grid;
-    grid-template-columns: repeat(10, 1fr);
-    grid-template-rows: repeat(10, 1fr);
-    z-index: 10;
-    pointer-events: none;
-    opacity: 0;
-  }
-  
-  .pixel-transition.active { opacity: 1; }
-  .pixel-block { background: var(--bg); opacity: 1; }
-
   @media (max-width: 800px) {
     .tv-container { grid-template-columns: 1fr; height: auto; }
     .remote-panel { display: none; }
@@ -244,17 +241,16 @@
   <div class="tv-container">
     <div class="screen">
       <div class="header">
-        <div class="header-left">
-          <span class="white" id="current-pnum">RONAN SULLIVAN</span>
-        </div>
-        <div class="header-right">
-          <span class="yellow" id="live-date">Wed 1 Apr</span>
-          <span class="yellow" style="margin-left: 10px;" id="live-time">21:59:00</span>
-        </div>
+        <span class="header-pnum" id="hdr-pnum">P100</span>
+        <span class="header-name">RONAN SULLIVAN</span>
+        <span class="header-search" id="hdr-search">100</span>
+        <span class="header-datetime">
+          <span id="live-date">Wed 1 Apr</span> 
+          <span id="live-time" style="margin-left: 10px;">22:06:00</span>
+        </span>
       </div>
 
       <div class="pages-container">
-        <div class="pixel-transition" id="pixel-overlay"></div>
 
         <div class="page" id="page-100">
           <h1 class="yellow">WELCOME TO MY PORTFOLIO</h1>
@@ -305,7 +301,7 @@
         </div>
 
         <div class="page hidden" id="page-102">
-          <h1 class="yellow">P102: ABOUT ME / CV</h1>
+          <h1 class="yellow">ABOUT ME / CV</h1>
           <div class="content-block" style="border-color: var(--cyan);">
             <h2 class="cyan">PROFESSIONAL PROFILE</h2>
             <p>Dynamic and focused writer with a strong portfolio covering live sports reporting, critical cultural analysis, and long-form columns. Proven track record in fast-paced editorial environments.</p>
@@ -323,7 +319,7 @@
         </div>
 
         <div class="page hidden" id="page-103">
-          <h1 class="yellow">P103: CONTACT</h1>
+          <h1 class="yellow">CONTACT</h1>
           <div class="content-block">
             <p>I am always looking to connect with editors, fellow writers, or anyone interested in my work. Feel free to drop a message through any of the active paths below:</p>
           </div>
@@ -344,7 +340,7 @@
         </div>
 
         <div class="page hidden" id="page-110">
-          <h1 class="green">P110: SPORTS PIECES</h1>
+          <h1 class="green">SPORTS PIECES</h1>
           <div class="grid-header">
             <span>REF</span><span>STORY / PUBLICATION</span><span>GENRE</span>
           </div>
@@ -356,7 +352,7 @@
         </div>
 
         <div class="page hidden" id="page-120">
-          <h1 class="cyan">P120: THEATRE & ARTS</h1>
+          <h1 class="cyan">THEATRE & ARTS</h1>
           <div class="grid-header">
             <span>REF</span><span>STORY / PUBLICATION</span><span>GENRE</span>
           </div>
@@ -371,7 +367,7 @@
         </div>
 
         <div class="page hidden" id="page-130">
-          <h1 class="yellow">P130: BOOKS & COLUMNS</h1>
+          <h1 class="yellow">BOOKS & COLUMNS</h1>
           <div class="grid-header">
             <span>REF</span><span>STORY / PUBLICATION</span><span>GENRE</span>
           </div>
@@ -421,15 +417,12 @@
 
   <script>
     let inputBuffer = "";
-    const displayEl = document.getElementById('display-digits');
-    const pageNumEl = document.getElementById('current-pnum');
-    const overlay = document.getElementById('pixel-overlay');
+    let currentPage = "100";
+    let isRolling = false; // Lock out navigation while searching
 
-    for (let i = 0; i < 100; i++) {
-      const block = document.createElement('div');
-      block.classList.add('pixel-block');
-      overlay.appendChild(block);
-    }
+    const displayEl = document.getElementById('display-digits');
+    const hdrPnum = document.getElementById('hdr-pnum');
+    const hdrSearch = document.getElementById('hdr-search');
 
     setInterval(() => {
       const now = new Date();
@@ -437,6 +430,7 @@
     }, 1000);
 
     function pressKey(num) {
+      if (isRolling) return;
       if (inputBuffer.length < 3) {
         inputBuffer += num;
         displayEl.innerText = inputBuffer.padEnd(3, '.');
@@ -447,11 +441,13 @@
     }
 
     function clearInput() {
+      if (isRolling) return;
       inputBuffer = "";
       displayEl.innerText = "...";
     }
 
     function submitPage() {
+      if (isRolling) return;
       if (inputBuffer.length === 3) {
         changePage(inputBuffer);
         clearInput();
@@ -459,6 +455,7 @@
     }
 
     window.addEventListener('keydown', (e) => {
+      if (isRolling) return;
       if (e.key >= '0' && e.key <= '9') {
         pressKey(e.key);
       } else if (e.key === 'Backspace' || e.key === 'Escape') {
@@ -468,36 +465,46 @@
       }
     });
 
-    function changePage(pageNum) {
+    function changePage(targetPage) {
       const validPages = ['100', '101', '102', '103', '110', '120', '130'];
       
-      if (!validPages.includes(pageNum)) {
-        alert("Page " + pageNum + " not found!");
+      if (!validPages.includes(targetPage)) {
+        alert("Page " + targetPage + " not found!");
         return;
       }
 
-      overlay.classList.add('active');
-      const blocks = document.querySelectorAll('.pixel-block');
+      if (targetPage === currentPage) return;
+
+      isRolling = true;
+      let startVal = parseInt(currentPage);
+      const targetVal = parseInt(targetPage);
       
-      blocks.forEach(block => {
-        block.style.opacity = Math.random() > 0.5 ? "1" : "0.7";
-      });
+      // Figure out the next highest 100 limit (e.g. 100 series rolls to 200 before picking up target)
+      let limit = Math.ceil((startVal + 1) / 100) * 100;
+      if (limit === startVal) limit += 100;
 
-      setTimeout(() => {
-        document.querySelectorAll('.page').forEach(page => page.classList.add('hidden'));
-        document.getElementById('page-' + pageNum).classList.remove('hidden');
+      // Fast Teletext rolling interval
+      const rollInterval = setInterval(() => {
+        startVal++;
         
-        if(pageNum === '100') {
-            pageNumEl.innerText = 'RONAN SULLIVAN';
-        } else {
-            pageNumEl.innerText = 'P' + pageNum;
-        }
-      }, 300);
+        // Render the search rolling up to the limit
+        hdrSearch.innerText = startVal.toString();
 
-      setTimeout(() => {
-        overlay.classList.remove('active');
-        blocks.forEach(block => block.style.opacity = "1");
-      }, 600);
+        if (startVal >= limit) {
+          clearInterval(rollInterval);
+          
+          // Once the limit is hit, snap directly to the user's requested target page
+          hdrSearch.innerText = targetPage;
+          
+          // Load actual page content
+          document.querySelectorAll('.page').forEach(page => page.classList.add('hidden'));
+          document.getElementById('page-' + targetPage).classList.remove('hidden');
+          
+          hdrPnum.innerText = 'P' + targetPage;
+          currentPage = targetPage;
+          isRolling = false;
+        }
+      }, 15); // Duration of speed for counting up
     }
   </script>
 </body>
