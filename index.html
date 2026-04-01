@@ -491,9 +491,8 @@
       // Counter always starts at the NEXT page in the sequence
       let currentTickerVal = parseInt(currentPage) + 1;
 
+      // Slowed down the interval to 65ms for a clunkier, heavier processing feel
       const rollInterval = setInterval(() => {
-        // Calculate the physical broadcast distance to the target 
-        // Handles rolling over to a lower number by simulating the carousel
         let distance;
         if (targetVal >= currentTickerVal) {
           distance = targetVal - currentTickerVal;
@@ -503,8 +502,8 @@
 
         // STATE 1: Jumping rapidly if far away
         if (distance > 10) {
-          // Jump by random large or smaller amounts (between 10 and 35)
-          const jump = 10 + Math.floor(Math.random() * 25);
+          // Jump by slightly reduced random amounts (between 5 and 20) to fit the slower pace
+          const jump = 5 + Math.floor(Math.random() * 15);
           currentTickerVal += jump;
         } else {
           // STATE 2: Counting up normally gear when close
@@ -535,7 +534,7 @@
             isRolling = false;
           }, 400); 
         }
-      }, 35); 
+      }, 65); 
     }
   </script>
 </body>
