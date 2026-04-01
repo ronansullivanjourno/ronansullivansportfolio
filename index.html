@@ -104,6 +104,7 @@
   .red { color: var(--red); }
 
   .blink { animation: blinker 1s step-start infinite; }
+  .fast-blink { animation: blinker 0.2s step-start infinite; }
   @keyframes blinker { 50% { opacity: 0; } }
 
   .grid-header {
@@ -246,11 +247,15 @@
         <span class="header-search" id="hdr-search">100</span>
         <span class="header-datetime">
           <span id="live-date">Wed 1 Apr</span> 
-          <span id="live-time" style="margin-left: 10px;">22:06:00</span>
+          <span id="live-time" style="margin-left: 10px;">22:10:00</span>
         </span>
       </div>
 
       <div class="pages-container">
+
+        <div id="loading-block" class="page hidden" style="justify-content: center; align-items: center;">
+             <p class="blink white" style="font-size: 40px;">█</p>
+        </div>
 
         <div class="page" id="page-100">
           <h1 class="yellow">WELCOME TO MY PORTFOLIO</h1>
@@ -418,11 +423,12 @@
   <script>
     let inputBuffer = "";
     let currentPage = "100";
-    let isRolling = false; // Lock out navigation while searching
+    let isRolling = false; 
 
     const displayEl = document.getElementById('display-digits');
     const hdrPnum = document.getElementById('hdr-pnum');
     const hdrSearch = document.getElementById('hdr-search');
+    const loadingBlock = document.getElementById('loading-block');
 
     setInterval(() => {
       const now = new Date();
@@ -476,35 +482,60 @@
       if (targetPage === currentPage) return;
 
       isRolling = true;
-      let startVal = parseInt(currentPage);
+      hdrSearch.classList.add('fast-blink'); 
+      
+      // Blank the current page away and show block cursor
+      document.querySelectorAll('.page').forEach(page => page.classList.add('hidden'));
+      loadingBlock.classList.remove('hidden'); 
+
       const targetVal = parseInt(targetPage);
       
-      // Figure out the next highest 100 limit (e.g. 100 series rolls to 200 before picking up target)
-      let limit = Math.ceil((startVal + 1) / 100) * 100;
-      if (limit === startVal) limit += 100;
+      // Find the base hundred (e.g., target 103 -> base 100)
+      const baseHundred = Math.floor(targetVal / 100) * 100;
 
-      // Fast Teletext rolling interval
+      // Start counter at least -33 below that base hundred
+      const randomStartOffset = 33 + Math.floor(Math.random() * 20); // starts between -33 and -53
+      let currentTickerVal = baseHundred - randomStartOffset;
+
+      // Determine where the counter switches gears to slow count-up (between -80 and -90 of target page)
+      const threshold = targetVal - (80 + Math.floor(Math.random() * 10));
+
       const rollInterval = setInterval(() => {
-        startVal++;
-        
-        // Render the search rolling up to the limit
-        hdrSearch.innerText = startVal.toString();
-
-        if (startVal >= limit) {
-          clearInterval(rollInterval);
+        // STATE 1: Chaotic Large Jumps
+        if (currentTickerVal < threshold) {
+          // Jump by random large or smaller amounts (between 10 and 35)
+          const jump = 10 + Math.floor(Math.random() * 25);
+          currentTickerVal += jump;
           
-          // Once the limit is hit, snap directly to the user's requested target page
+          // Failsafe to ensure it doesn't accidentally fly past the threshold in one leap
+          if (currentTickerVal > threshold) currentTickerVal = threshold;
+          
+        } else {
+          // STATE 2: Linear count-up Gear
+          currentTickerVal++;
+        }
+
+        // Render the search value
+        hdrSearch.innerText = currentTickerVal.toString();
+
+        // Hit the target!
+        if (currentTickerVal >= targetVal) {
+          clearInterval(rollInterval);
+          hdrSearch.classList.remove('fast-blink');
+          
           hdrSearch.innerText = targetPage;
           
-          // Load actual page content
-          document.querySelectorAll('.page').forEach(page => page.classList.add('hidden'));
-          document.getElementById('page-' + targetPage).classList.remove('hidden');
-          
-          hdrPnum.innerText = 'P' + targetPage;
-          currentPage = targetPage;
-          isRolling = false;
+          // CRT rendering delay
+          setTimeout(() => {
+            loadingBlock.classList.add('hidden');
+            document.getElementById('page-' + targetPage).classList.remove('hidden');
+            
+            hdrPnum.innerText = 'P' + targetPage;
+            currentPage = targetPage;
+            isRolling = false;
+          }, 400); 
         }
-      }, 15); // Duration of speed for counting up
+      }, 35); // Slight speed adjustment to accommodate large jumps
     }
   </script>
 </body>
