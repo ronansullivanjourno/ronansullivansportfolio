@@ -7,7 +7,225 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0c0d10;
+    --white: #ffffff;
+    --yellow: #ffee00;
+    --cyan: #00ffff;
+    --green: #00ff00;
+    --red: #ff3333;
+    --blue: #0022ff;
+    --font: 'VT323', monospace;
+  }
+
+  body {
+    background-color: #1a1c23;
+    color: var(--white);
+    font-family: var(--font);
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+
+  .tv-container {
+    width: 95vw;
+    max-width: 1100px;
+    height: 85vh;
+    background: var(--bg);
+    border: 10px solid #2a2d37;
+    box-shadow: 0 0 0 4px #0c0d10, 0 20px 40px rgba(0,0,0,0.6);
+    display: grid;
+    grid-template-columns: 1fr 260px;
+    position: relative;
+  }
+
+  .screen {
+    border-right: 4px solid #2a2d37;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 20px 30px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 4px double var(--white);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    color: var(--white);
+  }
+
+  .header-left { display: flex; gap: 20px; }
+  .page-num { color: var(--yellow); }
+  .brand { color: var(--green); }
+  .header-center { cursor: pointer; }
+
+  .page {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .hidden { display: none !important; }
+
+  h1 { font-size: 44px; margin-bottom: 10px; }
+  h2 { font-size: 32px; margin-bottom: 15px; }
+
+  .cyan { color: var(--cyan); }
+  .yellow { color: var(--yellow); }
+  .green { color: var(--green); }
+  .white { color: var(--white); }
+  .red { color: var(--red); }
+
+  .blink { animation: blinker 1s step-start infinite; }
+  @keyframes blinker { 50% { opacity: 0; } }
+
+  .grid-header {
+    display: grid;
+    grid-template-columns: 50px 1fr 120px;
+    border-bottom: 2px solid var(--cyan);
+    padding-bottom: 5px;
+    color: var(--cyan);
+    font-size: 22px;
+  }
+
+  .file-list {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 15px;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 50px 1fr 120px;
+    padding: 8px 0;
+    border-bottom: 1px solid #222;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--white);
+    font-size: 26px;
+    align-items: center;
+  }
+
+  .row:hover {
+    background-color: var(--white);
+    color: var(--bg);
+  }
+  .row:hover .cyan, .row:hover .yellow, .row:hover .green { color: var(--bg); }
+
+  .content-block {
+    background: #000;
+    border: 2px solid var(--green);
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+
+  .content-block p {
+    line-height: 1.4;
+    font-size: 28px;
+    margin-bottom: 15px;
+  }
+
+  .data-row {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dotted var(--yellow);
+    padding: 5px 0;
+    font-size: 26px;
+  }
+
+  .fastext {
+    display: flex;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 15px;
+    border-top: 4px double var(--white);
+  }
+
+  .fast-btn {
+    cursor: pointer;
+    font-size: 24px;
+    padding: 2px 10px;
+    background: #000;
+  }
+  .fast-btn span { font-weight: bold; }
+  .fast-btn:hover { background: var(--white); color: #000; }
+
+  .remote-panel {
+    background: #1e2029;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .remote-title {
+    font-size: 20px;
+    text-align: center;
+    color: #888;
+    letter-spacing: 2px;
+    border-bottom: 2px solid #333;
+    width: 100%;
+    padding-bottom: 10px;
+  }
+
+  .numpad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    width: 100%;
+    margin: 20px 0;
+  }
+
+  .num-btn {
+    background: #2a2d37;
+    border: 2px solid #444;
+    color: var(--white);
+    font-family: var(--font);
+    font-size: 32px;
+    padding: 10px 0;
+    cursor: pointer;
+    text-align: center;
+    box-shadow: inset 0 2px 0 rgba(255,255,255,0.1), 0 4px 0 #111;
+  }
+
+  .num-btn:active {
+    transform: translateY(2px);
+    box-shadow: inset 0 2px 0 rgba(255,255,255,0.1), 0 2px 0 #111;
+  }
+
+  .num-btn:hover {
+    background: #3a3f4d;
+    border-color: var(--cyan);
+  }
+
+  .input-display {
+    width: 100%;
+    background: #000;
+    border: 2px solid var(--red);
+    color: var(--red);
+    font-size: 36px;
+    text-align: center;
+    padding: 5px 0;
+    letter-spacing: 4px;
+  }
+
+  @media (max-width: 800px) {
+    .tv-container { grid-template-columns: 1fr; height: auto; }
+    .remote-panel { display: none; }
+    .screen { border-right: none; height: 80vh; }
+  }
+</style>
 </head>
 <body>
 
@@ -186,7 +404,6 @@
       currentActivePage = pageNum;
       document.getElementById('current-page-header').textContent = 'P' + pageNum;
       
-      // If they navigate to weather, trigger the fetch
       if(pageNum === 105) {
         getLiveWeather();
       }
@@ -237,9 +454,7 @@
   setInterval(updateClock, 1000);
   updateClock();
 
-  // ── LIVE WEATHER SCRIPT ──
   function getLiveWeather() {
-    // Geolocation for Enfield, UK
     const lat = 51.6538;
     const lon = -0.0799;
     
@@ -250,7 +465,6 @@
         document.getElementById('weather-temp').textContent = Math.round(weather.temperature) + "°C";
         document.getElementById('weather-wind').textContent = weather.windspeed + " km/h";
         
-        // Convert WMO Weather codes to readable strings & fun block graphics
         const code = weather.weathercode;
         let condition = "CLEAR SKY";
         let graphic = "☼ SUNNY ☼";
