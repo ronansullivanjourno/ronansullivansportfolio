@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>P100 CEEFAX — Ronan Sullivan</title>
+<title>Ronan Sullivan — Writing Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
@@ -64,15 +64,21 @@
   }
 
   .header-left { display: flex; gap: 20px; }
-  .page-num { color: var(--yellow); }
+  .user-name { color: var(--yellow); font-weight: bold; }
   .brand { color: var(--green); }
+
+  .pages-container {
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
 
   .page {
     flex: 1;
     display: flex;
     flex-direction: column;
-    position: relative;
-    height: 100%;
   }
   .hidden { display: none !important; }
 
@@ -142,7 +148,7 @@
     font-size: 26px;
   }
 
-  /* Footer bar placed inside each page */
+  /* Universal Footer - Anchored to the bottom of the TV screen */
   .fastext {
     display: flex;
     justify-content: space-between;
@@ -248,56 +254,48 @@
     <div class="screen">
       <div class="header">
         <div class="header-left">
-          <span class="page-num white" id="current-pnum">P100</span>
-          <span class="brand green">CEEFAX</span>
+          <span class="user-name" id="current-pnum">RONAN SULLIVAN</span>
+          <span class="brand green">PORTFOLIO</span>
         </div>
         <div class="header-right">
-          <span class="yellow">Wed 1 Apr</span>
+          <span class="yellow" id="live-date">Wed 1 Apr</span>
           <span class="yellow" style="margin-left: 10px;" id="live-time">19:00:00</span>
         </div>
       </div>
 
-      <div style="position: relative; flex: 1; display: flex; flex-direction: column;">
-        
+      <div class="pages-container">
         <div class="pixel-transition" id="pixel-overlay"></div>
-<div class="page" id="page-100">
-  <h1 class="yellow">RONAN SULLIVAN: PORTFOLIO</h1>
-  
-  <div class="content-block" style="border-color: var(--cyan); margin-bottom: 15px;">
-    <h2 class="cyan">WELCOME TO MY PORTFOLIO</h2>
-    <p>I am a writer and journalist specialising in sports reporting, theatre reviews, and cultural columns. Use the index below or type a 3-digit page number on your keyboard to browse my published work.</p>
-  </div>
 
-  <div class="grid-header">
-    <span>PAGE</span><span>SUBJECT</span><span>UPDATED</span>
-  </div>
-  
-  <div class="file-list">
-    <div class="row" onclick="changePage('101')">
-      <span class="cyan">101</span><span>DIRECTORY & CATEGORIES</span><span class="green">OK</span>
-    </div>
-    <div class="row" onclick="changePage('105')">
-      <span class="cyan">105</span><span>UK WEATHER FORECAST (FUN ADD-ON)</span><span class="green">LIVE</span>
-    </div>
-    <div class="row" onclick="changePage('200')">
-      <span class="cyan">200</span><span>SPORTS VIDIPRINTER (FUN ADD-ON)</span><span class="green">LIVE</span>
-    </div>
-  </div>
-
-  <div class="content-block" style="margin-top: auto;">
-    <p class="blink red">TYPE A 3-DIGIT NUMBER ON YOUR KEYBOARD TO CHANGE PAGE</p>
-  </div>
-
-  <div class="fastext">
-    <div class="fast-btn red" onclick="changePage('100')"><span>100</span> INDEX</div>
-    <div class="fast-btn green" onclick="changePage('101')"><span>101</span> DIR</div>
-    <div class="fast-btn yellow" onclick="changePage('105')"><span>105</span> WEATHER</div>
-    <div class="fast-btn cyan" onclick="changePage('200')"><span>200</span> SPORT</div>
-  </div>
-</div>
+        <div class="page" id="page-100">
+          <h1 class="yellow">WELCOME</h1>
+          <div class="content-block">
+            <p>I am a writer and journalist specialising in theatre reviews, cultural columns, and sports correspondence.</p>
+            <p>This layout functions like a retro teletext system. You can browse my published work by clicking the directory below, or by typing page numbers directly on your keyboard.</p>
+          </div>
+          <div class="grid-header">
+            <span>PAGE</span><span>SUBJECT</span><span>STATUS</span>
+          </div>
+          <div class="file-list">
+            <div class="row" onclick="changePage('101')">
+              <span class="cyan">101</span><span>WORK DIRECTORY</span><span class="green">OK</span>
+            </div>
+            <div class="row" onclick="changePage('102')">
+              <span class="cyan">102</span><span>ABOUT ME / CV</span><span class="green">OK</span>
+            </div>
+            <div class="row" onclick="changePage('105')">
+              <span class="cyan">105</span><span>WEATHER</span><span class="green">LIVE</span>
+            </div>
+            <div class="row" onclick="changePage('200')">
+              <span class="cyan">200</span><span>SPORTS VIDIPRINTER</span><span class="green">LIVE</span>
+            </div>
+          </div>
+          <div class="content-block" style="margin-top: auto;">
+            <p class="blink red">TYPE A 3-DIGIT NUMBER OR USE THE REMOTE TO NAVIGATE</p>
+          </div>
+        </div>
 
         <div class="page hidden" id="page-101">
-          <h1 class="yellow">DIRECTORY & CATEGORIES</h1>
+          <h1 class="yellow">WORK DIRECTORY</h1>
           <div class="grid-header">
             <span>PAGE</span><span>SECTION</span><span>STATUS</span>
           </div>
@@ -315,11 +313,24 @@
               <span class="cyan">100</span><span>BACK TO MAIN INDEX</span><span class="green">OK</span>
             </div>
           </div>
-          <div class="fastext">
-            <div class="fast-btn red" onclick="changePage('100')"><span>100</span> INDEX</div>
-            <div class="fast-btn green" onclick="changePage('101')"><span>101</span> DIR</div>
-            <div class="fast-btn yellow" onclick="changePage('105')"><span>105</span> WEATHER</div>
-            <div class="fast-btn cyan" onclick="changePage('200')"><span>200</span> SPORT</div>
+        </div>
+
+        <div class="page hidden" id="page-102">
+          <h1 class="yellow">P102: ABOUT ME / CV</h1>
+          <div class="content-block" style="border-color: var(--cyan);">
+            <h2 class="cyan">PROFESSIONAL PROFILE</h2>
+            <p>Dynamic and focused writer with a strong portfolio covering live sports reporting, critical cultural analysis, and long-form columns. Proven track record in fast-paced editorial environments.</p>
+          </div>
+          <div class="content-block" style="border-color: var(--yellow);">
+            <h2 class="yellow">SKILLS & EXPERTISE</h2>
+            <p>* Editorial Writing & Match Reporting<br>
+               * Cultural Criticism & Arts Reviews<br>
+               * Fast-turnaround Copywriting<br>
+               * Content Strategy & Digital Publishing</p>
+          </div>
+          <div class="content-block">
+            <h2 class="green">CONTACT</h2>
+            <p>Feel free to look through the categories on Page 101 to see my live bylines and writing samples.</p>
           </div>
         </div>
 
@@ -332,12 +343,6 @@
             <a class="row" href="https://enfielddispatch.co.uk/win-over-welsh-side-will-go-long-way-to-securing-enfield-towns-fenix-trophy-play-off-place/" target="_blank">
               <span class="yellow">10</span><span>Win over Welsh side - <span class="cyan">Enfield Dispatch</span></span><span class="green">SPORT</span>
             </a>
-          </div>
-          <div class="fastext">
-            <div class="fast-btn red" onclick="changePage('100')"><span>100</span> INDEX</div>
-            <div class="fast-btn green" onclick="changePage('101')"><span>101</span> DIR</div>
-            <div class="fast-btn yellow" onclick="changePage('105')"><span>105</span> WEATHER</div>
-            <div class="fast-btn cyan" onclick="changePage('200')"><span>200</span> SPORT</div>
           </div>
         </div>
 
@@ -353,12 +358,6 @@
             <a class="row" href="https://ronanswriting.blogspot.com/2023/05/national-theatre-dancing-at-lughnasa.html" target="_blank">
               <span class="yellow">12</span><span>Dancing at Lughnasa - <span class="cyan">The Line Is Good</span></span><span class="cyan">THEATRE</span>
             </a>
-          </div>
-          <div class="fastext">
-            <div class="fast-btn red" onclick="changePage('100')"><span>100</span> INDEX</div>
-            <div class="fast-btn green" onclick="changePage('101')"><span>101</span> DIR</div>
-            <div class="fast-btn yellow" onclick="changePage('105')"><span>105</span> WEATHER</div>
-            <div class="fast-btn cyan" onclick="changePage('200')"><span>200</span> SPORT</div>
           </div>
         </div>
 
@@ -381,12 +380,6 @@
               <span class="yellow">16</span><span>Fresh Year - <span class="cyan">Impact Notts</span></span><span class="yellow">PIECES</span>
             </a>
           </div>
-          <div class="fastext">
-            <div class="fast-btn red" onclick="changePage('100')"><span>100</span> INDEX</div>
-            <div class="fast-btn green" onclick="changePage('101')"><span>101</span> DIR</div>
-            <div class="fast-btn yellow" onclick="changePage('105')"><span>105</span> WEATHER</div>
-            <div class="fast-btn cyan" onclick="changePage('200')"><span>200</span> SPORT</div>
-          </div>
         </div>
 
         <div class="page hidden" id="page-105">
@@ -397,19 +390,13 @@
           </div>
           <h2 class="cyan">REGIONAL TEMPERATURES</h2>
           <div class="file-list">
-            <div class="data-row"><span>LONDON</span><span class="green">11°C</span></div>
+            <div class="data-row"><span>LONDON (ENFIELD)</span><span class="green">11°C</span></div>
             <div class="data-row"><span>BIRMINGHAM</span><span class="green">9°C</span></div>
             <div class="data-row"><span>MANCHESTER</span><span class="green">8°C</span></div>
             <div class="data-row"><span>NEWCASTLE</span><span class="green">6°C</span></div>
             <div class="data-row"><span>EDINBURGH</span><span class="green">5°C</span></div>
             <div class="data-row"><span>BELFAST</span><span class="green">7°C</span></div>
             <div class="data-row"><span>CARDIFF</span><span class="green">10°C</span></div>
-          </div>
-          <div class="fastext">
-            <div class="fast-btn red" onclick="changePage('100')"><span>100</span> INDEX</div>
-            <div class="fast-btn green" onclick="changePage('101')"><span>101</span> DIR</div>
-            <div class="fast-btn yellow" onclick="changePage('105')"><span>105</span> WEATHER</div>
-            <div class="fast-btn cyan" onclick="changePage('200')"><span>200</span> SPORT</div>
           </div>
         </div>
 
@@ -430,20 +417,17 @@
           <div class="content-block">
             <h2 class="cyan">HEADLINES</h2>
             <p>Sunderland secure massive away win in the Wear-Tyne derby at St. James' Park!</p>
-            <p>Nottingham Forest stun Spurs at home with a massive 3-nil victory.</p>
-          </div>
-          <div class="fastext">
-            <div class="fast-btn red" onclick="changePage('100')"><span>100</span> INDEX</div>
-            <div class="fast-btn green" onclick="changePage('101')"><span>101</span> DIR</div>
-            <div class="fast-btn yellow" onclick="changePage('105')"><span>105</span> WEATHER</div>
-            <div class="fast-btn cyan" onclick="changePage('200')"><span>200</span> SPORT</div>
           </div>
         </div>
 
+      </div> <div class="fastext">
+        <div class="fast-btn red" onclick="changePage('100')"><span>100</span> INDEX</div>
+        <div class="fast-btn green" onclick="changePage('101')"><span>101</span> DIR</div>
+        <div class="fast-btn yellow" onclick="changePage('105')"><span>105</span> WEATHER</div>
+        <div class="fast-btn cyan" onclick="changePage('200')"><span>200</span> SPORT</div>
       </div>
-    </div>
 
-    <div class="remote-panel">
+    </div> <div class="remote-panel">
       <div class="remote-title">TELETEXT REMOTE</div>
       <div class="input-display" id="display-digits">100</div>
       
@@ -470,20 +454,17 @@
     const pageNumEl = document.getElementById('current-pnum');
     const overlay = document.getElementById('pixel-overlay');
 
-    // Create 100 pixel blocks for the stagger animation
     for (let i = 0; i < 100; i++) {
       const block = document.createElement('div');
       block.classList.add('pixel-block');
       overlay.appendChild(block);
     }
 
-    // Live Clock Function
     setInterval(() => {
       const now = new Date();
       document.getElementById('live-time').innerText = now.toTimeString().split(' ')[0];
     }, 1000);
 
-    // Number buffer management
     function pressKey(num) {
       if (inputBuffer.length < 3) {
         inputBuffer += num;
@@ -506,7 +487,6 @@
       }
     }
 
-    // Keyboard controls
     window.addEventListener('keydown', (e) => {
       if (e.key >= '0' && e.key <= '9') {
         pressKey(e.key);
@@ -517,9 +497,8 @@
       }
     });
 
-    // Page handling & CRT scan simulation
     function changePage(pageNum) {
-      const validPages = ['100', '101', '105', '110', '120', '130', '200'];
+      const validPages = ['100', '101', '102', '105', '110', '120', '130', '200'];
       
       if (!validPages.includes(pageNum)) {
         alert("Page " + pageNum + " not found!");
@@ -536,7 +515,12 @@
       setTimeout(() => {
         document.querySelectorAll('.page').forEach(page => page.classList.add('hidden'));
         document.getElementById('page-' + pageNum).classList.remove('hidden');
-        pageNumEl.innerText = 'P' + pageNum;
+        
+        if(pageNum === '100') {
+            pageNumEl.innerText = 'RONAN SULLIVAN';
+        } else {
+            pageNumEl.innerText = 'P' + pageNum;
+        }
       }, 300);
 
       setTimeout(() => {
