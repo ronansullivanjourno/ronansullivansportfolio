@@ -38,6 +38,7 @@
         <div class="data-row"><span class="white">102</span><span class="cyan">BIOGRAPHY & ACCREDITATIONS</span></div>
         <div class="data-row"><span class="white">103</span><span class="cyan">CONTACT INFO & EXTERNAL LINKS</span></div>
         <div class="data-row"><span class="white">104</span><span class="cyan">LIVE NOTICES & INBOX</span></div>
+        <div class="data-row"><span class="white">105</span><span class="yellow">LIVE WEATHER (ENFIELD)</span></div>
       </div>
     </div>
 
@@ -124,11 +125,28 @@
       </div>
     </div>
 
+    <div id="p105" class="page hidden">
+      <h1 class="cyan">P105: REGIONAL WEATHER</h1>
+      <h2 class="yellow">ENFIELD & GREATER LONDON</h2>
+      
+      <div class="content-block" style="border-color: var(--cyan);">
+        <div class="data-row"><span class="white">LOCATION:</span><span class="cyan">ENFIELD, UK</span></div>
+        <div class="data-row"><span class="white">TEMPERATURE:</span><span class="yellow" id="weather-temp">LOADING...</span></div>
+        <div class="data-row"><span class="white">CONDITION:</span><span class="green" id="weather-cond">FETCHING...</span></div>
+        <div class="data-row"><span class="white">WIND SPEED:</span><span class="white" id="weather-wind">--</span></div>
+      </div>
+
+      <div class="content-block" style="border-color: var(--yellow); text-align: center;">
+        <p class="blink yellow" id="weather-graphic">■■■■■■■■■■</p>
+        <p>Data provided live by open-meteo broadcast.</p>
+      </div>
+    </div>
+
     <div class="fastext">
       <div class="fast-btn red" onclick="goToPage(100)"><span>100</span> INDEX</div>
       <div class="fast-btn green" onclick="goToPage(101)"><span>101</span> WORK</div>
       <div class="fast-btn yellow" onclick="goToPage(102)"><span>102</span> BIO</div>
-      <div class="fast-btn cyan" onclick="goToPage(103)"><span>103</span> DIAL</div>
+      <div class="fast-btn cyan" onclick="goToPage(105)"><span>105</span> METEO</div>
     </div>
 
   </div>
@@ -167,6 +185,11 @@
       targetPage.classList.remove('hidden');
       currentActivePage = pageNum;
       document.getElementById('current-page-header').textContent = 'P' + pageNum;
+      
+      // If they navigate to weather, trigger the fetch
+      if(pageNum === 105) {
+        getLiveWeather();
+      }
     } else {
       document.getElementById('p100').classList.remove('hidden');
       currentActivePage = 100;
@@ -213,6 +236,40 @@
   }
   setInterval(updateClock, 1000);
   updateClock();
+
+  // ── LIVE WEATHER SCRIPT ──
+  function getLiveWeather() {
+    // Geolocation for Enfield, UK
+    const lat = 51.6538;
+    const lon = -0.0799;
+    
+    fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`)
+      .then(response => response.json())
+      .then(data => {
+        const weather = data.current_weather;
+        document.getElementById('weather-temp').textContent = Math.round(weather.temperature) + "°C";
+        document.getElementById('weather-wind').textContent = weather.windspeed + " km/h";
+        
+        // Convert WMO Weather codes to readable strings & fun block graphics
+        const code = weather.weathercode;
+        let condition = "CLEAR SKY";
+        let graphic = "☼ SUNNY ☼";
+        
+        if (code >= 1 && code <= 3) { condition = "PARTLY CLOUDY"; graphic = "☁ CLOUDS ☁"; }
+        else if (code >= 45 && code <= 48) { condition = "FOGGY"; graphic = "░ FOG ░"; }
+        else if (code >= 51 && code <= 67) { condition = "RAINING"; graphic = "/// RAIN ///"; }
+        else if (code >= 71 && code <= 77) { condition = "SNOWING"; graphic = "* SNOW *"; }
+        else if (code >= 80 && code <= 82) { condition = "HEAVY RAIN"; graphic = "/// DOWNPOUR ///"; }
+        else if (code >= 95) { condition = "THUNDERSTORM"; graphic = "⚡ STORM ⚡"; }
+        
+        document.getElementById('weather-cond').textContent = condition;
+        document.getElementById('weather-graphic').textContent = graphic;
+      })
+      .catch(error => {
+        document.getElementById('weather-temp').textContent = "OFFLINE";
+        document.getElementById('weather-cond').textContent = "SIGNAL LOST";
+      });
+  }
 </script>
 
 </body>
