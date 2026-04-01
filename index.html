@@ -104,7 +104,6 @@
   .red { color: var(--red); }
 
   .blink { animation: blinker 1s step-start infinite; }
-  .fast-blink { animation: blinker 0.2s step-start infinite; }
   @keyframes blinker { 50% { opacity: 0; } }
 
   .grid-header {
@@ -482,7 +481,6 @@
       if (targetPage === currentPage) return;
 
       isRolling = true;
-      hdrSearch.classList.add('fast-blink'); 
       
       // Blank the current page away and show block cursor
       document.querySelectorAll('.page').forEach(page => page.classList.add('hidden'));
@@ -490,18 +488,14 @@
 
       const targetVal = parseInt(targetPage);
       
-      // Find the base hundred (e.g., target 103 -> base 100)
-      const baseHundred = Math.floor(targetVal / 100) * 100;
-
-      // Start counter at least -33 below that base hundred
-      const randomStartOffset = 33 + Math.floor(Math.random() * 20); // starts between -33 and -53
-      let currentTickerVal = baseHundred - randomStartOffset;
+      // Start the counter EXACTLY at the current page number
+      let currentTickerVal = parseInt(currentPage);
 
       // Determine where the counter switches gears to slow count-up (between -80 and -90 of target page)
       const threshold = targetVal - (80 + Math.floor(Math.random() * 10));
 
       const rollInterval = setInterval(() => {
-        // STATE 1: Chaotic Large Jumps
+        // STATE 1: Chaotic Large Jumps (Only if starting from a lower number)
         if (currentTickerVal < threshold) {
           // Jump by random large or smaller amounts (between 10 and 35)
           const jump = 10 + Math.floor(Math.random() * 25);
@@ -511,17 +505,20 @@
           if (currentTickerVal > threshold) currentTickerVal = threshold;
           
         } else {
-          // STATE 2: Linear count-up Gear
-          currentTickerVal++;
+          // STATE 2: Linear count-up gear (counts up normally or counts down if going backwards)
+          if (currentTickerVal < targetVal) {
+            currentTickerVal++;
+          } else if (currentTickerVal > targetVal) {
+            currentTickerVal--;
+          }
         }
 
         // Render the search value
         hdrSearch.innerText = currentTickerVal.toString();
 
         // Hit the target!
-        if (currentTickerVal >= targetVal) {
+        if (currentTickerVal === targetVal) {
           clearInterval(rollInterval);
-          hdrSearch.classList.remove('fast-blink');
           
           hdrSearch.innerText = targetPage;
           
@@ -535,7 +532,7 @@
             isRolling = false;
           }, 400); 
         }
-      }, 35); // Slight speed adjustment to accommodate large jumps
+      }, 35); 
     }
   </script>
 </body>
