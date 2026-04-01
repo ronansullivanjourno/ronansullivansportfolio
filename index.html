@@ -31,20 +31,38 @@
     user-select: none;
   }
 
+  /* ── INVENTIVE ADDITION: DESKTOP BRANDING WATERMARK ── */
+  .desktop-branding {
+    position: absolute;
+    bottom: 50px;
+    right: 30px;
+    text-align: right;
+    color: rgba(255, 255, 255, 0.25);
+    pointer-events: none;
+    user-select: none;
+  }
+  .desktop-branding h1 {
+    font-size: 40px;
+    font-weight: 900;
+    margin-bottom: -5px;
+    text-transform: uppercase;
+    font-family: Arial, sans-serif;
+  }
+  .desktop-branding p {
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+
   /* ── DESKTOP & ICONS ── */
   .desktop {
     height: calc(100vh - 30px);
     padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
-    flex-wrap: wrap;
-    align-content: flex-start;
+    position: relative;
   }
 
   .icon {
-    width: 75px;
+    width: 85px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -53,12 +71,20 @@
     color: var(--win-light);
     font-size: 11px;
     text-shadow: 1px 1px 1px var(--win-black);
+    position: absolute;
+    user-select: none;
+    touch-action: none;
   }
+
+  #icon-work { top: 20px; left: 20px; }
+  #icon-about { top: 120px; left: 20px; }
+  #icon-contact { top: 220px; left: 20px; }
 
   .icon .win-icon-fallback {
     width: 32px;
     height: 32px;
     margin-bottom: 5px;
+    pointer-events: none;
   }
 
   .icon-folder {
@@ -88,6 +114,9 @@
 
   .icon span {
     padding: 2px 4px;
+    pointer-events: none;
+    display: block;
+    width: 100%;
   }
 
   .icon:hover span {
@@ -106,6 +135,7 @@
     display: flex;
     flex-direction: column;
     z-index: 10;
+    touch-action: none;
   }
 
   .window.hidden { display: none !important; }
@@ -119,12 +149,14 @@
     align-items: center;
     font-weight: bold;
     font-size: 12px;
+    cursor: move;
   }
 
   .title-bar-text {
     display: flex;
     align-items: center;
     gap: 5px;
+    pointer-events: none;
   }
 
   .title-bar-controls button {
@@ -174,10 +206,67 @@
     flex: 1;
   }
 
-  /* ── SPECIFIC WINDOW REPOSITIONS ── */
-  #win-work { top: 50px; left: 150px; width: 550px; height: 420px; }
-  #win-about { top: 100px; left: 200px; width: 450px; }
-  #win-contact { top: 150px; left: 250px; width: 400px; }
+  /* Starting positions for Windows */
+  #win-work { top: 60px; left: 150px; width: 550px; height: 380px; }
+  #win-about { top: 120px; left: 240px; width: 450px; }
+  #win-contact { top: 180px; left: 300px; width: 400px; }
+
+  /* ── INVENTIVE ADDITION: SPLASH LOGIN SCREEN (Intro) ── */
+  #win-login {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 420px;
+    z-index: 200; /* Stays above everything at start */
+  }
+
+  .login-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+  }
+
+  .login-header .pfp-fallback {
+    width: 50px;
+    height: 50px;
+    background: #a0a0a0;
+    border: 2px solid;
+    border-color: var(--win-dark) var(--win-light) var(--win-light) var(--win-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    color: #fff;
+  }
+
+  .login-form-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .login-form-row label {
+    font-weight: bold;
+  }
+
+  .login-form-row input {
+    width: 220px;
+    border: 2px solid;
+    border-color: var(--win-dark) var(--win-light) var(--win-light) var(--win-dark);
+    padding: 2px 4px;
+    background: #fff;
+    font-family: var(--sans);
+    font-size: 12px;
+  }
+
+  .login-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 15px;
+  }
 
   /* ── WORK LIST ── */
   .file-list-header {
@@ -216,7 +305,7 @@
     background-color: var(--win-gray);
     border: 1px solid;
     border-color: var(--win-light) var(--win-dark) var(--win-dark) var(--win-light);
-    padding: 3px: 10px;
+    padding: 3px 15px;
     font-family: var(--sans);
     font-size: 11px;
     cursor: pointer;
@@ -226,7 +315,7 @@
   button.win-btn:active {
     border-color: var(--win-dark) var(--win-light) var(--win-light) var(--win-dark);
     box-shadow: none;
-    padding: 4px 9px 2px 11px;
+    padding: 4px 14px 2px 16px;
   }
 
   .filter-bar {
@@ -326,39 +415,79 @@
   }
 
   @media (max-width: 600px) {
-    #win-work, #win-about, #win-contact {
+    #win-work, #win-about, #win-contact, #win-login {
       width: 95% !important;
       left: 2.5% !important;
       top: 20px !important;
-      height: 75% !important;
+      transform: none !important;
+      height: auto !important;
     }
+    #win-work { height: 70% !important; }
   }
 </style>
 </head>
 <body>
 
+<div class="desktop-branding">
+  <h1>Ronan Sullivan</h1>
+  <p>Journalist & Critic</p>
+</div>
+
 <div class="desktop">
-  <div class="icon" onclick="openWindow('win-work')">
+  <div id="icon-work" class="icon" onclick="iconClick('win-work')">
     <div class="win-icon-fallback icon-folder"></div>
-    <span>My Work</span>
+    <span>Ronan's Work</span>
   </div>
   
-  <div class="icon" onclick="openWindow('win-about')">
+  <div id="icon-about" class="icon" onclick="iconClick('win-about')">
     <div class="win-icon-fallback icon-txt"></div>
-    <span>About.txt</span>
+    <span>Bio.txt</span>
   </div>
   
-  <div class="icon" onclick="openWindow('win-contact')">
+  <div id="icon-contact" class="icon" onclick="iconClick('win-contact')">
     <div class="win-icon-fallback icon-folder"></div>
-    <span>Contact</span>
+    <span>Contact Info</span>
   </div>
 </div>
 
-<div id="win-work" class="window" onclick="bringToFront('win-work')">
+<div id="win-login" class="window">
   <div class="title-bar">
-    <div class="title-bar-text">📁 My Work</div>
+    <div class="title-bar-text">🔐 Welcome to the Portfolio</div>
+  </div>
+  <div class="window-content" style="padding: 15px;">
+    <div class="login-header">
+      <div class="pfp-fallback">R</div>
+      <div>
+        <h2 style="font-size: 14px; margin-bottom: 3px;">Ronan Sullivan</h2>
+        <p style="font-size: 11px; color: #555;">Journalist, critic, and long-form writer based in London.</p>
+      </div>
+    </div>
+    
+    <div class="recessed" style="padding: 10px; margin-bottom: 10px; background-color: #f5f5f5;">
+      <p style="font-size: 11px; line-height: 1.4;"><strong>Site Objective:</strong> To house my professional portfolio covering sports journalism, book and theatre reviews, and cultural commentary.</p>
+    </div>
+
+    <div class="login-form-row">
+      <label>User name:</label>
+      <input type="text" value="Guest_Reader" readonly>
+    </div>
+    <div class="login-form-row">
+      <label>Password:</label>
+      <input type="password" value="••••••••" readonly>
+    </div>
+
+    <div class="login-buttons">
+      <button class="win-btn" onclick="closeLogin()">OK</button>
+      <button class="win-btn" onclick="closeLogin()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div id="win-work" class="window hidden" onclick="bringToFront('win-work')">
+  <div class="title-bar">
+    <div class="title-bar-text">📁 Ronan Sullivan - Published Work</div>
     <div class="title-bar-controls">
-      <button onclick="closeWindow('win-work')">X</button>
+      <button onclick="closeWindow('win-work'); event.stopPropagation();">X</button>
     </div>
   </div>
   <div class="menu-bar">
@@ -422,9 +551,9 @@
 
 <div id="win-about" class="window hidden" onclick="bringToFront('win-about')">
   <div class="title-bar">
-    <div class="title-bar-text">📝 About.txt - Notepad</div>
+    <div class="title-bar-text">📝 Bio.txt - Notepad</div>
     <div class="title-bar-controls">
-      <button onclick="closeWindow('win-about')">X</button>
+      <button onclick="closeWindow('win-about'); event.stopPropagation();">X</button>
     </div>
   </div>
   <div class="window-content">
@@ -445,7 +574,7 @@
   <div class="title-bar">
     <div class="title-bar-text">☎️ Address Book</div>
     <div class="title-bar-controls">
-      <button onclick="closeWindow('win-contact')">X</button>
+      <button onclick="closeWindow('win-contact'); event.stopPropagation();">X</button>
     </div>
   </div>
   <div class="window-content">
@@ -470,12 +599,11 @@
   </div>
 </div>
 
-
 <div class="taskbar">
   <div class="start-btn">Start</div>
   <div class="tasks">
-    <div class="task-item active" id="task-win-work" onclick="openWindow('win-work')">My Work</div>
-    <div class="task-item" id="task-win-about" onclick="openWindow('win-about')">About.txt</div>
+    <div class="task-item" id="task-win-work" onclick="openWindow('win-work')">My Work</div>
+    <div class="task-item" id="task-win-about" onclick="openWindow('win-about')">Bio.txt</div>
     <div class="task-item" id="task-win-contact" onclick="openWindow('win-contact')">Contact</div>
   </div>
   <div class="systray" id="clock">12:00 PM</div>
@@ -483,6 +611,10 @@
 
 <script>
   let zIndex = 10;
+  let isDragging = false;
+  let currentDraggedElement = null;
+  let offsetLeft = 0;
+  let offsetTop = 0;
 
   function openWindow(id) {
     const win = document.getElementById(id);
@@ -496,12 +628,20 @@
     document.getElementById('task-' + id).classList.remove('active');
   }
 
+  function closeLogin() {
+    document.getElementById('win-login').classList.add('hidden');
+    // Automatically open your work window as the first interface!
+    openWindow('win-work');
+  }
+
   function bringToFront(id) {
     zIndex++;
     document.getElementById(id).style.zIndex = zIndex;
     
     document.querySelectorAll('.task-item').forEach(t => t.classList.remove('active'));
-    document.getElementById('task-' + id).classList.add('active');
+    // Only set taskbar active if it has a task button
+    const taskBtn = document.getElementById('task-' + id);
+    if(taskBtn) taskBtn.classList.add('active');
   }
 
   function filterFiles(cat) {
@@ -520,6 +660,75 @@
   }
   setInterval(updateClock, 1000);
   updateClock();
+
+  /* ── DRAG AND DROP LOGIC ── */
+  let iconDragThreshold = 0;
+  function iconClick(winId) {
+    if (iconDragThreshold < 5) {
+      openWindow(winId);
+    }
+  }
+
+  function startDrag(e, element, type) {
+    isDragging = true;
+    currentDraggedElement = element;
+    iconDragThreshold = 0;
+
+    let clientX = e.type.startsWith('touch') ? e.touches[0].clientX : e.clientX;
+    let clientY = e.type.startsWith('touch') ? e.touches[0].clientY : e.clientY;
+
+    const rect = element.getBoundingClientRect();
+    
+    offsetLeft = clientX - rect.left;
+    offsetTop = clientY - rect.top;
+
+    if (type === 'window') bringToFront(element.id);
+
+    e.preventDefault();
+  }
+
+  function doDrag(e) {
+    if (!isDragging || !currentDraggedElement) return;
+
+    let clientX = e.type.startsWith('touch') ? e.touches[0].clientX : e.clientX;
+    let clientY = e.type.startsWith('touch') ? e.touches[0].clientY : e.clientY;
+
+    iconDragThreshold++;
+
+    let newX = clientX - offsetLeft;
+    let newY = clientY - offsetTop;
+
+    if (newX < 0) newX = 0;
+    if (newY < 0) newY = 0;
+    if (newX > window.innerWidth - 50) newX = window.innerWidth - 50;
+    if (newY > window.innerHeight - 50) newY = window.innerHeight - 50;
+
+    currentDraggedElement.style.left = newX + 'px';
+    currentDraggedElement.style.top = newY + 'px';
+    // Remove transform if applied by CSS centering (like on the login box)
+    currentDraggedElement.style.transform = 'none'; 
+  }
+
+  function endDrag() {
+    isDragging = false;
+    currentDraggedElement = null;
+  }
+
+  document.querySelectorAll('.title-bar').forEach(bar => {
+    const win = bar.parentElement;
+    bar.addEventListener('mousedown', (e) => startDrag(e, win, 'window'));
+    bar.addEventListener('touchstart', (e) => startDrag(e, win, 'window'), { passive: false });
+  });
+
+  document.querySelectorAll('.icon').forEach(icon => {
+    icon.addEventListener('mousedown', (e) => startDrag(e, icon, 'icon'));
+    icon.addEventListener('touchstart', (e) => startDrag(e, icon, 'icon'), { passive: false });
+  });
+
+  window.addEventListener('mousemove', doDrag);
+  window.addEventListener('touchmove', doDrag, { passive: false });
+  window.addEventListener('mouseup', endDrag);
+  window.addEventListener('touchend', endDrag);
 </script>
 
 </body>
