@@ -140,14 +140,6 @@
     margin-bottom: 15px;
   }
 
-  .data-row {
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px dotted var(--yellow);
-    padding: 5px 0;
-    font-size: 26px;
-  }
-
   /* Universal Footer - Anchored to the bottom of the TV screen */
   .fastext {
     display: flex;
@@ -282,12 +274,6 @@
             <div class="row" onclick="changePage('102')">
               <span class="cyan">102</span><span>ABOUT ME / CV</span><span class="green">OK</span>
             </div>
-            <div class="row" onclick="changePage('105')">
-              <span class="cyan">105</span><span>WEATHER</span><span class="green">LIVE</span>
-            </div>
-            <div class="row" onclick="changePage('200')">
-              <span class="cyan">200</span><span>SPORTS VIDIPRINTER</span><span class="green">LIVE</span>
-            </div>
           </div>
           <div class="content-block" style="margin-top: auto;">
             <p class="blink red">TYPE A 3-DIGIT NUMBER OR USE THE REMOTE TO NAVIGATE</p>
@@ -382,49 +368,11 @@
           </div>
         </div>
 
-        <div class="page hidden" id="page-105">
-          <h1 class="yellow">UK WEATHER FORECAST</h1>
-          <div class="content-block">
-            <h2 class="cyan">NATIONAL OUTLOOK</h2>
-            <p>A band of rain is moving slowly southwards across Scotland and Northern Ireland. England and Wales are starting dry but staying mostly cloudy with patchier rain arriving later in the evening.</p>
-          </div>
-          <h2 class="cyan">REGIONAL TEMPERATURES</h2>
-          <div class="file-list">
-            <div class="data-row"><span>LONDON (ENFIELD)</span><span class="green">11°C</span></div>
-            <div class="data-row"><span>BIRMINGHAM</span><span class="green">9°C</span></div>
-            <div class="data-row"><span>MANCHESTER</span><span class="green">8°C</span></div>
-            <div class="data-row"><span>NEWCASTLE</span><span class="green">6°C</span></div>
-            <div class="data-row"><span>EDINBURGH</span><span class="green">5°C</span></div>
-            <div class="data-row"><span>BELFAST</span><span class="green">7°C</span></div>
-            <div class="data-row"><span>CARDIFF</span><span class="green">10°C</span></div>
-          </div>
-        </div>
-
-        <div class="page hidden" id="page-200">
-          <h1 class="yellow">SPORT: VIDIPRINTER</h1>
-          <div class="grid-header">
-            <span>TIME</span><span>LATEST MATCH RESULTS</span><span>STATUS</span>
-          </div>
-          <div class="file-list">
-            <div class="row"><span class="cyan">FT</span><span>Brighton 2-1 Liverpool</span><span class="green">FINAL</span></div>
-            <div class="row"><span class="cyan">FT</span><span>Fulham 3-1 Burnley</span><span class="green">FINAL</span></div>
-            <div class="row"><span class="cyan">FT</span><span>Everton 3-0 Chelsea</span><span class="green">FINAL</span></div>
-            <div class="row"><span class="cyan">FT</span><span>Leeds 0-0 Brentford</span><span class="green">FINAL</span></div>
-            <div class="row"><span class="cyan">FT</span><span>Newcastle 1-2 Sunderland</span><span class="green">FINAL</span></div>
-            <div class="row"><span class="cyan">FT</span><span>Spurs 0-3 Nott'm Forest</span><span class="green">FINAL</span></div>
-            <div class="row"><span class="cyan">FT</span><span>Aston Villa 2-0 West Ham</span><span class="green">FINAL</span></div>
-          </div>
-          <div class="content-block">
-            <h2 class="cyan">HEADLINES</h2>
-            <p>Sunderland secure massive away win in the Wear-Tyne derby at St. James' Park!</p>
-          </div>
-        </div>
-
       </div> <div class="fastext">
         <div class="fast-btn red" onclick="changePage('100')"><span>100</span> INDEX</div>
         <div class="fast-btn green" onclick="changePage('101')"><span>101</span> DIR</div>
-        <div class="fast-btn yellow" onclick="changePage('105')"><span>105</span> WEATHER</div>
-        <div class="fast-btn cyan" onclick="changePage('200')"><span>200</span> SPORT</div>
+        <div class="fast-btn yellow" onclick="changePage('102')"><span>102</span> ABOUT</div>
+        <div class="fast-btn cyan" onclick="changePage('130')"><span>130</span> COLUMNS</div>
       </div>
 
     </div> <div class="remote-panel">
@@ -498,7 +446,7 @@
     });
 
     function changePage(pageNum) {
-      const validPages = ['100', '101', '102', '105', '110', '120', '130', '200'];
+      const validPages = ['100', '101', '102', '110', '120', '130'];
       
       if (!validPages.includes(pageNum)) {
         alert("Page " + pageNum + " not found!");
