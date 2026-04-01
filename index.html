@@ -71,6 +71,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
+    position: relative;
   }
   .hidden { display: none !important; }
 
@@ -217,6 +218,23 @@
     letter-spacing: 4px;
   }
 
+  /* --- CRT PIXEL TRANSITION EFFECT --- */
+  .pixel-transition {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: var(--bg);
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    z-index: 10;
+    pointer-events: none;
+    opacity: 0;
+  }
+  
+  .pixel-transition.active { opacity: 1; }
+
+  .pixel-block { background: var(--bg); opacity: 1; }
+
   @media (max-width: 800px) {
     .tv-container { grid-template-columns: 1fr; height: auto; }
     .remote-panel { display: none; }
@@ -232,149 +250,154 @@
           <span class="brand green">CEEFAX</span>
         </div>
         <div class="header-right">
-          <span class="yellow">Wed 1 Apr</span>
-          <span class="yellow" style="margin-left: 10px;" id="live-time">18:59:35</span>
+          <span class="yellow" id="live-date">Wed 1 Apr</span>
+          <span class="yellow" style="margin-left: 10px;" id="live-time">19:00:00</span>
         </div>
       </div>
 
-      <div class="page" id="page-100">
-        <h1 class="yellow">CEEFAX MAIN INDEX</h1>
-        <div class="grid-header">
-          <span>PAGE</span>
-          <span>SUBJECT</span>
-          <span>UPDATED</span>
-        </div>
-        <div class="file-list">
-          <div class="row" onclick="changePage('101')">
-            <span class="cyan">101</span>
-            <span>DIRECTORY & CATEGORIES</span>
-            <span class="green">14:20</span>
-          </div>
-          <div class="row" onclick="changePage('105')">
-            <span class="cyan">105</span>
-            <span>WEATHER FORECAST</span>
-            <span class="green">18:10</span>
-          </div>
-          <div class="row" onclick="changePage('200')">
-            <span class="cyan">200</span>
-            <span>LIVE SPORTS VIDIPRINTER</span>
-            <span class="green">LIVE</span>
-          </div>
-        </div>
-        <div class="content-block">
-          <h2 class="cyan">WELCOME TO CEEFAX</h2>
-          <p>Your ultimate text-based service for live news, weather, and sports scores. Use the remote control or click a row above to navigate.</p>
-        </div>
-      </div>
+      <div style="position: relative; flex: 1; display: flex; flex-direction: column;">
+        
+        <div class="pixel-transition" id="pixel-overlay"></div>
 
-      <div class="page hidden" id="page-101">
-        <h1 class="yellow">DIRECTORY & CATEGORIES</h1>
-        <div class="grid-header">
-          <span>PAGE</span>
-          <span>SECTION</span>
-          <span>STATUS</span>
-        </div>
-        <div class="file-list">
-          <div class="row" onclick="changePage('100')">
-            <span class="cyan">100</span>
-            <span>MAIN INDEX</span>
-            <span class="green">OK</span>
+        <div class="page" id="page-100">
+          <h1 class="yellow">CEEFAX MAIN INDEX</h1>
+          <div class="grid-header">
+            <span>PAGE</span>
+            <span>SUBJECT</span>
+            <span>UPDATED</span>
           </div>
-          <div class="row">
-            <span class="cyan">110</span>
-            <span>UK NEWS DESK</span>
-            <span class="green">OK</span>
+          <div class="file-list">
+            <div class="row" onclick="changePage('101')">
+              <span class="cyan">101</span>
+              <span>DIRECTORY & CATEGORIES</span>
+              <span class="green">14:20</span>
+            </div>
+            <div class="row" onclick="changePage('105')">
+              <span class="cyan">105</span>
+              <span>WEATHER FORECAST</span>
+              <span class="green">18:10</span>
+            </div>
+            <div class="row" onclick="changePage('200')">
+              <span class="cyan">200</span>
+              <span>LIVE SPORTS VIDIPRINTER</span>
+              <span class="green">LIVE</span>
+            </div>
           </div>
-          <div class="row" onclick="changePage('105')">
-            <span class="cyan">105</span>
-            <span>UK WEATHER</span>
-            <span class="green">OK</span>
-          </div>
-          <div class="row" onclick="changePage('200')">
-            <span class="cyan">200</span>
-            <span>SPORT & RESULTS</span>
-            <span class="green">LIVE</span>
-          </div>
-          <div class="row">
-            <span class="cyan">350</span>
-            <span>FINANCE & MARKETS</span>
-            <span class="green">OK</span>
-          </div>
-          <div class="row">
-            <span class="cyan">400</span>
-            <span>TRAVEL & DELAYS</span>
-            <span class="green">OK</span>
+          <div class="content-block">
+            <h2 class="cyan">WELCOME TO CEEFAX</h2>
+            <p>Your ultimate text-based service for live news, weather, and sports scores. Use the remote control or click a row above to navigate.</p>
+            <p class="blink red">TYPE A 3-DIGIT NUMBER ON YOUR KEYBOARD TO CHANGE PAGE</p>
           </div>
         </div>
-      </div>
 
-      <div class="page hidden" id="page-105">
-        <h1 class="yellow">UK WEATHER FORECAST</h1>
-        <div class="content-block">
-          <h2 class="cyan">NATIONAL OUTLOOK</h2>
-          <p>A band of rain is moving slowly southwards across Scotland and Northern Ireland. England and Wales are starting dry but staying mostly cloudy with patchier rain arriving later in the evening.</p>
+        <div class="page hidden" id="page-101">
+          <h1 class="yellow">DIRECTORY & CATEGORIES</h1>
+          <div class="grid-header">
+            <span>PAGE</span><span>SECTION</span><span>STATUS</span>
+          </div>
+          <div class="file-list">
+            <div class="row" onclick="changePage('110')">
+              <span class="cyan">110</span><span>SPORTS CORRESPONDENCE</span><span class="green">OK</span>
+            </div>
+            <div class="row" onclick="changePage('120')">
+              <span class="cyan">120</span><span>THEATRE & ARTS REVIEWS</span><span class="green">OK</span>
+            </div>
+            <div class="row" onclick="changePage('130')">
+              <span class="cyan">130</span><span>BOOKS & COLUMNS</span><span class="green">OK</span>
+            </div>
+            <div class="row" onclick="changePage('100')">
+              <span class="cyan">100</span><span>BACK TO MAIN INDEX</span><span class="green">OK</span>
+            </div>
+          </div>
         </div>
-        <h2 class="cyan">REGIONAL TEMPERATURES</h2>
-        <div class="file-list">
-          <div class="data-row"><span>LONDON</span><span class="green">11°C</span></div>
-          <div class="data-row"><span>BIRMINGHAM</span><span class="green">9°C</span></div>
-          <div class="data-row"><span>MANCHESTER</span><span class="green">8°C</span></div>
-          <div class="data-row"><span>NEWCASTLE</span><span class="green">6°C</span></div>
-          <div class="data-row"><span>EDINBURGH</span><span class="green">5°C</span></div>
-          <div class="data-row"><span>BELFAST</span><span class="green">7°C</span></div>
-          <div class="data-row"><span>CARDIFF</span><span class="green">10°C</span></div>
-        </div>
-      </div>
 
-      <div class="page hidden" id="page-200">
-        <h1 class="yellow">SPORT: VIDIPRINTER</h1>
-        <div class="grid-header">
-          <span>TIME</span>
-          <span>LATEST MATCH RESULTS</span>
-          <span>STATUS</span>
-        </div>
-        <div class="file-list">
-          <div class="row">
-            <span class="cyan">FT</span>
-            <span>Brighton 2-1 Liverpool</span>
-            <span class="green">FINAL</span>
+        <div class="page hidden" id="page-110">
+          <h1 class="green">P110: SPORTS PIECES</h1>
+          <div class="grid-header">
+            <span>REF</span><span>STORY / PUBLICATION</span><span>GENRE</span>
           </div>
-          <div class="row">
-            <span class="cyan">FT</span>
-            <span>Fulham 3-1 Burnley</span>
-            <span class="green">FINAL</span>
-          </div>
-          <div class="row">
-            <span class="cyan">FT</span>
-            <span>Everton 3-0 Chelsea</span>
-            <span class="green">FINAL</span>
-          </div>
-          <div class="row">
-            <span class="cyan">FT</span>
-            <span>Leeds 0-0 Brentford</span>
-            <span class="green">FINAL</span>
-          </div>
-          <div class="row">
-            <span class="cyan">FT</span>
-            <span>Newcastle 1-2 Sunderland</span>
-            <span class="green">FINAL</span>
-          </div>
-          <div class="row">
-            <span class="cyan">FT</span>
-            <span>Spurs 0-3 Nott'm Forest</span>
-            <span class="green">FINAL</span>
-          </div>
-          <div class="row">
-            <span class="cyan">FT</span>
-            <span>Aston Villa 2-0 West Ham</span>
-            <span class="green">FINAL</span>
+          <div class="file-list">
+            <a class="row" href="https://enfielddispatch.co.uk/win-over-welsh-side-will-go-long-way-to-securing-enfield-towns-fenix-trophy-play-off-place/" target="_blank">
+              <span class="yellow">10</span><span>Win over Welsh side - <span class="cyan">Enfield Dispatch</span></span><span class="green">SPORT</span>
+            </a>
           </div>
         </div>
-        <div class="content-block">
-          <h2 class="cyan">HEADLINES</h2>
-          <p>Sunderland secure massive away win in the Wear-Tyne derby at St. James' Park!</p>
-          <p>Nottingham Forest stun Spurs at home with a massive 3-nil victory.</p>
+
+        <div class="page hidden" id="page-120">
+          <h1 class="cyan">P120: THEATRE & ARTS</h1>
+          <div class="grid-header">
+            <span>REF</span><span>STORY / PUBLICATION</span><span>GENRE</span>
+          </div>
+          <div class="file-list">
+            <a class="row" href="https://ronanswriting.blogspot.com/2023/05/national-theatre-review-motive-and-cue.html" target="_blank">
+              <span class="yellow">11</span><span>The Motive and the Cue - <span class="cyan">The Line Is Good</span></span><span class="cyan">THEATRE</span>
+            </a>
+            <a class="row" href="https://ronanswriting.blogspot.com/2023/05/national-theatre-dancing-at-lughnasa.html" target="_blank">
+              <span class="yellow">12</span><span>Dancing at Lughnasa - <span class="cyan">The Line Is Good</span></span><span class="cyan">THEATRE</span>
+            </a>
+          </div>
         </div>
+
+        <div class="page hidden" id="page-130">
+          <h1 class="yellow">P130: BOOKS & COLUMNS</h1>
+          <div class="grid-header">
+            <span>REF</span><span>STORY / PUBLICATION</span><span>GENRE</span>
+          </div>
+          <div class="file-list">
+            <a class="row" href="https://ronanswriting.blogspot.com/2022/12/book-review-wednesday-second-place-by.html" target="_blank">
+              <span class="yellow">13</span><span>My Brilliant Friend - <span class="cyan">My Pen Will Absolve Me</span></span><span class="yellow">BOOKS</span>
+            </a>
+            <a class="row" href="https://ronanswriting.blogspot.com/2022/12/book-review-wednesday-second-place-by.html" target="_blank">
+              <span class="yellow">14</span><span>Second Place - <span class="cyan">The Line Is Good</span></span><span class="yellow">BOOKS</span>
+            </a>
+            <a class="row" href="https://impactnottingham.com/2018/03/acting-souljam-drunk-texting-grateful-another-month-life-freshers-columnist/" target="_blank">
+              <span class="yellow">15</span><span>Acting Souljam... - <span class="cyan">Impact Notts</span></span><span class="yellow">PIECES</span>
+            </a>
+            <a class="row" href="https://impactnottingham.com/2018/01/fresh-year-freshers-columnist/" target="_blank">
+              <span class="yellow">16</span><span>Fresh Year - <span class="cyan">Impact Notts</span></span><span class="yellow">PIECES</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="page hidden" id="page-105">
+          <h1 class="yellow">UK WEATHER FORECAST</h1>
+          <div class="content-block">
+            <h2 class="cyan">NATIONAL OUTLOOK</h2>
+            <p>A band of rain is moving slowly southwards across Scotland and Northern Ireland. England and Wales are starting dry but staying mostly cloudy with patchier rain arriving later in the evening.</p>
+          </div>
+          <h2 class="cyan">REGIONAL TEMPERATURES</h2>
+          <div class="file-list">
+            <div class="data-row"><span>LONDON</span><span class="green">11°C</span></div>
+            <div class="data-row"><span>BIRMINGHAM</span><span class="green">9°C</span></div>
+            <div class="data-row"><span>MANCHESTER</span><span class="green">8°C</span></div>
+            <div class="data-row"><span>NEWCASTLE</span><span class="green">6°C</span></div>
+            <div class="data-row"><span>EDINBURGH</span><span class="green">5°C</span></div>
+            <div class="data-row"><span>BELFAST</span><span class="green">7°C</span></div>
+            <div class="data-row"><span>CARDIFF</span><span class="green">10°C</span></div>
+          </div>
+        </div>
+
+        <div class="page hidden" id="page-200">
+          <h1 class="yellow">SPORT: VIDIPRINTER</h1>
+          <div class="grid-header">
+            <span>TIME</span><span>LATEST MATCH RESULTS</span><span>STATUS</span>
+          </div>
+          <div class="file-list">
+            <div class="row"><span class="cyan">FT</span><span>Brighton 2-1 Liverpool</span><span class="green">FINAL</span></div>
+            <div class="row"><span class="cyan">FT</span><span>Fulham 3-1 Burnley</span><span class="green">FINAL</span></div>
+            <div class="row"><span class="cyan">FT</span><span>Everton 3-0 Chelsea</span><span class="green">FINAL</span></div>
+            <div class="row"><span class="cyan">FT</span><span>Leeds 0-0 Brentford</span><span class="green">FINAL</span></div>
+            <div class="row"><span class="cyan">FT</span><span>Newcastle 1-2 Sunderland</span><span class="green">FINAL</span></div>
+            <div class="row"><span class="cyan">FT</span><span>Spurs 0-3 Nott'm Forest</span><span class="green">FINAL</span></div>
+            <div class="row"><span class="cyan">FT</span><span>Aston Villa 2-0 West Ham</span><span class="green">FINAL</span></div>
+          </div>
+          <div class="content-block">
+            <h2 class="cyan">HEADLINES</h2>
+            <p>Sunderland secure massive away win in the Wear-Tyne derby at St. James' Park!</p>
+            <p>Nottingham Forest stun Spurs at home with a massive 3-nil victory.</p>
+          </div>
+        </div>
+
       </div>
 
       <div class="fastext">
@@ -399,9 +422,9 @@
         <button class="num-btn" onclick="pressKey('7')">7</button>
         <button class="num-btn" onclick="pressKey('8')">8</button>
         <button class="num-btn" onclick="pressKey('9')">9</button>
-        <button class="num-btn" onclick="clearInput()">C</button>
+        <button class="num-btn" style="color:var(--red);" onclick="clearInput()">C</button>
         <button class="num-btn" onclick="pressKey('0')">0</button>
-        <button class="num-btn" onclick="submitPage()">➔</button>
+        <button class="num-btn" style="color:var(--green);" onclick="submitPage()">➔</button>
       </div>
     </div>
   </div>
@@ -410,17 +433,29 @@
     let inputBuffer = "";
     const displayEl = document.getElementById('display-digits');
     const pageNumEl = document.getElementById('current-pnum');
+    const overlay = document.getElementById('pixel-overlay');
 
-    // Update the live clock
+    // Create 100 pixel blocks for the stagger animation
+    for (let i = 0; i < 100; i++) {
+      const block = document.createElement('div');
+      block.classList.add('pixel-block');
+      overlay.appendChild(block);
+    }
+
+    // Live Clock Function
     setInterval(() => {
       const now = new Date();
       document.getElementById('live-time').innerText = now.toTimeString().split(' ')[0];
     }, 1000);
 
+    // Number buffer management
     function pressKey(num) {
       if (inputBuffer.length < 3) {
         inputBuffer += num;
         displayEl.innerText = inputBuffer.padEnd(3, '.');
+      }
+      if (inputBuffer.length === 3) {
+        setTimeout(submitPage, 250); // Auto-submit when 3 numbers typed
       }
     }
 
@@ -436,22 +471,47 @@
       }
     }
 
+    // Keyboard controls
+    window.addEventListener('keydown', (e) => {
+      if (e.key >= '0' && e.key <= '9') {
+        pressKey(e.key);
+      } else if (e.key === 'Backspace' || e.key === 'Escape') {
+        clearInput();
+      } else if (e.key === 'Enter') {
+        submitPage();
+      }
+    });
+
+    // Page handling & CRT scan simulation
     function changePage(pageNum) {
-      const validPages = ['100', '101', '105', '200'];
+      const validPages = ['100', '101', '105', '110', '120', '130', '200'];
       
       if (!validPages.includes(pageNum)) {
         alert("Page " + pageNum + " not found!");
         return;
       }
 
-      // Hide all pages
-      document.querySelectorAll('.page').forEach(page => {
-        page.classList.add('hidden');
+      // 1. Activate pixel overlay
+      overlay.classList.add('active');
+      const blocks = document.querySelectorAll('.pixel-block');
+      
+      // Randomly stagger the opacity of the pixel blocks to mimic CRT drawn lines
+      blocks.forEach(block => {
+        block.style.opacity = Math.random() > 0.5 ? "1" : "0.7";
       });
 
-      // Show the selected page
-      document.getElementById('page-' + pageNum).classList.remove('hidden');
-      pageNumEl.innerText = 'P' + pageNum;
+      // 2. Mid-animation swap pages
+      setTimeout(() => {
+        document.querySelectorAll('.page').forEach(page => page.classList.add('hidden'));
+        document.getElementById('page-' + pageNum).classList.remove('hidden');
+        pageNumEl.innerText = 'P' + pageNum;
+      }, 300);
+
+      // 3. Clear transition
+      setTimeout(() => {
+        overlay.classList.remove('active');
+        blocks.forEach(block => block.style.opacity = "1");
+      }, 600);
     }
   </script>
 </body>
