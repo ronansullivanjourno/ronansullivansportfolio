@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ronan Sullivan — Journalist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0a0a08;
+    --paper: #f5f2eb;
+    --muted: #6b6860;
+    --hint: #a8a49c;
+    --rule: rgba(10,10,8,0.12);
+    --rule-heavy: rgba(10,10,8,0.35);
+    --accent: #c8392b;
+    --serif: 'Playfair Display', Georgia, serif;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE TEXTURE ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* ── MASTHEAD ── */
+  .masthead {
+    position: relative;
+    z-index: 1;
+    padding: 2.5rem 3rem 0;
+    border-bottom: 3px solid var(--ink);
+    animation: fadeDown 0.6s ease both;
+  }
+
+  .masthead-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 0.5px solid var(--rule-heavy);
+    flex-wrap: wrap;
+  }
+
+  .masthead-kicker {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .masthead-name {
+    font-family: var(--serif);
+    font-size: clamp(3.5rem, 11vw, 7.5rem);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+  }
+
+  .masthead-name em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .masthead-descriptor {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 1rem;
+  }
+
+  .masthead-right {
+    text-align: right;
+    font-family: var(--mono);
+    font-size: 11px;
+    line-height: 2;
+    color: var(--muted);
+    padding-top: 0.25rem;
+  }
+
+  .masthead-right a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule-heavy);
+    padding-bottom: 1px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+
+  .masthead-right a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .masthead-tagline {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--muted);
+    padding: 0.85rem 0;
+    border-bottom: 0.5px solid var(--rule);
+  }
+
+  /* ── NAV ── */
+  .nav-strip {
+    display: flex;
+    border-bottom: none;
+  }
+
+  .nav-strip button {
+    flex: 1;
+    background: none;
+    border: none;
+    border-right: 0.5px solid var(--rule-heavy);
+    padding: 0.8rem 1rem;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .nav-strip button:last-child { border-right: none; }
+
+  .nav-strip button.active {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .nav-strip button:hover:not(.active) {
+    background: rgba(10,10,8,0.06);
+    color: var(--ink);
+  }
+
+  /* ── PAGES ── */
+  .page { position: relative; z-index: 1; animation: fadeUp 0.4s ease both; }
+  .hidden { display: none !important; }
+
+  /* ── WORK PAGE ── */
+  .filter-bar {
+    display: flex;
+    gap: 0;
+    padding: 0 3rem;
+    border-bottom: 0.5px solid var(--rule);
+    overflow-x: auto;
+  }
+
+  .filter-bar button {
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 0.7rem 1.1rem;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--hint);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.12s, border-color 0.12s;
+    margin-bottom: -0.5px;
+  }
+
+  .filter-bar button.active {
+    color: var(--ink);
+    border-bottom-color: var(--accent);
+  }
+
+  .filter-bar button:hover { color: var(--muted); }
+
+  .articles-list { padding: 0 3rem; }
+
+  .article-row {
+    display: grid;
+    grid-template-columns: 3.5rem 1fr auto;
+    gap: 0 1.5rem;
+    align-items: start;
+    padding: 1.4rem 0;
+    border-bottom: 0.5px solid var(--rule);
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.12s;
+    margin: 0 -3rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
+  .article-row:hover { background: rgba(10,10,8,0.03); }
+  .article-row:hover .art-title { color: var(--accent); }
+
+  .art-index {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--hint);
+    padding-top: 4px;
+    letter-spacing: 0.05em;
+  }
+
+  .art-cat {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--hint);
+    margin-bottom: 0.3rem;
+  }
+
+  .art-title {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--ink);
+    margin-bottom: 0.3rem;
+    transition: color 0.15s;
+  }
+
+  .art-pub {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--hint);
+    letter-spacing: 0.06em;
+  }
+
+  .art-arrow {
+    font-size: 1.1rem;
+    color: var(--hint);
+    padding-top: 6px;
+    transition: color 0.15s, transform 0.15s;
+  }
+
+  .article-row:hover .art-arrow {
+    color: var(--accent);
+    transform: translate(2px, -2px);
+  }
+
+  .cat-hidden { display: none !important; }
+
+  /* ── ABOUT PAGE ── */
+  .about-page {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 60vh;
+  }
+
+  @media (max-width: 640px) {
+    .about-page { grid-template-columns: 1fr; }
+    .about-right { border-left: none !important; border-top: 0.5px solid var(--rule); }
+  }
+
+  .about-left { padding: 3rem; border-right: 0.5px solid var(--rule); }
+
+  .about-headline {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  .about-headline em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .about-body p {
+    font-size: 14px;
+    line-height: 1.85;
+    color: var(--muted);
+    margin-bottom: 0.9rem;
+    font-weight: 300;
+  }
+
+  .about-body p strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .about-right { padding: 3rem; }
+
+  .cred-section-title {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--hint);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .cred-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0.7rem 0;
+    border-bottom: 0.5px solid var(--rule);
+    gap: 1rem;
+  }
+
+  .cred-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--hint);
+    flex-shrink: 0;
+  }
+
+  .cred-value {
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--ink);
+    font-weight: 500;
+    text-align: right;
+  }
+
+  .beats-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 1.5rem;
+  }
+
+  .beat-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border: 0.5px solid var(--rule-heavy);
+    color: var(--muted);
+  }
+
+  /* ── CONTACT PAGE ── */
+  .contact-page {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 60vh;
+  }
+
+  @media (max-width: 640px) {
+    .contact-page { grid-template-columns: 1fr; }
+    .contact-right { border-left: none !important; border-top: 0.5px solid var(--rule); }
+  }
+
+  .contact-left { padding: 3rem; border-right: 0.5px solid var(--rule); }
+
+  .contact-headline {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.25rem;
+  }
+
+  .contact-sub {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.8;
+    font-weight: 300;
+    max-width: 340px;
+  }
+
+  .contact-right { padding: 3rem; }
+
+  .contact-links { border-top: 2px solid var(--ink); }
+
+  .contact-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.1rem 0;
+    border-bottom: 0.5px solid var(--rule);
+    gap: 1rem;
+  }
+
+  .contact-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--hint);
+  }
+
+  .contact-row a {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule-heavy);
+    padding-bottom: 1px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+
+  .contact-row a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .contact-row span.val {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative;
+    z-index: 1;
+    border-top: 3px solid var(--ink);
+    padding: 1rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  footer p {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--hint);
+  }
+
+  footer .footer-name {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    .masthead { padding: 1.5rem 1.25rem 0; }
+    .masthead-top { gap: 1rem; }
+    .masthead-right { display: none; }
+    .filter-bar { padding: 0 1.25rem; }
+    .articles-list { padding: 0 1.25rem; }
+    .article-row { margin: 0 -1.25rem; padding-left: 1.25rem; padding-right: 1.25rem; grid-template-columns: 2.5rem 1fr auto; gap: 0 0.75rem; }
+    .about-left, .about-right, .contact-left, .contact-right { padding: 1.5rem 1.25rem; }
+    footer { padding: 1rem 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-top">
+    <div>
+      <p class="masthead-kicker">Portfolio — Journalism &amp; Criticism</p>
+      <h1 class="masthead-name">Ronan<br><em>Sullivan</em></h1>
+      <p class="masthead-descriptor">Journalist · Writer · NCTJ</p>
+    </div>
+    <div class="masthead-right">
+      NCTJ Diploma<br>
+      PA Media Academy<br>
+      London, UK<br>
+      <br>
+      <a href="https://www.linkedin.com/in/ronanmsullivan/" target="_blank">LinkedIn ↗</a><br>
+      <a href="https://ronanswriting.blogspot.com/" target="_blank">The Line Is Good ↗</a>
+    </div>
+  </div>
+  <p class="masthead-tagline">Sport reporting, arts criticism and student life — from non-league grounds to the National Theatre.</p>
+  <nav class="nav-strip">
+    <button class="active" onclick="showPage('work', this)">Work</button>
+    <button onclick="showPage('about', this)">About</button>
+    <button onclick="showPage('contact', this)">Contact</button>
+  </nav>
+</header>
+
+<!-- ── WORK ── -->
+<main id="work" class="page">
+  <div class="filter-bar">
+    <button class="active" onclick="filter('all', this)">All</button>
+    <button onclick="filter('sport', this)">Sport</button>
+    <button onclick="filter('theatre', this)">Theatre</button>
+    <button onclick="filter('books', this)">Books</button>
+    <button onclick="filter('column', this)">Column</button>
+  </div>
+  <div class="articles-list">
+
+    <a class="article-row cat-sport" href="https://enfielddispatch.co.uk/win-over-welsh-side-will-go-long-way-to-securing-enfield-towns-fenix-trophy-play-off-place/" target="_blank" rel="noopener">
+      <span class="art-index">01</span>
+      <div>
+        <p class="art-cat">Sport — Enfield Dispatch</p>
+        <p class="art-title">Win over Welsh side will go a long way to securing Enfield Town's Fenix Trophy play-off place</p>
+        <p class="art-pub">Match report &amp; analysis</p>
+      </div>
+      <span class="art-arrow">↗</span>
+    </a>
+
+    <a class="article-row cat-theatre" href="https://ronanswriting.blogspot.com/2023/05/national-theatre-review-motive-and-cue.html" target="_blank" rel="noopener">
+      <span class="art-index">02</span>
+      <div>
+        <p class="art-cat">Theatre Review — The Line Is Good · 2023</p>
+        <p class="art-title">The Motive and the Cue — National Theatre ★★</p>
+        <p class="art-pub">Jack Thorne's Richard Burton / Hamlet retelling</p>
+      </div>
+      <span class="art-arrow">↗</span>
+    </a>
+
+    <a class="article-row cat-theatre" href="https://ronanswriting.blogspot.com/2023/05/national-theatre-dancing-at-lughnasa.html" target="_blank" rel="noopener">
+      <span class="art-index">03</span>
+      <div>
+        <p class="art-cat">Theatre Review — The Line Is Good · 2023</p>
+        <p class="art-title">Dancing at Lughnasa — National Theatre</p>
+        <p class="art-pub">Brian Friel revival</p>
+      </div>
+      <span class="art-arrow">↗</span>
+    </a>
+
+    <a class="article-row cat-books" href="https://ronanswriting.blogspot.com/2022/12/book-review-wednesday-second-place-by.html" target="_blank" rel="noopener">
+      <span class="art-index">04</span>
+      <div>
+        <p class="art-cat">Book Review — The Line Is Good · 2022</p>
+        <p class="art-title">Second Place — Rachel Cusk</p>
+        <p class="art-pub">Identity, art and displacement</p>
+      </div>
+      <span class="art-arrow">↗</span>
+    </a>
+
+    <a class="article-row cat-books" href="https://ronanswriting.blogspot.com/2022/12/october-child-by-linda-bostrom.html" target="_blank" rel="noopener">
+      <span class="art-index">05</span>
+      <div>
+        <p class="art-cat">Book Review — The Line Is Good · 2022</p>
+        <p class="art-title">October Child — Linda Boström Knausgård</p>
+        <p class="art-pub">Memoir-novel on psychiatric illness and family</p>
+      </div>
+      <span class="art-arrow">↗</span>
+    </a>
+
+    <a class="article-row cat-column" href="https://impactnottingham.com/2018/03/acting-souljam-drunk-texting-grateful-another-month-life-freshers-columnist/" target="_blank" rel="noopener">
+      <span class="art-index">06</span>
+      <div>
+        <p class="art-cat">Column — Impact Nottingham · 2018</p>
+        <p class="art-title">Acting Souljam, drunk texting and being grateful for another month of life</p>
+        <p class="art-pub">Freshers columnist</p>
+      </div>
+      <span class="art-arrow">↗</span>
+    </a>
+
+    <a class="article-row cat-column" href="https://impactnottingham.com/2018/01/fresh-year-freshers-columnist/" target="_blank" rel="noopener">
+      <span class="art-index">07</span>
+      <div>
+        <p class="art-cat">Column — Impact Nottingham · 2018</p>
+        <p class="art-title">Fresh year — Freshers columnist</p>
+        <p class="art-pub">Opening instalment</p>
+      </div>
+      <span class="art-arrow">↗</span>
+    </a>
+
+    <a class="article-row cat-column" href="https://impactnottingham.com/2017/12/3-months-freshers-columnist-still-alive/" target="_blank" rel="noopener">
+      <span class="art-index">08</span>
+      <div>
+        <p class="art-cat">Column — Impact Nottingham · 2017</p>
+        <p class="art-title">3 months as a freshers columnist — still alive</p>
+        <p class="art-pub">Freshers columnist</p>
+      </div>
+      <span class="art-arrow">↗</span>
+    </a>
+
+  </div>
+</main>
+
+<!-- ── ABOUT ── -->
+<main id="about" class="page hidden about-page">
+  <div class="about-left">
+    <h2 class="about-headline">Journalist covering sport, <em>culture</em> and student life.</h2>
+    <div class="about-body">
+      <p><strong>I'm Ronan Sullivan</strong>, a journalist based in London, currently studying for an NCTJ Diploma at PA Media Academy.</p>
+      <p>My work spans non-league sport reporting, theatre and book criticism, and long-form student columns. I've written for the Enfield Dispatch, Impact Nottingham, and my own publication, The Line Is Good.</p>
+      <p>I'm drawn to stories at the intersection of culture and everyday experience — whether that's a play-off push at Enfield Town or a Brian Friel revival at the National Theatre.</p>
+    </div>
+    <div class="beats-grid">
+      <span class="beat-tag">Non-league football</span>
+      <span class="beat-tag">Theatre</span>
+      <span class="beat-tag">Literary fiction</span>
+      <span class="beat-tag">Student life</span>
+      <span class="beat-tag">Arts &amp; culture</span>
+    </div>
+  </div>
+  <div class="about-right">
+    <p class="cred-section-title">Credentials</p>
+    <div class="cred-row"><span class="cred-label">Training</span><span class="cred-value">NCTJ Diploma</span></div>
+    <div class="cred-row"><span class="cred-label">Institution</span><span class="cred-value">PA Media Academy</span></div>
+    <div class="cred-row"><span class="cred-label">Based</span><span class="cred-value">London, UK</span></div>
+    <div class="cred-row"><span class="cred-label">Publications</span><span class="cred-value">Enfield Dispatch<br>Impact Nottingham<br>The Line Is Good</span></div>
+    <div class="cred-row"><span class="cred-label">Beats</span><span class="cred-value">Sport, Arts, Culture</span></div>
+  </div>
+</main>
+
+<!-- ── CONTACT ── -->
+<main id="contact" class="page hidden contact-page">
+  <div class="contact-left">
+    <h2 class="contact-headline">Let's work together.</h2>
+    <p class="contact-sub">Open to commissions, work experience and editorial conversations. Best reached via LinkedIn.</p>
+  </div>
+  <div class="contact-right">
+    <div class="contact-links">
+      <div class="contact-row">
+        <span class="contact-label">LinkedIn</span>
+        <a href="https://www.linkedin.com/in/ronanmsullivan/" target="_blank" rel="noopener">ronanmsullivan ↗</a>
+      </div>
+      <div class="contact-row">
+        <span class="contact-label">Blog</span>
+        <a href="https://ronanswriting.blogspot.com/" target="_blank" rel="noopener">The Line Is Good ↗</a>
+      </div>
+      <div class="contact-row">
+        <span class="contact-label">Location</span>
+        <span class="val">London, UK</span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-label">Training</span>
+        <span class="val">NCTJ Diploma, PA Media Academy</span>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <span class="footer-name">Ronan Sullivan</span>
+  <p>Journalist &amp; Writer — London &copy; 2025</p>
+</footer>
+
+<script>
+  function showPage(id, btn) {
+    document.querySelectorAll('main.page').forEach(p => p.classList.add('hidden'));
+    document.querySelectorAll('.nav-strip button').forEach(b => b.classList.remove('active'));
+    const el = document.getElementById(id);
+    el.classList.remove('hidden');
+    el.style.animation = 'none';
+    el.offsetHeight;
+    el.style.animation = 'fadeUp 0.35s ease both';
+    btn.classList.add('active');
+  }
+
+  function filter(cat, btn) {
+    document.querySelectorAll('.filter-bar button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    let i = 1;
+    document.querySelectorAll('.article-row').forEach(row => {
+      const hide = cat !== 'all' && !row.classList.contains('cat-' + cat);
+      row.classList.toggle('cat-hidden', hide);
+      if (!hide) {
+        row.querySelector('.art-index').textContent = String(i).padStart(2, '0');
+        i++;
+      }
+    });
+  }
+</script>
+</body>
+</html>
