@@ -72,6 +72,7 @@
     display: flex;
     flex-direction: column;
     position: relative;
+    height: 100%;
   }
   .hidden { display: none !important; }
 
@@ -141,12 +142,14 @@
     font-size: 26px;
   }
 
+  /* Footer bar placed inside each page */
   .fastext {
     display: flex;
     justify-content: space-between;
     margin-top: auto;
     padding-top: 15px;
     border-top: 4px double var(--white);
+    background: var(--bg);
   }
 
   .fast-btn {
@@ -218,7 +221,6 @@
     letter-spacing: 4px;
   }
 
-  /* --- CRT PIXEL TRANSITION EFFECT --- */
   .pixel-transition {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -232,7 +234,6 @@
   }
   
   .pixel-transition.active { opacity: 1; }
-
   .pixel-block { background: var(--bg); opacity: 1; }
 
   @media (max-width: 800px) {
@@ -241,7 +242,8 @@
     .screen { border-right: none; height: 80vh; }
   }
 </style>
-</head><body>
+</head>
+<body>
   <div class="tv-container">
     <div class="screen">
       <div class="header">
@@ -250,7 +252,7 @@
           <span class="brand green">CEEFAX</span>
         </div>
         <div class="header-right">
-          <span class="yellow" id="live-date">Wed 1 Apr</span>
+          <span class="yellow">Wed 1 Apr</span>
           <span class="yellow" style="margin-left: 10px;" id="live-time">19:00:00</span>
         </div>
       </div>
@@ -262,31 +264,29 @@
         <div class="page" id="page-100">
           <h1 class="yellow">CEEFAX MAIN INDEX</h1>
           <div class="grid-header">
-            <span>PAGE</span>
-            <span>SUBJECT</span>
-            <span>UPDATED</span>
+            <span>PAGE</span><span>SUBJECT</span><span>UPDATED</span>
           </div>
           <div class="file-list">
             <div class="row" onclick="changePage('101')">
-              <span class="cyan">101</span>
-              <span>DIRECTORY & CATEGORIES</span>
-              <span class="green">14:20</span>
+              <span class="cyan">101</span><span>DIRECTORY & CATEGORIES</span><span class="green">14:20</span>
             </div>
             <div class="row" onclick="changePage('105')">
-              <span class="cyan">105</span>
-              <span>WEATHER FORECAST</span>
-              <span class="green">18:10</span>
+              <span class="cyan">105</span><span>WEATHER FORECAST</span><span class="green">18:10</span>
             </div>
             <div class="row" onclick="changePage('200')">
-              <span class="cyan">200</span>
-              <span>LIVE SPORTS VIDIPRINTER</span>
-              <span class="green">LIVE</span>
+              <span class="cyan">200</span><span>LIVE SPORTS VIDIPRINTER</span><span class="green">LIVE</span>
             </div>
           </div>
           <div class="content-block">
             <h2 class="cyan">WELCOME TO CEEFAX</h2>
             <p>Your ultimate text-based service for live news, weather, and sports scores. Use the remote control or click a row above to navigate.</p>
             <p class="blink red">TYPE A 3-DIGIT NUMBER ON YOUR KEYBOARD TO CHANGE PAGE</p>
+          </div>
+          <div class="fastext">
+            <div class="fast-btn red" onclick="changePage('100')"><span>100</span> INDEX</div>
+            <div class="fast-btn green" onclick="changePage('101')"><span>101</span> DIR</div>
+            <div class="fast-btn yellow" onclick="changePage('105')"><span>105</span> WEATHER</div>
+            <div class="fast-btn cyan" onclick="changePage('200')"><span>200</span> SPORT</div>
           </div>
         </div>
 
@@ -309,6 +309,12 @@
               <span class="cyan">100</span><span>BACK TO MAIN INDEX</span><span class="green">OK</span>
             </div>
           </div>
+          <div class="fastext">
+            <div class="fast-btn red" onclick="changePage('100')"><span>100</span> INDEX</div>
+            <div class="fast-btn green" onclick="changePage('101')"><span>101</span> DIR</div>
+            <div class="fast-btn yellow" onclick="changePage('105')"><span>105</span> WEATHER</div>
+            <div class="fast-btn cyan" onclick="changePage('200')"><span>200</span> SPORT</div>
+          </div>
         </div>
 
         <div class="page hidden" id="page-110">
@@ -320,6 +326,12 @@
             <a class="row" href="https://enfielddispatch.co.uk/win-over-welsh-side-will-go-long-way-to-securing-enfield-towns-fenix-trophy-play-off-place/" target="_blank">
               <span class="yellow">10</span><span>Win over Welsh side - <span class="cyan">Enfield Dispatch</span></span><span class="green">SPORT</span>
             </a>
+          </div>
+          <div class="fastext">
+            <div class="fast-btn red" onclick="changePage('100')"><span>100</span> INDEX</div>
+            <div class="fast-btn green" onclick="changePage('101')"><span>101</span> DIR</div>
+            <div class="fast-btn yellow" onclick="changePage('105')"><span>105</span> WEATHER</div>
+            <div class="fast-btn cyan" onclick="changePage('200')"><span>200</span> SPORT</div>
           </div>
         </div>
 
@@ -335,6 +347,12 @@
             <a class="row" href="https://ronanswriting.blogspot.com/2023/05/national-theatre-dancing-at-lughnasa.html" target="_blank">
               <span class="yellow">12</span><span>Dancing at Lughnasa - <span class="cyan">The Line Is Good</span></span><span class="cyan">THEATRE</span>
             </a>
+          </div>
+          <div class="fastext">
+            <div class="fast-btn red" onclick="changePage('100')"><span>100</span> INDEX</div>
+            <div class="fast-btn green" onclick="changePage('101')"><span>101</span> DIR</div>
+            <div class="fast-btn yellow" onclick="changePage('105')"><span>105</span> WEATHER</div>
+            <div class="fast-btn cyan" onclick="changePage('200')"><span>200</span> SPORT</div>
           </div>
         </div>
 
@@ -357,6 +375,12 @@
               <span class="yellow">16</span><span>Fresh Year - <span class="cyan">Impact Notts</span></span><span class="yellow">PIECES</span>
             </a>
           </div>
+          <div class="fastext">
+            <div class="fast-btn red" onclick="changePage('100')"><span>100</span> INDEX</div>
+            <div class="fast-btn green" onclick="changePage('101')"><span>101</span> DIR</div>
+            <div class="fast-btn yellow" onclick="changePage('105')"><span>105</span> WEATHER</div>
+            <div class="fast-btn cyan" onclick="changePage('200')"><span>200</span> SPORT</div>
+          </div>
         </div>
 
         <div class="page hidden" id="page-105">
@@ -374,6 +398,12 @@
             <div class="data-row"><span>EDINBURGH</span><span class="green">5°C</span></div>
             <div class="data-row"><span>BELFAST</span><span class="green">7°C</span></div>
             <div class="data-row"><span>CARDIFF</span><span class="green">10°C</span></div>
+          </div>
+          <div class="fastext">
+            <div class="fast-btn red" onclick="changePage('100')"><span>100</span> INDEX</div>
+            <div class="fast-btn green" onclick="changePage('101')"><span>101</span> DIR</div>
+            <div class="fast-btn yellow" onclick="changePage('105')"><span>105</span> WEATHER</div>
+            <div class="fast-btn cyan" onclick="changePage('200')"><span>200</span> SPORT</div>
           </div>
         </div>
 
@@ -396,15 +426,14 @@
             <p>Sunderland secure massive away win in the Wear-Tyne derby at St. James' Park!</p>
             <p>Nottingham Forest stun Spurs at home with a massive 3-nil victory.</p>
           </div>
+          <div class="fastext">
+            <div class="fast-btn red" onclick="changePage('100')"><span>100</span> INDEX</div>
+            <div class="fast-btn green" onclick="changePage('101')"><span>101</span> DIR</div>
+            <div class="fast-btn yellow" onclick="changePage('105')"><span>105</span> WEATHER</div>
+            <div class="fast-btn cyan" onclick="changePage('200')"><span>200</span> SPORT</div>
+          </div>
         </div>
 
-      </div>
-
-      <div class="fastext">
-        <div class="fast-btn red" onclick="changePage('100')"><span>100</span> INDEX</div>
-        <div class="fast-btn green" onclick="changePage('101')"><span>101</span> DIR</div>
-        <div class="fast-btn yellow" onclick="changePage('105')"><span>105</span> WEATHER</div>
-        <div class="fast-btn cyan" onclick="changePage('200')"><span>200</span> SPORT</div>
       </div>
     </div>
 
@@ -455,7 +484,7 @@
         displayEl.innerText = inputBuffer.padEnd(3, '.');
       }
       if (inputBuffer.length === 3) {
-        setTimeout(submitPage, 250); // Auto-submit when 3 numbers typed
+        setTimeout(submitPage, 250); 
       }
     }
 
@@ -491,23 +520,19 @@
         return;
       }
 
-      // 1. Activate pixel overlay
       overlay.classList.add('active');
       const blocks = document.querySelectorAll('.pixel-block');
       
-      // Randomly stagger the opacity of the pixel blocks to mimic CRT drawn lines
       blocks.forEach(block => {
         block.style.opacity = Math.random() > 0.5 ? "1" : "0.7";
       });
 
-      // 2. Mid-animation swap pages
       setTimeout(() => {
         document.querySelectorAll('.page').forEach(page => page.classList.add('hidden'));
         document.getElementById('page-' + pageNum).classList.remove('hidden');
         pageNumEl.innerText = 'P' + pageNum;
       }, 300);
 
-      // 3. Clear transition
       setTimeout(() => {
         overlay.classList.remove('active');
         blocks.forEach(block => block.style.opacity = "1");
