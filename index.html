@@ -11,12 +11,13 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg: #0c0d10;
+    --bg: #000000;
     --white: #ffffff;
     --yellow: #ffee00;
     --cyan: #00ffff;
     --green: #00ff00;
     --red: #ff3333;
+    --magenta: #ff00ff;
     --font: 'VT323', monospace;
   }
 
@@ -24,7 +25,6 @@
     background-color: #1a1c23;
     color: var(--white);
     font-family: var(--font);
-    font-size: 24px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -32,39 +32,54 @@
     overflow: hidden;
   }
 
+  /* Main Container acting as physical hardware */
   .tv-container {
     width: 95vw;
     max-width: 1100px;
     height: 85vh;
-    background: var(--bg);
-    border: 10px solid #2a2d37;
-    box-shadow: 0 0 0 4px #0c0d10, 0 20px 40px rgba(0,0,0,0.6);
+    background: #2a2d37;
+    border: 12px solid #343847;
+    border-radius: 8px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6), inset 0 0 10px #000;
     display: grid;
     grid-template-columns: 1fr 260px;
     position: relative;
   }
 
+  /* Emulated CRT Screen */
   .screen {
-    border-right: 4px solid #2a2d37;
+    background-color: var(--bg);
     display: flex;
     flex-direction: column;
     height: 100%;
-    padding: 20px 30px;
+    padding: 15px 25px;
     position: relative;
     overflow: hidden;
+    border-right: 6px solid #1e2029;
   }
 
+  /* Scanline overlay for that ZXNet feel */
+  .screen::after {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+    background-size: 100% 4px;
+    z-index: 10;
+    pointer-events: none;
+  }
+
+  /* Pure Teletext Header (Row 0) */
   .header {
     display: grid;
     grid-template-columns: 80px auto 80px auto;
     align-items: center;
-    border-bottom: 4px double var(--white);
+    border-bottom: 2px solid var(--white);
     padding-bottom: 5px;
-    margin-bottom: 15px;
-    
-    letter-spacing: 4px; 
-    transform: scaleY(0.8); 
-    transform-origin: top left; 
+    margin-bottom: 10px;
+    font-size: 28px;
+    height: 35px;
   }
 
   .header-pnum { color: var(--white); }
@@ -72,6 +87,7 @@
   .header-search { color: var(--yellow); text-align: center; }
   .header-datetime { color: var(--yellow); text-align: right; }
 
+  /* Content area bounded to prevent overflow */
   .pages-container {
     position: relative;
     flex: 1;
@@ -84,95 +100,93 @@
     flex: 1;
     display: flex;
     flex-direction: column;
+    font-size: 26px;
+    line-height: 1.2;
   }
   .hidden { display: none !important; }
 
-  h1 { 
-    font-size: 44px; 
-    margin-bottom: 15px; 
-    transform: scaleY(0.9);
-    transform-origin: bottom left; 
-    line-height: 1.1; 
-  }
-  
-  h2 { font-size: 32px; margin-bottom: 15px; }
+  /* Strict character structures */
+  h1 { font-size: 36px; margin-bottom: 10px; }
+  h2 { font-size: 28px; margin-bottom: 5px; }
 
   .cyan { color: var(--cyan); }
   .yellow { color: var(--yellow); }
   .green { color: var(--green); }
   .white { color: var(--white); }
   .red { color: var(--red); }
+  .magenta { color: var(--magenta); }
 
   .blink { animation: blinker 1s step-start infinite; }
   @keyframes blinker { 50% { opacity: 0; } }
 
+  .concealed { color: var(--bg) !important; }
+  .concealed.revealed { color: var(--red) !important; }
+
   .grid-header {
     display: grid;
-    grid-template-columns: 50px 1fr 120px;
-    border-bottom: 2px solid var(--cyan);
-    padding-bottom: 5px;
+    grid-template-columns: 60px 1fr 100px;
+    border-bottom: 1px solid var(--cyan);
+    padding-bottom: 2px;
+    margin-bottom: 5px;
     color: var(--cyan);
-    font-size: 22px;
   }
 
   .file-list {
     flex: 1;
     overflow-y: auto;
-    margin-bottom: 15px;
   }
 
   .row {
     display: grid;
-    grid-template-columns: 50px 1fr 120px;
-    padding: 8px 0;
-    border-bottom: 1px solid #222;
+    grid-template-columns: 60px 1fr 100px;
+    padding: 3px 0;
     cursor: pointer;
     text-decoration: none;
     color: var(--white);
-    font-size: 26px;
     align-items: center;
   }
 
-  .row:hover {
-    background-color: var(--white);
-    color: var(--bg);
-  }
-  .row:hover .cyan, .row:hover .yellow, .row:hover .green { color: var(--bg); }
+  .row:hover { background-color: #111; }
 
   .content-block {
-    background: #000;
-    border: 2px solid var(--green);
-    padding: 15px;
-    margin-bottom: 20px;
-  }
-
-  .content-block p {
-    line-height: 1.4;
-    font-size: 28px;
+    border: 1px solid var(--green);
+    padding: 10px;
     margin-bottom: 15px;
   }
 
+  .content-block p { margin-bottom: 10px; }
+  .content-block p:last-child { margin-bottom: 0; }
+
+  /* Fastext toolbar (Row 24) */
   .fastext {
     display: flex;
     justify-content: space-between;
-    margin-top: auto;
-    padding-top: 15px;
-    border-top: 4px double var(--white);
+    padding-top: 10px;
+    border-top: 2px solid var(--white);
     background: var(--bg);
+    height: 45px;
   }
 
   .fast-btn {
     cursor: pointer;
-    font-size: 24px;
-    padding: 2px 10px;
-    background: #000;
+    font-size: 22px;
+    padding: 2px 8px;
+    background: #111;
+    border-radius: 4px;
   }
   .fast-btn span { font-weight: bold; }
+  
+  .fast-btn.red-btn { color: var(--red); border: 1px solid var(--red); }
+  .fast-btn.green-btn { color: var(--green); border: 1px solid var(--green); }
+  .fast-btn.yellow-btn { color: var(--yellow); border: 1px solid var(--yellow); }
+  .fast-btn.cyan-btn { color: var(--cyan); border: 1px solid var(--cyan); }
+  
   .fast-btn:hover { background: var(--white); color: #000; }
 
+  /* Physical Remote Control Side Panel */
   .remote-panel {
     background: #1e2029;
-    padding: 20px;
+    padding: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -180,55 +194,79 @@
   }
 
   .remote-title {
-    font-size: 20px;
+    font-size: 18px;
     text-align: center;
     color: #888;
     letter-spacing: 2px;
     border-bottom: 2px solid #333;
     width: 100%;
-    padding-bottom: 10px;
+    padding-bottom: 5px;
+  }
+
+  .input-display {
+    width: 100%;
+    background: #0a0b0d;
+    border: 2px solid #ff3333;
+    color: #ff3333;
+    font-size: 32px;
+    text-align: center;
+    padding: 5px 0;
+    margin-top: 10px;
+    letter-spacing: 4px;
   }
 
   .numpad {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+    gap: 8px;
     width: 100%;
-    margin: 20px 0;
+    margin: 15px 0;
   }
 
   .num-btn {
     background: #2a2d37;
-    border: 2px solid #444;
+    border: 1px solid #444;
     color: var(--white);
     font-family: var(--font);
-    font-size: 32px;
+    font-size: 28px;
     padding: 10px 0;
     cursor: pointer;
     text-align: center;
-    box-shadow: inset 0 2px 0 rgba(255,255,255,0.1), 0 4px 0 #111;
+    border-radius: 4px;
+    box-shadow: 0 3px 0 #111;
   }
 
   .num-btn:active {
     transform: translateY(2px);
-    box-shadow: inset 0 2px 0 rgba(255,255,255,0.1), 0 2px 0 #111;
+    box-shadow: 0 1px 0 #111;
   }
 
   .num-btn:hover {
     background: #3a3f4d;
-    border-color: var(--cyan);
+    border-color: #666;
   }
 
-  .input-display {
+  /* Utility bottom row of remote */
+  .remote-utils {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
     width: 100%;
-    background: #000;
-    border: 2px solid var(--red);
-    color: var(--red);
-    font-size: 36px;
-    text-align: center;
-    padding: 5px 0;
-    letter-spacing: 4px;
+    margin-bottom: 10px;
   }
+
+  .util-btn {
+    background: #15161c;
+    border: 1px solid #444;
+    color: var(--cyan);
+    font-family: var(--font);
+    font-size: 22px;
+    padding: 8px 0;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 4px;
+  }
+  .util-btn:hover { background: #2a2d37; }
 
   @media (max-width: 800px) {
     .tv-container { grid-template-columns: 1fr; height: auto; }
@@ -242,7 +280,7 @@
     <div class="screen">
       <div class="header">
         <span class="header-pnum" id="hdr-pnum">P100</span>
-        <span class="header-name">RONAN SULLIVAN</span>
+        <span class="header-name">CEEFAX 1 100</span>
         <span class="header-search" id="hdr-search">100</span>
         <span class="header-datetime">
           <span id="live-date">Wed 1 Apr</span> 
@@ -264,6 +302,7 @@
             <p>Here, you can find live sports work, arts reviews, and creative writing.</p>
             <p>Click the directory below or enter a page number to browse my work.</p>
           </div>
+          
           <div class="grid-header">
             <span>PAGE</span><span>SUBJECT</span><span>STATUS</span>
           </div>
@@ -278,8 +317,9 @@
               <span class="cyan">103</span><span>CONTACT DETAILS</span><span class="green">OK</span>
             </div>
           </div>
-          <div class="content-block" style="margin-top: auto;">
-            <p class="blink red">TYPE A 3-DIGIT NUMBER OR USE THE REMOTE TO NAVIGATE</p>
+          
+          <div style="margin-top: auto; padding-bottom: 10px;">
+            <p class="concealed red" id="hidden-help">TYPE A 3-DIGIT NUMBER OR USE THE REMOTE</p>
           </div>
         </div>
 
@@ -308,24 +348,23 @@
           <h1 class="yellow">ABOUT ME / CV</h1>
           <div class="content-block" style="border-color: var(--cyan);">
             <h2 class="cyan">PROFESSIONAL PROFILE</h2>
-            <p>Dynamic and focused writer with a strong portfolio covering live sports reporting, critical cultural analysis, and long-form columns. Proven track record in fast-paced editorial environments.</p>
+            <p>Dynamic and focused writer with a strong portfolio covering live sports reporting, critical cultural analysis, and long-form columns.</p>
           </div>
           <div class="content-block" style="border-color: var(--yellow);">
             <h2 class="yellow">SKILLS & EXPERTISE</h2>
             <p>* Editorial Writing & Match Reporting<br>
                * Cultural Criticism & Arts Reviews<br>
-               * Fast-turnaround Copywriting<br>
-               * Content Strategy & Digital Publishing</p>
+               * Fast-turnaround Copywriting</p>
           </div>
-          <div class="content-block">
-            <p>Need to reach me? Navigate to <span class="cyan">Page 103</span> or use the toolbar below to access direct messaging links.</p>
+          <div style="margin-top: auto; padding-bottom: 10px;">
+            <p>Need to reach me? Navigate to <span class="cyan">Page 103</span></p>
           </div>
         </div>
 
         <div class="page hidden" id="page-103">
           <h1 class="yellow">CONTACT</h1>
           <div class="content-block">
-            <p>I am always looking to connect with editors, fellow writers, or anyone interested in my work. Feel free to drop a message through any of the active paths below:</p>
+            <p>I am always looking to connect with editors, fellow writers, or anyone interested in my work.</p>
           </div>
           <div class="grid-header">
             <span>KEY</span><span>NETWORK</span><span>LINK</span>
@@ -338,9 +377,6 @@
               <span class="yellow">LN</span><span>LinkedIn</span><span class="cyan">LINK</span>
             </a>
           </div>
-          <div class="content-block" style="margin-top: auto;">
-            <p class="green">Gating: These links will open up standard external protocols on your device.</p>
-          </div>
         </div>
 
         <div class="page hidden" id="page-110">
@@ -350,7 +386,7 @@
           </div>
           <div class="file-list">
             <a class="row" href="https://enfielddispatch.co.uk/win-over-welsh-side-will-go-long-way-to-securing-enfield-towns-fenix-trophy-play-off-place/" target="_blank">
-              <span class="yellow">10</span><span>Win over Welsh side - Enfield Dispatch</span><span class="green">SPORT</span>
+              <span class="yellow">10</span><span>Win over Welsh side</span><span class="green">SPORT</span>
             </a>
           </div>
         </div>
@@ -362,10 +398,10 @@
           </div>
           <div class="file-list">
             <a class="row" href="https://ronanswriting.blogspot.com/2023/05/national-theatre-review-motive-and-cue.html" target="_blank">
-              <span class="yellow">11</span><span>The Motive and the Cue - The Line Is Good</span><span class="cyan">THEATRE</span>
+              <span class="yellow">11</span><span>The Motive and the Cue</span><span class="cyan">THEATRE</span>
             </a>
             <a class="row" href="https://ronanswriting.blogspot.com/2023/05/national-theatre-dancing-at-lughnasa.html" target="_blank">
-              <span class="yellow">12</span><span>Dancing at Lughnasa - The Line Is Good</span><span class="cyan">THEATRE</span>
+              <span class="yellow">12</span><span>Dancing at Lughnasa</span><span class="cyan">THEATRE</span>
             </a>
           </div>
         </div>
@@ -377,28 +413,32 @@
           </div>
           <div class="file-list">
             <a class="row" href="https://ronanswriting.blogspot.com/2022/12/book-review-wednesday-second-place-by.html" target="_blank">
-              <span class="yellow">13</span><span>My Brilliant Friend - My Pen Will Absolve Me</span><span class="yellow">BOOKS</span>
+              <span class="yellow">13</span><span>My Brilliant Friend</span><span class="yellow">BOOKS</span>
             </a>
             <a class="row" href="https://ronanswriting.blogspot.com/2022/12/book-review-wednesday-second-place-by.html" target="_blank">
-              <span class="yellow">14</span><span>Second Place - The Line Is Good</span><span class="yellow">BOOKS</span>
+              <span class="yellow">14</span><span>Second Place</span><span class="yellow">BOOKS</span>
             </a>
             <a class="row" href="https://impactnottingham.com/2018/03/acting-souljam-drunk-texting-grateful-another-month-life-freshers-columnist/" target="_blank">
-              <span class="yellow">15</span><span>Acting Souljam... - Impact Notts</span><span class="yellow">PIECES</span>
+              <span class="yellow">15</span><span>Acting Souljam...</span><span class="yellow">PIECES</span>
             </a>
             <a class="row" href="https://impactnottingham.com/2018/01/fresh-year-freshers-columnist/" target="_blank">
-              <span class="yellow">16</span><span>Fresh Year - Impact Notts</span><span class="yellow">PIECES</span>
+              <span class="yellow">16</span><span>Fresh Year</span><span class="yellow">PIECES</span>
             </a>
           </div>
         </div>
 
-      </div> <div class="fastext">
-        <div class="fast-btn red" onclick="changePage('100')"><span>100</span> INDEX</div>
-        <div class="fast-btn green" onclick="changePage('101')"><span>101</span> DIR</div>
-        <div class="fast-btn yellow" onclick="changePage('102')"><span>102</span> ABOUT</div>
-        <div class="fast-btn cyan" onclick="changePage('103')"><span>103</span> CONTACT</div>
+      </div> 
+
+      <div class="fastext">
+        <div class="fast-btn red-btn" onclick="changePage('100')"><span>100</span> INDEX</div>
+        <div class="fast-btn green-btn" onclick="changePage('101')"><span>101</span> DIR</div>
+        <div class="fast-btn yellow-btn" onclick="changePage('102')"><span>102</span> ABOUT</div>
+        <div class="fast-btn cyan-btn" onclick="changePage('103')"><span>103</span> CONTACT</div>
       </div>
 
-    </div> <div class="remote-panel">
+    </div> 
+
+    <div class="remote-panel">
       <div class="remote-title">TELETEXT REMOTE</div>
       <div class="input-display" id="display-digits">100</div>
       
@@ -416,6 +456,12 @@
         <button class="num-btn" onclick="pressKey('0')">0</button>
         <button class="num-btn" style="color:var(--green);" onclick="submitPage()">➔</button>
       </div>
+
+      <div class="remote-utils">
+        <button class="util-btn" style="color: #ff3333;" onclick="changePage('100')">Idx</button>
+        <button class="util-btn" onclick="revealHidden()">[ ? ]</button>
+        <button class="util-btn" onclick="clearInput()">Del</button>
+      </div>
     </div>
   </div>
 
@@ -429,6 +475,7 @@
     const hdrSearch = document.getElementById('hdr-search');
     const loadingBlock = document.getElementById('loading-block');
 
+    // Real-time Clock running at 1-sec intervals
     setInterval(() => {
       const now = new Date();
       document.getElementById('live-time').innerText = now.toTimeString().split(' ')[0];
@@ -459,6 +506,12 @@
       }
     }
 
+    // Reveal Concealed Text functionality
+    function revealHidden() {
+      const el = document.getElementById('hidden-help');
+      if (el) el.classList.toggle('revealed');
+    }
+
     window.addEventListener('keydown', (e) => {
       if (isRolling) return;
       if (e.key >= '0' && e.key <= '9') {
@@ -482,16 +535,16 @@
 
       isRolling = true;
       
-      // Blank the current page away and show block cursor
+      // Blank the main page out into a loading block (Header stays active!)
       document.querySelectorAll('.page').forEach(page => page.classList.add('hidden'));
       loadingBlock.classList.remove('hidden'); 
 
       const targetVal = parseInt(targetPage);
       
-      // Counter always starts at the NEXT page in the sequence
+      // Ticker starts at exact sequential row
       let currentTickerVal = parseInt(currentPage) + 1;
 
-      // Slowed down the interval to 65ms for a clunkier, heavier processing feel
+      // Heavy 65ms processing speed
       const rollInterval = setInterval(() => {
         let distance;
         if (targetVal >= currentTickerVal) {
@@ -500,31 +553,27 @@
           distance = (200 - currentTickerVal) + targetVal; 
         }
 
-        // STATE 1: Jumping rapidly if far away
+        // Fast state vs linear search
         if (distance > 10) {
-          // Jump by slightly reduced random amounts (between 5 and 20) to fit the slower pace
           const jump = 5 + Math.floor(Math.random() * 15);
           currentTickerVal += jump;
         } else {
-          // STATE 2: Counting up normally gear when close
           currentTickerVal++;
         }
 
-        // Handle Rollover (Teletext loops from 199 back to 100 on sub-menus typically)
+        // Loop constraints
         if (currentTickerVal > 199) {
           currentTickerVal = 100;
         }
 
-        // Render the search value
+        // Map it to Row 0
         hdrSearch.innerText = currentTickerVal.toString();
 
-        // Hit the target!
+        // Break on target acquisition
         if (currentTickerVal === targetVal) {
           clearInterval(rollInterval);
-          
           hdrSearch.innerText = targetPage;
           
-          // CRT rendering delay
           setTimeout(() => {
             loadingBlock.classList.add('hidden');
             document.getElementById('page-' + targetPage).classList.remove('hidden');
