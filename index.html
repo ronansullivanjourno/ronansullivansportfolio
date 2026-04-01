@@ -59,13 +59,12 @@
     justify-content: space-between;
     align-items: center;
     border-bottom: 4px double var(--white);
-    padding-bottom: 10px;
+    padding-bottom: 5px;
     margin-bottom: 15px;
   }
 
   .header-left { display: flex; gap: 20px; }
   .user-name { color: var(--yellow); font-weight: bold; }
-  .brand { color: var(--green); }
 
   .pages-container {
     position: relative;
@@ -82,8 +81,16 @@
   }
   .hidden { display: none !important; }
 
-  h1 { font-size: 44px; margin-bottom: 10px; }
+  h1 { font-size: 44px; margin-bottom: 5px; }
   h2 { font-size: 32px; margin-bottom: 15px; }
+  
+  /* Subtitle for the Welcome page */
+  .sub-branding {
+    font-size: 28px;
+    color: var(--red);
+    margin-bottom: 15px;
+    font-weight: normal;
+  }
 
   .cyan { color: var(--cyan); }
   .yellow { color: var(--yellow); }
@@ -246,8 +253,7 @@
     <div class="screen">
       <div class="header">
         <div class="header-left">
-          <span class="user-name" id="current-pnum">RONAN SULLIVAN</span>
-          <span class="brand green">PORTFOLIO</span>
+          <span class="white" id="current-pnum">CEEFAX 1</span>
         </div>
         <div class="header-right">
           <span class="yellow" id="live-date">Wed 1 Apr</span>
@@ -260,6 +266,8 @@
 
         <div class="page" id="page-100">
           <h1 class="yellow">WELCOME</h1>
+          <div class="sub-branding">RONAN SULLIVAN'S PORTFOLIO</div>
+          
           <div class="content-block">
             <p>Hi, I'm Ronan. Welcome to my portfolio. I'm currently studying for an NCTJ Diploma at PA Media Academy.</p>
             <p>Here, you can find live sports work, arts reviews, and creative writing.</p>
@@ -470,7 +478,6 @@
     });
 
     function changePage(pageNum) {
-      // ADDED 103 TO VALID PAGES ARRAY HERE
       const validPages = ['100', '101', '102', '103', '110', '120', '130'];
       
       if (!validPages.includes(pageNum)) {
@@ -489,8 +496,9 @@
         document.querySelectorAll('.page').forEach(page => page.classList.add('hidden'));
         document.getElementById('page-' + pageNum).classList.remove('hidden');
         
+        // Dynamic Header tracker that changes based on current page
         if(pageNum === '100') {
-            pageNumEl.innerText = 'RONAN SULLIVAN';
+            pageNumEl.innerText = 'CEEFAX 1';
         } else {
             pageNumEl.innerText = 'P' + pageNum;
         }
