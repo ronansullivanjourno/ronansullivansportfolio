@@ -260,35 +260,41 @@
       <div style="position: relative; flex: 1; display: flex; flex-direction: column;">
         
         <div class="pixel-transition" id="pixel-overlay"></div>
+<div class="page" id="page-100">
+  <h1 class="yellow">RONAN SULLIVAN: PORTFOLIO</h1>
+  
+  <div class="content-block" style="border-color: var(--cyan); margin-bottom: 15px;">
+    <h2 class="cyan">WELCOME TO MY PORTFOLIO</h2>
+    <p>I am a writer and journalist specialising in sports reporting, theatre reviews, and cultural columns. Use the index below or type a 3-digit page number on your keyboard to browse my published work.</p>
+  </div>
 
-        <div class="page" id="page-100">
-          <h1 class="yellow">CEEFAX MAIN INDEX</h1>
-          <div class="grid-header">
-            <span>PAGE</span><span>SUBJECT</span><span>UPDATED</span>
-          </div>
-          <div class="file-list">
-            <div class="row" onclick="changePage('101')">
-              <span class="cyan">101</span><span>DIRECTORY & CATEGORIES</span><span class="green">14:20</span>
-            </div>
-            <div class="row" onclick="changePage('105')">
-              <span class="cyan">105</span><span>WEATHER FORECAST</span><span class="green">18:10</span>
-            </div>
-            <div class="row" onclick="changePage('200')">
-              <span class="cyan">200</span><span>LIVE SPORTS VIDIPRINTER</span><span class="green">LIVE</span>
-            </div>
-          </div>
-          <div class="content-block">
-            <h2 class="cyan">WELCOME TO CEEFAX</h2>
-            <p>Your ultimate text-based service for live news, weather, and sports scores. Use the remote control or click a row above to navigate.</p>
-            <p class="blink red">TYPE A 3-DIGIT NUMBER ON YOUR KEYBOARD TO CHANGE PAGE</p>
-          </div>
-          <div class="fastext">
-            <div class="fast-btn red" onclick="changePage('100')"><span>100</span> INDEX</div>
-            <div class="fast-btn green" onclick="changePage('101')"><span>101</span> DIR</div>
-            <div class="fast-btn yellow" onclick="changePage('105')"><span>105</span> WEATHER</div>
-            <div class="fast-btn cyan" onclick="changePage('200')"><span>200</span> SPORT</div>
-          </div>
-        </div>
+  <div class="grid-header">
+    <span>PAGE</span><span>SUBJECT</span><span>UPDATED</span>
+  </div>
+  
+  <div class="file-list">
+    <div class="row" onclick="changePage('101')">
+      <span class="cyan">101</span><span>DIRECTORY & CATEGORIES</span><span class="green">OK</span>
+    </div>
+    <div class="row" onclick="changePage('105')">
+      <span class="cyan">105</span><span>UK WEATHER FORECAST (FUN ADD-ON)</span><span class="green">LIVE</span>
+    </div>
+    <div class="row" onclick="changePage('200')">
+      <span class="cyan">200</span><span>SPORTS VIDIPRINTER (FUN ADD-ON)</span><span class="green">LIVE</span>
+    </div>
+  </div>
+
+  <div class="content-block" style="margin-top: auto;">
+    <p class="blink red">TYPE A 3-DIGIT NUMBER ON YOUR KEYBOARD TO CHANGE PAGE</p>
+  </div>
+
+  <div class="fastext">
+    <div class="fast-btn red" onclick="changePage('100')"><span>100</span> INDEX</div>
+    <div class="fast-btn green" onclick="changePage('101')"><span>101</span> DIR</div>
+    <div class="fast-btn yellow" onclick="changePage('105')"><span>105</span> WEATHER</div>
+    <div class="fast-btn cyan" onclick="changePage('200')"><span>200</span> SPORT</div>
+  </div>
+</div>
 
         <div class="page hidden" id="page-101">
           <h1 class="yellow">DIRECTORY & CATEGORIES</h1>
