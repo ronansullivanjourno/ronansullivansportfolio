@@ -6,21 +6,21 @@
 <title>Ronan Sullivan — Journalist</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --ink: #0a0a08;
-    --paper: #f5f2eb;
-    --muted: #6b6860;
-    --hint: #a8a49c;
-    --rule: rgba(10,10,8,0.12);
-    --rule-heavy: rgba(10,10,8,0.35);
-    --accent: #c8392b;
-    --serif: 'Playfair Display', Georgia, serif;
-    --mono: 'IBM Plex Mono', monospace;
-    --sans: 'IBM Plex Sans', sans-serif;
+    --ink: #002FA7;          /* Yves Klein Blue */
+    --paper: #FDFBF7;        /* Warm Alabaster / Editorial Paper */
+    --muted: #3a54a4;        /* Softer Blue for body text readability */
+    --hint: #8fa4df;         /* Light Blue for borders/disabled states */
+    --rule: rgba(0, 47, 167, 0.15);
+    --rule-heavy: rgba(0, 47, 167, 0.4);
+    --accent: #D4AF37;       /* Soft Pale Gold (Complimentary Accent) */
+    --serif-head: 'Playfair Display', Georgia, serif;
+    --serif-body: 'Lora', Georgia, serif;
+    --mono: 'Fira Code', monospace;
   }
 
   html { scroll-behavior: smooth; }
@@ -28,7 +28,7 @@
   body {
     background: var(--paper);
     color: var(--ink);
-    font-family: var(--sans);
+    font-family: var(--serif-body);
     font-size: 16px;
     line-height: 1.6;
     min-height: 100vh;
@@ -43,7 +43,7 @@
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
     pointer-events: none;
     z-index: 0;
-    opacity: 0.4;
+    opacity: 0.3;
   }
 
   /* ── MASTHEAD ── */
@@ -75,7 +75,7 @@
   }
 
   .masthead-name {
-    font-family: var(--serif);
+    font-family: var(--serif-head);
     font-size: clamp(3.5rem, 11vw, 7.5rem);
     font-weight: 900;
     line-height: 0.9;
@@ -120,9 +120,9 @@
   }
 
   .masthead-tagline {
-    font-family: var(--serif);
+    font-family: var(--serif-body);
     font-style: italic;
-    font-size: 1rem;
+    font-size: 1.05rem;
     color: var(--muted);
     padding: 0.85rem 0;
     border-bottom: 0.5px solid var(--rule);
@@ -157,7 +157,7 @@
   }
 
   .nav-strip button:hover:not(.active) {
-    background: rgba(10,10,8,0.06);
+    background: rgba(0, 47, 167, 0.06);
     color: var(--ink);
   }
 
@@ -214,7 +214,7 @@
     padding-right: 3rem;
   }
 
-  .article-row:hover { background: rgba(10,10,8,0.03); }
+  .article-row:hover { background: rgba(0, 47, 167, 0.03); }
   .article-row:hover .art-title { color: var(--accent); }
 
   .art-index {
@@ -230,25 +230,25 @@
     font-size: 9px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--hint);
+    color: var(--muted);
     margin-bottom: 0.3rem;
   }
 
   .art-title {
-    font-family: var(--serif);
-    font-size: 1.2rem;
-    font-weight: 700;
-    line-height: 1.25;
+    font-family: var(--serif-body);
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.3;
     color: var(--ink);
     margin-bottom: 0.3rem;
     transition: color 0.15s;
   }
 
   .art-pub {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--hint);
-    letter-spacing: 0.06em;
+    font-family: var(--serif-body);
+    font-size: 13px;
+    font-style: italic;
+    color: var(--muted);
   }
 
   .art-arrow {
@@ -280,7 +280,7 @@
   .about-left { padding: 3rem; border-right: 0.5px solid var(--rule); }
 
   .about-headline {
-    font-family: var(--serif);
+    font-family: var(--serif-head);
     font-size: clamp(1.8rem, 4vw, 2.6rem);
     font-weight: 700;
     line-height: 1.2;
@@ -294,16 +294,15 @@
   }
 
   .about-body p {
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.85;
     color: var(--muted);
     margin-bottom: 0.9rem;
-    font-weight: 300;
   }
 
   .about-body p strong {
     color: var(--ink);
-    font-weight: 500;
+    font-weight: 600;
   }
 
   .about-right { padding: 3rem; }
@@ -313,7 +312,7 @@
     font-size: 9px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--hint);
+    color: var(--muted);
     margin-bottom: 1.25rem;
     padding-bottom: 0.5rem;
     border-bottom: 2px solid var(--ink);
@@ -333,13 +332,13 @@
     font-size: 10px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--hint);
+    color: var(--muted);
     flex-shrink: 0;
   }
 
   .cred-value {
-    font-family: var(--sans);
-    font-size: 13px;
+    font-family: var(--serif-body);
+    font-size: 14px;
     color: var(--ink);
     font-weight: 500;
     text-align: right;
@@ -360,6 +359,7 @@
     padding: 5px 10px;
     border: 0.5px solid var(--rule-heavy);
     color: var(--muted);
+    background: rgba(0, 47, 167, 0.02);
   }
 
   /* ── CONTACT PAGE ── */
@@ -377,7 +377,7 @@
   .contact-left { padding: 3rem; border-right: 0.5px solid var(--rule); }
 
   .contact-headline {
-    font-family: var(--serif);
+    font-family: var(--serif-head);
     font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 900;
     line-height: 1.05;
@@ -386,10 +386,9 @@
   }
 
   .contact-sub {
-    font-size: 14px;
+    font-size: 15px;
     color: var(--muted);
     line-height: 1.8;
-    font-weight: 300;
     max-width: 340px;
   }
 
@@ -411,12 +410,12 @@
     font-size: 10px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--hint);
+    color: var(--muted);
   }
 
   .contact-row a {
-    font-family: var(--sans);
-    font-size: 14px;
+    font-family: var(--serif-body);
+    font-size: 15px;
     font-weight: 500;
     color: var(--ink);
     text-decoration: none;
@@ -431,7 +430,8 @@
   }
 
   .contact-row span.val {
-    font-size: 14px;
+    font-family: var(--serif-body);
+    font-size: 15px;
     font-weight: 500;
     color: var(--ink);
   }
@@ -453,13 +453,13 @@
     font-family: var(--mono);
     font-size: 10px;
     letter-spacing: 0.08em;
-    color: var(--hint);
+    color: var(--muted);
   }
 
   footer .footer-name {
-    font-family: var(--serif);
+    font-family: var(--serif-head);
     font-style: italic;
-    font-size: 13px;
+    font-size: 14px;
     color: var(--muted);
   }
 
@@ -505,7 +505,7 @@
       <a href="https://ronanswriting.blogspot.com/" target="_blank">The Line Is Good ↗</a>
     </div>
   </div>
-  <p class="masthead-tagline">Sport reporting, arts criticism and student life — from non-league grounds to the National Theatre.</p>
+  <p class="masthead-tagline">Sport reporting, arts criticism and culture — from non-league grounds to the National Theatre.</p>
   <nav class="nav-strip">
     <button class="active" onclick="showPage('work', this)">Work</button>
     <button onclick="showPage('about', this)">About</button>
@@ -513,7 +513,6 @@
   </nav>
 </header>
 
-<!-- ── WORK ── -->
 <main id="work" class="page">
   <div class="filter-bar">
     <button class="active" onclick="filter('all', this)">All</button>
@@ -521,6 +520,7 @@
     <button onclick="filter('theatre', this)">Theatre</button>
     <button onclick="filter('books', this)">Books</button>
     <button onclick="filter('column', this)">Column</button>
+    <button onclick="filter('culture', this)">Culture</button>
   </div>
   <div class="articles-list">
 
@@ -534,8 +534,138 @@
       <span class="art-arrow">↗</span>
     </a>
 
-    <a class="article-row cat-theatre" href="https://ronanswriting.blogspot.com/2023/05/national-theatre-review-motive-and-cue.html" target="_blank" rel="noopener">
+    <a class="article-row cat-culture" href="https://anvilheavy.wordpress.com/2024/11/01/cleo-from-5-to-7-agnes-vardas-troubled-bodies-and-parisian-cobblestones/" target="_blank" rel="noopener">
       <span class="art-index">02</span>
+      <div>
+        <p class="art-cat">Film &amp; Culture — Anvil Heavy · 2024</p>
+        <p class="art-title">Cléo from 5 to 7: Agnès Varda’s Troubled Bodies and Parisian Cobblestones</p>
+        <p class="art-pub">Cinematic analysis</p>
+      </div>
+      <span class="art-arrow">↗</span>
+    </a>
+
+    <a class="article-row cat-culture" href="https://anvilheavy.wordpress.com/2024/09/25/colin-from-accounts-season-2-this-aussie-dog-com-continues-to-bark-up-the-right-tree/" target="_blank" rel="noopener">
+      <span class="art-index">03</span>
+      <div>
+        <p class="art-cat">TV Review — Anvil Heavy · 2024</p>
+        <p class="art-title">Colin from Accounts Season 2 — This Aussie Dog-Com Continues to Bark up the Right Tree</p>
+        <p class="art-pub">Comedy review</p>
+      </div>
+      <span class="art-arrow">↗</span>
+    </a>
+
+    <a class="article-row cat-books" href="https://anvilheavy.wordpress.com/2024/09/18/book-review-prophet-song-by-paul-lynch/" target="_blank" rel="noopener">
+      <span class="art-index">04</span>
+      <div>
+        <p class="art-cat">Book Review — Anvil Heavy · 2024</p>
+        <p class="art-title">Prophet Song by Paul Lynch</p>
+        <p class="art-pub">Literary criticism</p>
+      </div>
+      <span class="art-arrow">↗</span>
+    </a>
+
+    <a class="article-row cat-theatre" href="https://anvilheavy.wordpress.com/2024/08/13/the-hot-wing-king-at-the-national-theatre-review/" target="_blank" rel="noopener">
+      <span class="art-index">05</span>
+      <div>
+        <p class="art-cat">Theatre Review — Anvil Heavy · 2024</p>
+        <p class="art-title">The Hot Wing King at the National Theatre</p>
+        <p class="art-pub">Katori Hall's Pulitzer-winning comedy</p>
+      </div>
+      <span class="art-arrow">↗</span>
+    </a>
+
+    <a class="article-row cat-theatre" href="https://anvilheavy.wordpress.com/2024/06/07/bluets-review-royal-court-theatre/" target="_blank" rel="noopener">
+      <span class="art-index">06</span>
+      <div>
+        <p class="art-cat">Theatre Review — Anvil Heavy · 2024</p>
+        <p class="art-title">Bluets — Royal Court Theatre</p>
+        <p class="art-pub">Maggie Nelson adaptation</p>
+      </div>
+      <span class="art-arrow">↗</span>
+    </a>
+
+    <a class="article-row cat-culture" href="https://anvilheavy.wordpress.com/2024/06/05/332/" target="_blank" rel="noopener">
+      <span class="art-index">07</span>
+      <div>
+        <p class="art-cat">Culture — Anvil Heavy · 2024</p>
+        <p class="art-title">A Brief Philosophy of Late-Capitalist Noise</p>
+        <p class="art-pub">Modern reflection</p>
+      </div>
+      <span class="art-arrow">↗</span>
+    </a>
+
+    <a class="article-row cat-books" href="https://anvilheavy.wordpress.com/2024/06/05/the-son-of-man-by-jean-baptiste-del-amo-filial-ties-and-french-hillsides/" target="_blank" rel="noopener">
+      <span class="art-index">08</span>
+      <div>
+        <p class="art-cat">Book Review — Anvil Heavy · 2024</p>
+        <p class="art-title">The Son of Man by Jean-Baptiste Del Amo: Filial Ties and French Hillsides</p>
+        <p class="art-pub">Literary analysis</p>
+      </div>
+      <span class="art-arrow">↗</span>
+    </a>
+
+    <a class="article-row cat-theatre" href="https://anvilheavy.wordpress.com/2024/06/05/underdog-the-other-other-bronte-review-national-theatre/" target="_blank" rel="noopener">
+      <span class="art-index">09</span>
+      <div>
+        <p class="art-cat">Theatre Review — Anvil Heavy · 2024</p>
+        <p class="art-title">Underdog: The Other, Other Brontë — National Theatre</p>
+        <p class="art-pub">Sarah Gordon's biting drama</p>
+      </div>
+      <span class="art-arrow">↗</span>
+    </a>
+
+    <a class="article-row cat-theatre" href="https://anvilheavy.wordpress.com/2024/06/05/london-tide-national-theatre-review/" target="_blank" rel="noopener">
+      <span class="art-index">10</span>
+      <div>
+        <p class="art-cat">Theatre Review — Anvil Heavy · 2024</p>
+        <p class="art-title">London Tide — National Theatre</p>
+        <p class="art-pub">Charles Dickens adaptation</p>
+      </div>
+      <span class="art-arrow">↗</span>
+    </a>
+
+    <a class="article-row cat-culture" href="https://anvilheavy.wordpress.com/2022/10/28/poem-yellowpole-dimples/" target="_blank" rel="noopener">
+      <span class="art-index">11</span>
+      <div>
+        <p class="art-cat">Poetry — Anvil Heavy · 2022</p>
+        <p class="art-title">Yellowpole Dimples</p>
+        <p class="art-pub">Original piece</p>
+      </div>
+      <span class="art-arrow">↗</span>
+    </a>
+
+    <a class="article-row cat-culture" href="https://anvilheavy.wordpress.com/2022/09/30/non-fiction-the-bass-was-hard/" target="_blank" rel="noopener">
+      <span class="art-index">12</span>
+      <div>
+        <p class="art-cat">Non-Fiction — Anvil Heavy · 2022</p>
+        <p class="art-title">The Bass Was Hard</p>
+        <p class="art-pub">Reflective essay</p>
+      </div>
+      <span class="art-arrow">↗</span>
+    </a>
+
+    <a class="article-row cat-culture" href="https://anvilheavy.wordpress.com/2022/09/14/fiction-slush-puppie/" target="_blank" rel="noopener">
+      <span class="art-index">13</span>
+      <div>
+        <p class="art-cat">Fiction — Anvil Heavy · 2022</p>
+        <p class="art-title">Slush Puppie</p>
+        <p class="art-pub">Original story</p>
+      </div>
+      <span class="art-arrow">↗</span>
+    </a>
+
+    <a class="article-row cat-theatre" href="https://anvilheavy.wordpress.com/2023/05/16/national-theatre-review-dancing-at-lughnasa/" target="_blank" rel="noopener">
+      <span class="art-index">14</span>
+      <div>
+        <p class="art-cat">Theatre Review — Anvil Heavy · 2023</p>
+        <p class="art-title">Dancing at Lughnasa — National Theatre</p>
+        <p class="art-pub">Brian Friel revival</p>
+      </div>
+      <span class="art-arrow">↗</span>
+    </a>
+
+    <a class="article-row cat-theatre" href="https://ronanswriting.blogspot.com/2023/05/national-theatre-review-motive-and-cue.html" target="_blank" rel="noopener">
+      <span class="art-index">15</span>
       <div>
         <p class="art-cat">Theatre Review — The Line Is Good · 2023</p>
         <p class="art-title">The Motive and the Cue — National Theatre ★★</p>
@@ -544,18 +674,18 @@
       <span class="art-arrow">↗</span>
     </a>
 
-    <a class="article-row cat-theatre" href="https://ronanswriting.blogspot.com/2023/05/national-theatre-dancing-at-lughnasa.html" target="_blank" rel="noopener">
-      <span class="art-index">03</span>
+    <a class="article-row cat-books" href="https://anvilheavy.wordpress.com/2022/12/12/book-review-october-child-by-linda-bostrom-knausgard/" target="_blank" rel="noopener">
+      <span class="art-index">16</span>
       <div>
-        <p class="art-cat">Theatre Review — The Line Is Good · 2023</p>
-        <p class="art-title">Dancing at Lughnasa — National Theatre</p>
-        <p class="art-pub">Brian Friel revival</p>
+        <p class="art-cat">Book Review — Anvil Heavy · 2022</p>
+        <p class="art-title">October Child — Linda Boström Knausgård</p>
+        <p class="art-pub">Memoir-novel on psychiatric illness and family</p>
       </div>
       <span class="art-arrow">↗</span>
     </a>
 
     <a class="article-row cat-books" href="https://ronanswriting.blogspot.com/2022/12/book-review-wednesday-second-place-by.html" target="_blank" rel="noopener">
-      <span class="art-index">04</span>
+      <span class="art-index">17</span>
       <div>
         <p class="art-cat">Book Review — The Line Is Good · 2022</p>
         <p class="art-title">Second Place — Rachel Cusk</p>
@@ -564,42 +694,32 @@
       <span class="art-arrow">↗</span>
     </a>
 
-    <a class="article-row cat-books" href="https://ronanswriting.blogspot.com/2022/12/october-child-by-linda-bostrom.html" target="_blank" rel="noopener">
-      <span class="art-index">05</span>
-      <div>
-        <p class="art-cat">Book Review — The Line Is Good · 2022</p>
-        <p class="art-title">October Child — Linda Boström Knausgård</p>
-        <p class="art-pub">Memoir-novel on psychiatric illness and family</p>
-      </div>
-      <span class="art-arrow">↗</span>
-    </a>
-
     <a class="article-row cat-column" href="https://impactnottingham.com/2018/03/acting-souljam-drunk-texting-grateful-another-month-life-freshers-columnist/" target="_blank" rel="noopener">
-      <span class="art-index">06</span>
+      <span class="art-index">18</span>
       <div>
         <p class="art-cat">Column — Impact Nottingham · 2018</p>
         <p class="art-title">Acting Souljam, drunk texting and being grateful for another month of life</p>
-        <p class="art-pub">Freshers columnist</p>
+        <p class="art-pub">Freshers columnist archive</p>
       </div>
       <span class="art-arrow">↗</span>
     </a>
 
     <a class="article-row cat-column" href="https://impactnottingham.com/2018/01/fresh-year-freshers-columnist/" target="_blank" rel="noopener">
-      <span class="art-index">07</span>
+      <span class="art-index">19</span>
       <div>
         <p class="art-cat">Column — Impact Nottingham · 2018</p>
         <p class="art-title">Fresh year — Freshers columnist</p>
-        <p class="art-pub">Opening instalment</p>
+        <p class="art-pub">Opening instalment archive</p>
       </div>
       <span class="art-arrow">↗</span>
     </a>
 
     <a class="article-row cat-column" href="https://impactnottingham.com/2017/12/3-months-freshers-columnist-still-alive/" target="_blank" rel="noopener">
-      <span class="art-index">08</span>
+      <span class="art-index">20</span>
       <div>
         <p class="art-cat">Column — Impact Nottingham · 2017</p>
         <p class="art-title">3 months as a freshers columnist — still alive</p>
-        <p class="art-pub">Freshers columnist</p>
+        <p class="art-pub">Freshers columnist archive</p>
       </div>
       <span class="art-arrow">↗</span>
     </a>
@@ -607,21 +727,21 @@
   </div>
 </main>
 
-<!-- ── ABOUT ── -->
 <main id="about" class="page hidden about-page">
   <div class="about-left">
-    <h2 class="about-headline">Journalist covering sport, <em>culture</em> and student life.</h2>
+    <h2 class="about-headline">Journalist covering sport, <em>culture</em> and the arts.</h2>
     <div class="about-body">
       <p><strong>I'm Ronan Sullivan</strong>, a journalist based in London, currently studying for an NCTJ Diploma at PA Media Academy.</p>
-      <p>My work spans non-league sport reporting, theatre and book criticism, and long-form student columns. I've written for the Enfield Dispatch, Impact Nottingham, and my own publication, The Line Is Good.</p>
-      <p>I'm drawn to stories at the intersection of culture and everyday experience — whether that's a play-off push at Enfield Town or a Brian Friel revival at the National Theatre.</p>
+      <p>My work primarily spans non-league sport reporting, extensive theatre criticism, and deep dives into literary fiction. I write regularly for publications such as Anvil Heavy, the Enfield Dispatch, and my own platform, The Line Is Good.</p>
+      <p>I am drawn to stories at the intersection of local culture and large-scale storytelling — whether that's a crucial play-off push at Enfield Town, a modern French novel analysis, or reviewing a new opening at the Royal Court and National Theatre.</p>
+      <p>In the past, I also wrote long-form student columns covering campus life and culture for Impact Nottingham.</p>
     </div>
     <div class="beats-grid">
       <span class="beat-tag">Non-league football</span>
       <span class="beat-tag">Theatre</span>
       <span class="beat-tag">Literary fiction</span>
-      <span class="beat-tag">Student life</span>
       <span class="beat-tag">Arts &amp; culture</span>
+      <span class="beat-tag">Film &amp; TV</span>
     </div>
   </div>
   <div class="about-right">
@@ -629,12 +749,11 @@
     <div class="cred-row"><span class="cred-label">Training</span><span class="cred-value">NCTJ Diploma</span></div>
     <div class="cred-row"><span class="cred-label">Institution</span><span class="cred-value">PA Media Academy</span></div>
     <div class="cred-row"><span class="cred-label">Based</span><span class="cred-value">London, UK</span></div>
-    <div class="cred-row"><span class="cred-label">Publications</span><span class="cred-value">Enfield Dispatch<br>Impact Nottingham<br>The Line Is Good</span></div>
+    <div class="cred-row"><span class="cred-label">Publications</span><span class="cred-value">Anvil Heavy<br>Enfield Dispatch<br>The Line Is Good<br>Impact Nottingham</span></div>
     <div class="cred-row"><span class="cred-label">Beats</span><span class="cred-value">Sport, Arts, Culture</span></div>
   </div>
 </main>
 
-<!-- ── CONTACT ── -->
 <main id="contact" class="page hidden contact-page">
   <div class="contact-left">
     <h2 class="contact-headline">Let's work together.</h2>
@@ -664,7 +783,7 @@
 
 <footer>
   <span class="footer-name">Ronan Sullivan</span>
-  <p>Journalist &amp; Writer — London &copy; 2025</p>
+  <p>Journalist &amp; Writer — London &copy; 2026</p>
 </footer>
 
 <script>
