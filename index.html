@@ -81,16 +81,8 @@
   }
   .hidden { display: none !important; }
 
-  h1 { font-size: 44px; margin-bottom: 5px; }
+  h1 { font-size: 44px; margin-bottom: 15px; }
   h2 { font-size: 32px; margin-bottom: 15px; }
-  
-  /* Subtitle for the Welcome page */
-  .sub-branding {
-    font-size: 28px;
-    color: var(--red);
-    margin-bottom: 15px;
-    font-weight: normal;
-  }
 
   .cyan { color: var(--cyan); }
   .yellow { color: var(--yellow); }
@@ -253,11 +245,11 @@
     <div class="screen">
       <div class="header">
         <div class="header-left">
-          <span class="white" id="current-pnum">CEEFAX 1</span>
+          <span class="white" id="current-pnum">RONAN SULLIVAN</span>
         </div>
         <div class="header-right">
           <span class="yellow" id="live-date">Wed 1 Apr</span>
-          <span class="yellow" style="margin-left: 10px;" id="live-time">19:00:00</span>
+          <span class="yellow" style="margin-left: 10px;" id="live-time">21:47:00</span>
         </div>
       </div>
 
@@ -265,8 +257,7 @@
         <div class="pixel-transition" id="pixel-overlay"></div>
 
         <div class="page" id="page-100">
-          <h1 class="yellow">WELCOME</h1>
-          <div class="sub-branding">RONAN SULLIVAN'S PORTFOLIO</div>
+          <h1 class="yellow">WELCOME TO MY PORTFOLIO</h1>
           
           <div class="content-block">
             <p>Hi, I'm Ronan. Welcome to my portfolio. I'm currently studying for an NCTJ Diploma at PA Media Academy.</p>
@@ -496,9 +487,8 @@
         document.querySelectorAll('.page').forEach(page => page.classList.add('hidden'));
         document.getElementById('page-' + pageNum).classList.remove('hidden');
         
-        // Dynamic Header tracker that changes based on current page
         if(pageNum === '100') {
-            pageNumEl.innerText = 'CEEFAX 1';
+            pageNumEl.innerText = 'RONAN SULLIVAN';
         } else {
             pageNumEl.innerText = 'P' + pageNum;
         }
