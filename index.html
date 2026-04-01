@@ -228,24 +228,111 @@
     <div class="screen">
       <div class="header">
         <div class="header-left">
-          <span class="page-num white">P200</span>
+          <span class="page-num white" id="current-pnum">P100</span>
           <span class="brand green">CEEFAX</span>
         </div>
         <div class="header-right">
           <span class="yellow">Wed 1 Apr</span>
-          <span class="yellow" style="margin-left: 10px;">18:59:35</span>
+          <span class="yellow" style="margin-left: 10px;" id="live-time">18:59:35</span>
         </div>
       </div>
 
-      <div class="page" id="main-page">
+      <div class="page" id="page-100">
+        <h1 class="yellow">CEEFAX MAIN INDEX</h1>
+        <div class="grid-header">
+          <span>PAGE</span>
+          <span>SUBJECT</span>
+          <span>UPDATED</span>
+        </div>
+        <div class="file-list">
+          <div class="row" onclick="changePage('101')">
+            <span class="cyan">101</span>
+            <span>DIRECTORY & CATEGORIES</span>
+            <span class="green">14:20</span>
+          </div>
+          <div class="row" onclick="changePage('105')">
+            <span class="cyan">105</span>
+            <span>WEATHER FORECAST</span>
+            <span class="green">18:10</span>
+          </div>
+          <div class="row" onclick="changePage('200')">
+            <span class="cyan">200</span>
+            <span>LIVE SPORTS VIDIPRINTER</span>
+            <span class="green">LIVE</span>
+          </div>
+        </div>
+        <div class="content-block">
+          <h2 class="cyan">WELCOME TO CEEFAX</h2>
+          <p>Your ultimate text-based service for live news, weather, and sports scores. Use the remote control or click a row above to navigate.</p>
+        </div>
+      </div>
+
+      <div class="page hidden" id="page-101">
+        <h1 class="yellow">DIRECTORY & CATEGORIES</h1>
+        <div class="grid-header">
+          <span>PAGE</span>
+          <span>SECTION</span>
+          <span>STATUS</span>
+        </div>
+        <div class="file-list">
+          <div class="row" onclick="changePage('100')">
+            <span class="cyan">100</span>
+            <span>MAIN INDEX</span>
+            <span class="green">OK</span>
+          </div>
+          <div class="row">
+            <span class="cyan">110</span>
+            <span>UK NEWS DESK</span>
+            <span class="green">OK</span>
+          </div>
+          <div class="row" onclick="changePage('105')">
+            <span class="cyan">105</span>
+            <span>UK WEATHER</span>
+            <span class="green">OK</span>
+          </div>
+          <div class="row" onclick="changePage('200')">
+            <span class="cyan">200</span>
+            <span>SPORT & RESULTS</span>
+            <span class="green">LIVE</span>
+          </div>
+          <div class="row">
+            <span class="cyan">350</span>
+            <span>FINANCE & MARKETS</span>
+            <span class="green">OK</span>
+          </div>
+          <div class="row">
+            <span class="cyan">400</span>
+            <span>TRAVEL & DELAYS</span>
+            <span class="green">OK</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="page hidden" id="page-105">
+        <h1 class="yellow">UK WEATHER FORECAST</h1>
+        <div class="content-block">
+          <h2 class="cyan">NATIONAL OUTLOOK</h2>
+          <p>A band of rain is moving slowly southwards across Scotland and Northern Ireland. England and Wales are starting dry but staying mostly cloudy with patchier rain arriving later in the evening.</p>
+        </div>
+        <h2 class="cyan">REGIONAL TEMPERATURES</h2>
+        <div class="file-list">
+          <div class="data-row"><span>LONDON</span><span class="green">11°C</span></div>
+          <div class="data-row"><span>BIRMINGHAM</span><span class="green">9°C</span></div>
+          <div class="data-row"><span>MANCHESTER</span><span class="green">8°C</span></div>
+          <div class="data-row"><span>NEWCASTLE</span><span class="green">6°C</span></div>
+          <div class="data-row"><span>EDINBURGH</span><span class="green">5°C</span></div>
+          <div class="data-row"><span>BELFAST</span><span class="green">7°C</span></div>
+          <div class="data-row"><span>CARDIFF</span><span class="green">10°C</span></div>
+        </div>
+      </div>
+
+      <div class="page hidden" id="page-200">
         <h1 class="yellow">SPORT: VIDIPRINTER</h1>
-        
         <div class="grid-header">
           <span>TIME</span>
           <span>LATEST MATCH RESULTS</span>
           <span>STATUS</span>
         </div>
-
         <div class="file-list">
           <div class="row">
             <span class="cyan">FT</span>
@@ -283,25 +370,24 @@
             <span class="green">FINAL</span>
           </div>
         </div>
-
         <div class="content-block">
           <h2 class="cyan">HEADLINES</h2>
           <p>Sunderland secure massive away win in the Wear-Tyne derby at St. James' Park!</p>
           <p>Nottingham Forest stun Spurs at home with a massive 3-nil victory.</p>
         </div>
+      </div>
 
-        <div class="fastext">
-          <div class="fast-btn red"><span>100</span> INDEX</div>
-          <div class="fast-btn green"><span>220</span> FOOTBALL</div>
-          <div class="fast-btn yellow"><span>300</span> WEATHER</div>
-          <div class="fast-btn cyan"><span>400</span> TRAVEL</div>
-        </div>
+      <div class="fastext">
+        <div class="fast-btn red" onclick="changePage('100')"><span>100</span> INDEX</div>
+        <div class="fast-btn green" onclick="changePage('101')"><span>101</span> DIR</div>
+        <div class="fast-btn yellow" onclick="changePage('105')"><span>105</span> WEATHER</div>
+        <div class="fast-btn cyan" onclick="changePage('200')"><span>200</span> SPORT</div>
       </div>
     </div>
 
     <div class="remote-panel">
       <div class="remote-title">TELETEXT REMOTE</div>
-      <div class="input-display" id="display-digits">200</div>
+      <div class="input-display" id="display-digits">100</div>
       
       <div class="numpad">
         <button class="num-btn" onclick="pressKey('1')">1</button>
@@ -323,6 +409,13 @@
   <script>
     let inputBuffer = "";
     const displayEl = document.getElementById('display-digits');
+    const pageNumEl = document.getElementById('current-pnum');
+
+    // Update the live clock
+    setInterval(() => {
+      const now = new Date();
+      document.getElementById('live-time').innerText = now.toTimeString().split(' ')[0];
+    }, 1000);
 
     function pressKey(num) {
       if (inputBuffer.length < 3) {
@@ -337,16 +430,28 @@
     }
 
     function submitPage() {
-      if (inputBuffer === "100") {
-        alert("Redirecting to Index... (Simulated)");
-        clearInput();
-      } else if (inputBuffer === "200") {
-        alert("You are already on Page 200!");
-        clearInput();
-      } else {
-        alert("Page " + inputBuffer + " not found!");
+      if (inputBuffer.length === 3) {
+        changePage(inputBuffer);
         clearInput();
       }
+    }
+
+    function changePage(pageNum) {
+      const validPages = ['100', '101', '105', '200'];
+      
+      if (!validPages.includes(pageNum)) {
+        alert("Page " + pageNum + " not found!");
+        return;
+      }
+
+      // Hide all pages
+      document.querySelectorAll('.page').forEach(page => {
+        page.classList.add('hidden');
+      });
+
+      // Show the selected page
+      document.getElementById('page-' + pageNum).classList.remove('hidden');
+      pageNumEl.innerText = 'P' + pageNum;
     }
   </script>
 </body>
